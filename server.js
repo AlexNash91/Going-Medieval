@@ -11,24 +11,24 @@ const connection = sql.createConnection({
 
 connection.connect();
 
-//server tick
-setInterval(() => {
-    //change to correct table_name and column_name
-  connection.query('SELECT * FROM table_name', (error, results) => {
-    if (error) {
-      console.error(error);
-    } else {
-      results.forEach(row => {
-        // Update logic
-        connection.query('UPDATE table_name SET column_name = ? WHERE id = ?', [newValue, row.id], (error, results) => {
-          if (error) {
-            console.error(error);
-          }
-        });
-      });
-    }
-  });
-}, 30000); // 30 seconds in milliseconds  - set higher for production.
+//server tick  Commented for now
+// setInterval(() => {
+//     //change to correct table_name and column_name
+//   connection.query('SELECT * FROM table_name', (error, results) => {
+//     if (error) {
+//       console.error(error);
+//     } else {
+//       results.forEach(row => {
+//         // Update logic
+//         connection.query('UPDATE table_name SET column_name = ? WHERE id = ?', [newValue, row.id], (error, results) => {
+//           if (error) {
+//             console.error(error);
+//           }
+//         });
+//       });
+//     }
+//   });
+// }, 30000); // 30 seconds in milliseconds  - set higher for production.
 
 app.listen(3001, () => {
   console.log('Server running on port 3001');
