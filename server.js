@@ -11,7 +11,6 @@ const connection = sql.createConnection({
 
 connection.connect();
 
-
 //server tick
 setInterval(() => {
     //change to correct table_name and column_name
@@ -29,7 +28,7 @@ setInterval(() => {
       });
     }
   });
-}, 600000); // 10 minutes in milliseconds
+}, 30000); // 30 seconds in milliseconds  - set higher for production.
 
 app.listen(3001, () => {
   console.log('Server running on port 3001');
