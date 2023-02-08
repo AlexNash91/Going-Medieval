@@ -25,3 +25,5 @@ coin: {
 },
   }      
 )
+
+module.exports = Resources;

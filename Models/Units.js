@@ -14,3 +14,5 @@ Units.init(
     },
 }    
 )
+
+module.exports = Units;

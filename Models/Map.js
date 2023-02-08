@@ -10,3 +10,5 @@ Map.init(
   }  
  }   
 )
+
+module.exports = Map;
