@@ -24,38 +24,40 @@ router.get('/', async (req, res) => {
 
 router.get('/', async (req,res) => {
     try {
-        const Gameinfo = await Players.findAll({
+        const gameData = await Model.findAll({
             include: [
                 {
-                    model: Players,
-                    attributes: []
+
                 }
             ]
         })
 
-        res.render('gameData' {
-            Gameinfo
+        res.render('gameData', {
+            playerRank
         })
-
+        
     }catch (err) {
         console.log(err)
     }
 })
 
+
+
 router.get('/', async (req,res) => {
     try {
-        const playerRank = await Model.findAll({
+        const playerRank = await Players.findAll({
             include: [
                 {
-
+                    model: Players,
+                    attributes: ['name', 'kingdom', 'ranking']
                 }
             ]
         })
 
-        res.render('gameData' {
+        res.render('playerRank', {
             playerRank
         })
-        
+
     }catch (err) {
         console.log(err)
     }
