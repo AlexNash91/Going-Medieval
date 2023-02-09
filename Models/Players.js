@@ -27,42 +27,23 @@ allowNull:false,
 wood: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    references: {
-      model: 'wood',
-      key: 'wood_count',
-    },
+    
   },
 stone: {
     type: DataTypes.INTEGER,
-    allowNull: false,
-    references: {
-      model: 'stone',
-      key: 'stone_count',
-    },   
+    allowNull: false,    
 },
 iron: {
     type: DataTypes.INTEGER,
-    allowNull: false,
-    references: {
-      model: 'iron',
-      key: 'iron_count',
-    },    
+    allowNull: false,      
 },
 food: {
     type: DataTypes.INTEGER,
-    allowNull: false,
-    references: {
-      model: 'food',
-      key: 'food_count',
-    },    
+    allowNull: false,        
 },
 coin: {
     type: DataTypes.INTEGER,
-    allowNull: false,
-    references: {
-      model: 'coin',
-      key: 'coin_count',
-    },    
+    allowNull: false,    
 },  
 },
 {
