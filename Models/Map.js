@@ -14,17 +14,17 @@ Map.init(
     map_one: {
       type: DataTypes.STRING,
       allowNull: false,
-      autoIncrement: true,
+      // autoIncrement: true,
     },
     map_two: {
       type: DataTypes.STRING,
       allowNull: false,
-      autoIncrement: true,
+      // autoIncrement: true,
     },
     map_three: {
       type: DataTypes.STRING,
       allowNull: false,
-      autoIncrement: true,
+      // autoIncrement: true,
     },
   },
   {

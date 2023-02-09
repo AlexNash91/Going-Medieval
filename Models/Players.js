@@ -11,6 +11,11 @@ id:{
     primaryKey: true,
     autoIncrement: true,    
 },
+
+name:{
+  type: DataTypes.STRING,
+  allowNull:false,
+},
 kingdom: {
 type: DataTypes.STRING,
 allowNull: false,    
@@ -22,42 +27,23 @@ allowNull:false,
 wood: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    references: {
-      model: 'Wood',
-      key: 'wood_count',
-    },
+    
   },
 stone: {
     type: DataTypes.INTEGER,
-    allowNull: false,
-    references: {
-      model: 'Stone',
-      key: 'stone_count',
-    },   
+    allowNull: false,    
 },
 iron: {
     type: DataTypes.INTEGER,
-    allowNull: false,
-    references: {
-      model: 'Iron',
-      key: 'iron_count',
-    },    
+    allowNull: false,      
 },
 food: {
     type: DataTypes.INTEGER,
-    allowNull: false,
-    references: {
-      model: 'Food',
-      key: 'food_count',
-    },    
+    allowNull: false,        
 },
 coin: {
     type: DataTypes.INTEGER,
-    allowNull: false,
-    references: {
-      model: 'Coin',
-      key: 'coin_count',
-    },    
+    allowNull: false,    
 },  
 },
 {
