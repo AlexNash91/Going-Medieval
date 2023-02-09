@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Map } = require('../models');
+const { Map, Players } = require('../models');
 
 // GET request for map on homepage
 router.get('/', async (req, res) => {
@@ -24,7 +24,7 @@ router.get('/', async (req, res) => {
 
 router.get('/', async (req,res) => {
     try {
-        const Gameinfo = await Model.findAll({
+        const gameData = await Model.findAll({
             include: [
                 {
 
@@ -32,29 +32,32 @@ router.get('/', async (req,res) => {
             ]
         })
 
-        res.render('gameData' {
-            Gameinfo
+        res.render('gameData', {
+            playerRank
         })
-
+        
     }catch (err) {
         console.log(err)
     }
 })
 
+
+
 router.get('/', async (req,res) => {
     try {
-        const playerRank = await Model.findAll({
+        const playerRank = await Players.findAll({
             include: [
                 {
-
+                    model: Players,
+                    attributes: ['name', 'kingdom', 'ranking']
                 }
             ]
         })
 
-        res.render('gameData' {
+        res.render('playerRank', {
             playerRank
         })
-        
+
     }catch (err) {
         console.log(err)
     }

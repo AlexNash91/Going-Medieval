@@ -11,6 +11,11 @@ id:{
     primaryKey: true,
     autoIncrement: true,    
 },
+
+name:{
+  type: DataTypes.STRING,
+  allowNull:false,
+},
 kingdom: {
 type: DataTypes.STRING,
 allowNull: false,    
