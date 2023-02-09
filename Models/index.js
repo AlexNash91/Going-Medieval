@@ -9,22 +9,22 @@ const Units = require('./Units');
 const MapTiles = require('./MapTiles');
 const Players = require('./Players');
 
-Players.hasOne(Wood, {
+Players.belongsTo(Wood, {
 foreignKey: 'wood_count',    
 });
 
-Players.hasOne(Stone, {
+Players.belongsTo(Stone, {
 foreignKey: 'stone_count',    
 });
 
-Players.hasOne(Iron, {
+Players.belongsTo(Iron, {
 foreignKey: 'iron_count'    
 });
-Players.hasOne(Food, {
+Players.belongsTo(Food, {
 foreignKey: 'food_count',    
 });
 
-Players.hasOne(Coin, {
+Players.belongsTo(Coin, {
 foreignKey: 'coin_count'    
 });
 
