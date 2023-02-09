@@ -1,15 +1,35 @@
-const express = require('express');
+const express = require("express");
 const app = express();
-const sql = require('mysql');
+const sql = require("mysql");
+const session = require("express-session");
+const routes = require("./controllers");
+const exphbs = require("express-handlebars");
+
+const sequelize = require("./config/connection");
+const SequelizeStore = require("connect-session-sequelize")(session.Store);
+const PORT = process.env.PORT || 3001;
 
 const connection = sql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'rootroot',
-  database: 'medieval_db'
+  host: process.env.DB_HOST,
+  user: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  multipleStatements: true,
 });
 
 connection.connect();
+
+const sess = {
+  secret: "Secret Sauce",
+  cookie: {},
+  resave: false,
+  saveUninitialized: true,
+  store: new SequelizeStore({
+    db: sequelize,
+  }),
+};
+
+app.use(session(sess));
 
 //server tick  Commented for now
 // setInterval(() => {
@@ -29,7 +49,15 @@ connection.connect();
 //     }
 //   });
 // }, 30000); // 30 seconds in milliseconds  - set higher for production.
+const hbs = exphbs.create({ helpers });
+app.engine("handlebars", hbs.engine);
+app.set("view engine", "handlebars");
 
-app.listen(3001, () => {
-  console.log('Server running on port 3001');
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use(routes);
+
+sequelize.sync({ force: false }).then(() => {
+  app.listen(PORT, () => console.log("Now listening"));
 });
