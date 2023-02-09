@@ -21,3 +21,41 @@ router.get('/', async (req, res) => {
         console.log(err)
     }
 })
+
+router.get('/', async (req,res) => {
+    try {
+        const Gameinfo = await Model.findAll({
+            include: [
+                {
+
+                }
+            ]
+        })
+
+        res.render('gameData' {
+            Gameinfo
+        })
+
+    }catch (err) {
+        console.log(err)
+    }
+})
+
+router.get('/', async (req,res) => {
+    try {
+        const playerRank = await Model.findAll({
+            include: [
+                {
+
+                }
+            ]
+        })
+
+        res.render('gameData' {
+            playerRank
+        })
+        
+    }catch (err) {
+        console.log(err)
+    }
+})
