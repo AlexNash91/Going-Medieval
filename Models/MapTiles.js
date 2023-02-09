@@ -1,9 +1,9 @@
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
 
-class MapSet extends Model {}
+class MapTiles extends Model {}
 
-MapSet.init(
+MapTiles.init(
 {
   id: {
     type: DataTypes.INTEGER,
@@ -31,4 +31,4 @@ allowNull: false,
     modelName: "mapset",  
 }    
 )
-module.exports = MapSet;
+module.exports = MapTiles;
