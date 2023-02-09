@@ -7,48 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Map Test</title>
     <style>
-        body{
-            margin: 0;
+        canvas {
+            width: 100%;
         }
-        canvas{
-            display: block;
-        }
+
     </style>
 </head>
 
 <body>
-    <script src="./three.js"></script>
-    <script type="module" src="./GLTFLoader.js"></script>
-    <script type="module">
-        import { GLTFLoader } from "./GLTFLoader.js";
-
-        var scene = new THREE.scene();
-        var camera = new THREE.PerspectiveCamera(
-            75,
-            1000
-        );
-        var renderer = new THREE.WebGLRenderer();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        document.body.appendChild(renderer.domElement);
-
-        var loader = new GLTFLoader();
-
-        var obj;
-        loader.load("square_forest.gltf.glb", function (gltf) {
-            obj = gltf.scene;
-            scene.add(gltf.scene);
-        });
-
-        var light = new THREE.HemisphereLight(0xffffff, 0x000000, 2);
-        scene.add(light);
-        camera.position.set(0, 15, 50);
-        function animate() {
-            requestAnimationFrame(animate);
-            renderer.render(scene, camera);
-        }
-
-        animate();
-    </script>
+    <script src="./phaser.js"></script>
+    <script src="./game.js"></script>
 </body>
 
 </html>
