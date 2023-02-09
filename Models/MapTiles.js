@@ -36,7 +36,7 @@ MapTiles.init(
     sequelize,
     freezeTableName: true,
     underscored: true,
-    modelName: "mapset",
+    modelName: "maptiles",
   }
 );
 module.exports = MapTiles;
