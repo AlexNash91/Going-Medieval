@@ -1,9 +1,9 @@
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
 
-class Units extends Model {}
+class MapTiles extends Model {}
 
-Units.init(
+MapTiles.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -11,23 +11,23 @@ Units.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    foot_soldier: {
+    field: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    heavy_soldier: {
+    forest: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    mounted_soldier: {
+    rock: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    rogue: {
+    sand: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    archer: {
+    water: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
@@ -36,7 +36,8 @@ Units.init(
     sequelize,
     freezeTableName: true,
     underscored: true,
-    modelName: "units",
-  }
+    modelName: "maptiles",
+  },
 );
-module.exports = Units;
+
+module.exports = MapTiles;
