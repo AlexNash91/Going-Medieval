@@ -31,6 +31,11 @@ Resources.init(
       allowNull: false,
       autoIncrement: true,
     },
+    food: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    autoIncrement: true
+    },
   },
   {
     sequelize,
