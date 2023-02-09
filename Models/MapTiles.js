@@ -37,6 +37,7 @@ MapTiles.init(
     freezeTableName: true,
     underscored: true,
     modelName: "maptiles",
-  }
+  },
 );
+
 module.exports = MapTiles;
