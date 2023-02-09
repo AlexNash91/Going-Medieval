@@ -31,7 +31,7 @@ Map.init(
     sequelize,
     freezeTableName: true,
     underscored: true,
-    modelName: "Map",
+    modelName: "map",
   }
 );
 
