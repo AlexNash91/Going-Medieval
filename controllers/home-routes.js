@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Map } = require('../models');
+const { Map, Players } = require('../models');
 
 // GET request for map on homepage
 router.get('/', async (req, res) => {
@@ -24,10 +24,11 @@ router.get('/', async (req, res) => {
 
 router.get('/', async (req,res) => {
     try {
-        const Gameinfo = await Model.findAll({
+        const Gameinfo = await Players.findAll({
             include: [
                 {
-
+                    model: Players,
+                    attributes: []
                 }
             ]
         })
