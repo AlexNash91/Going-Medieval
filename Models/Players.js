@@ -23,7 +23,7 @@ wood: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
-      model: 'Wood',
+      model: 'wood',
       key: 'wood_count',
     },
   },
@@ -31,7 +31,7 @@ stone: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
-      model: 'Stone',
+      model: 'stone',
       key: 'stone_count',
     },   
 },
@@ -39,7 +39,7 @@ iron: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
-      model: 'Iron',
+      model: 'iron',
       key: 'iron_count',
     },    
 },
@@ -47,7 +47,7 @@ food: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
-      model: 'Food',
+      model: 'food',
       key: 'food_count',
     },    
 },
@@ -55,7 +55,7 @@ coin: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
-      model: 'Coin',
+      model: 'coin',
       key: 'coin_count',
     },    
 },  
