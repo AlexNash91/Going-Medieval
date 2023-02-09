@@ -4,17 +4,14 @@ const { Map, Players } = require('../models');
 // GET request for map on homepage
 router.get('/', async (req, res) => {
     try {
-        const mapData = await Map.findOne({
-            // include: [
-            //     {
-            //         model: Map,
-            //         // attributes: ['id', 'map_one', 'map_two', 'map_three']
-            //     }
-            // ]
-        })
+        const homeData = await Map.findOne();
+            
+            
+
+               
 
         res.render('home', {
-            mapData
+            homeData
         })
         
     }catch (err) {
