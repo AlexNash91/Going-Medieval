@@ -50,7 +50,7 @@ coin: {
     sequelize,
     freezeTableName: true,
     underscored: true,
-    modelName: "players",   
+    modelName: "Players",   
 }    
 );
 module.exports= Players;
