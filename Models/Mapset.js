@@ -41,6 +41,7 @@ Mapset.init(
         freezeTableName: true,
         underscored: true,
         modelName: "Mapset",
+        timestamps: false
     },
 );
 

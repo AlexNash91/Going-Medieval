@@ -3,7 +3,7 @@ const express = require('express');
 // Import express-session
 const session = require('express-session');
 const exphbs = require('express-handlebars');
-const router = require('express').Router()
+// const router = require('express').Router()
 const {Mapset} = require('./Models')
 
 const routes = require('./controllers');
@@ -24,6 +24,9 @@ const sess = {
 };
 
 app.use(session(sess));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(routes)
+
 
 const hbs = exphbs.create({ helpers });
 
@@ -33,16 +36,6 @@ app.set('view engine', 'handlebars');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
-
-// app.use(routes);
-
-router.get('/api/map', (res, req) => {
-  Mapset.findAll({})
-  .then(data => {
-      res.json(JSON.parse(data))
-  }) 
-})
-
 
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log('Now listening'));
