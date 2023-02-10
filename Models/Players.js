@@ -40,16 +40,13 @@ iron: {
 food: {
     type: DataTypes.INTEGER,
     allowNull: false,        
-},
-coin: {
-    type: DataTypes.INTEGER,
-    allowNull: false,    
-},  
+}, 
 },
 {
     sequelize,
     freezeTableName: true,
     underscored: true,
+    timestamps: false,
     modelName: "Players",   
 }    
 );
