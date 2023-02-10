@@ -19,7 +19,7 @@ password: 'aggthatcrag',
 },
 {
 username: 'DaKing',
-password: 'royalty'
+password: 'royalty',
 },
 ];
 const seedUser = () => User.bulkCreate(userData);
