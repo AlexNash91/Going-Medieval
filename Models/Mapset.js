@@ -20,15 +20,15 @@ Mapset.init(
             allowNull: false,
         },
         spr: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             allowNull: false,
         },
         def: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             allowNull: false,
         },
         res: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             allowNull: false,
         },
         own: {
@@ -40,7 +40,7 @@ Mapset.init(
         sequelize,
         freezeTableName: true,
         underscored: true,
-        modelName: "mapset",
+        modelName: "Mapset",
     },
 );
 
