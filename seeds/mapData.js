@@ -1,7 +1,7 @@
 const { Map } = require('../models');
 
 const mapData = [
-       
+      
       {
         map_one: 'Sommer',
 
@@ -17,6 +17,6 @@ const mapData = [
       },
 ]
 
-const seedMaps = () => Gallery.bulkCreate(gallerydata);
+const seedMaps = () => Gallery.bulkCreate(mapData);
 
 module.exports = seedMaps;

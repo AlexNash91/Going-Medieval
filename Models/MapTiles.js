@@ -32,12 +32,13 @@ MapTiles.init(
       allowNull: false,
     },
   },
+
   {
     sequelize,
     freezeTableName: true,
     underscored: true,
     modelName: "maptiles",
-  },
+  }
 );
 
-module.exports = MapTiles;
+ module.exports = MapTiles;
