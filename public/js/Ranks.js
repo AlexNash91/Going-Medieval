@@ -9,11 +9,11 @@ const ranks =  function () {
                 console.log('t')
                 console.log("Name: " + data[i].name + " Kingdom: " + data[i].kingdom + " Ranking: " + data[i].ranking)
 
-                // displayStrings += `<p>${item}</p>`;
+                displayStrings += `<p>${data[i].name + data[i].kingdom + data[i].ranking}</p>`;
             }
         
-
-            // displayContainer.innerHTML = displayStrings;
+            const displayContainer = document.getElementById('ranking');
+            displayContainer.innerHTML = displayStrings;
             
     })
     .catch(err => console.log(err))
