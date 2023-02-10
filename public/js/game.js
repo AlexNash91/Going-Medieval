@@ -1,7 +1,6 @@
 // create new scene
 let gameScene = new Phaser.Scene('Game');
 
-//DOEST WORK CANT FIND API/MAP
 
 
 //set config
@@ -25,19 +24,17 @@ gameScene.preload = function () {
 //called once after preload ends
 gameScene.create = function () {
     fetch('/api/map')
-    .then(resp => resp.json())
-    .then(data => {
-        console.log(data)
-    })
-    .catch(err => console.log(err))
-
-    //creates test sprites and sets pos depth and scale
-    for (var i = 0; i < data.length; i++) {
-        window['t' + (i)] = this.add.sprite(data[i].x, data[i].y, data[i].spr);
-        window['t' + (i)].setDepth(0);
-        window['t' + (i)].setScale(1);
-        console.log('t' + (i))
-    }
+        .then(resp => resp.json())
+        .then(data => {
+            console.log(data)
+            for (var i = 0; i < data.length; i++) {
+                window['t' + (i)] = this.add.sprite(data[i].x, data[i].y, data[i].spr);
+                window['t' + (i)].setDepth(10);
+                window['t' + (i)].setScale(1);
+                console.log(window['t'+(i)])
+            }
+        })
+        .catch(err => console.log(err))
 };
 
 //create new game
