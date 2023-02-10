@@ -13,7 +13,7 @@ const ranks =  function () {
             }
         
 
-            displayContainer.innerHTML = displayStrings;
+            // displayContainer.innerHTML = displayStrings;
             
     })
     .catch(err => console.log(err))
