@@ -133,7 +133,7 @@ const MapSetData = [
   },
 
   {
-    x: 475,
+    x: 425,
     y: 180,
     spr: "field",
     def: "field",
