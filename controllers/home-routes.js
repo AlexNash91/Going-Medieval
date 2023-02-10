@@ -5,10 +5,6 @@ const { Map, Players } = require('../models');
 router.get('/', async (req, res) => {
     try {
         const homeData = await Map.findOne();
-            
-            
-
-               
 
         res.render('home', {
             homeData
