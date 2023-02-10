@@ -18,7 +18,6 @@ router.get('/', async (req, res) => {
 router.get('/api/map', async (req, res) => {
     try {
         const gameData = await Mapset.findAll()
-        console.log(gameData)
         res.json(gameData)
     } catch (err) {
         console.log(err)
