@@ -6,9 +6,9 @@ let gameScene = new Phaser.Scene('Game');
 //set config
 let config = {
     type: Phaser.AUTO,  //Phaser default to WebGL
-    width: 1000,
-    height: 1000,
-    backgroundColor: '#D3D3D3',
+    width: 1200,
+    height: 800,
+    backgroundColor: '#E2CE84',
     scene: gameScene
 };
 
@@ -19,6 +19,7 @@ gameScene.preload = function () {
     this.load.image('forest', './Assets/Tiles/0009.png');
     this.load.image('hills', './Assets/Tiles/0020.png');
     this.load.image('mountain', './Assets/Tiles/0167.png');
+    this.load.image('water', './Assets/Tiles/0986.png')
 };
 
 //called once after preload ends
@@ -26,12 +27,10 @@ gameScene.create = function () {
     fetch('/api/map')
         .then(resp => resp.json())
         .then(data => {
-            console.log(data)
             for (var i = 0; i < data.length; i++) {
                 window['t' + (i)] = this.add.sprite(data[i].x, data[i].y, data[i].spr);
                 window['t' + (i)].setDepth(10);
                 window['t' + (i)].setScale(1);
-                console.log(window['t'+(i)])
             }
         })
         .catch(err => console.log(err))
