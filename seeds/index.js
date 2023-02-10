@@ -10,7 +10,7 @@ const seedAll = async () => {
     await sequelize.sync({ force: true });
 
     await playerData();
-  
+   await userData();
     process.exit(0);
   };
   
