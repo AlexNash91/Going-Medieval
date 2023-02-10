@@ -16,12 +16,12 @@ router.get('/', async (req, res) => {
 })
 
 router.get('/login', (req, res) => {
-    // if (req.session.logged_in) {
-    //     res.redirect('/');
-    //     return;
-    //   }
-    
-      res.render('login');
+    if (req.session.logged_in) {
+        res.redirect('/');
+        return;
+    }
+
+    res.render('login');
 });
 
 router.get('/api/map', async (req, res) => {
@@ -33,8 +33,6 @@ router.get('/api/map', async (req, res) => {
     }
 })
 
-
-    
 router.get('/ranks', async (req, res) => {
     try {
         const playerRank = await Players.findAll()
