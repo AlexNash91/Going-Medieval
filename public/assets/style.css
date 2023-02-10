@@ -154,7 +154,18 @@
     padding-right: 100px;
     padding-left: 100px;
   }
-  
+  /* still working on this table */
+  .table {
+    display: table;
+    margin: 0 auto;
+  }
+
+  .title li{
+    display: inline;
+    list-style: none;
+    
+  }
+
   /* LAYOUT */
   .container {
     display: flex;
