@@ -24,29 +24,7 @@ router.get('/api/map', async (req, res) => {
     }
 })
 
-
-router.get('/Ranks', async (req, res) => {
-    try {
-        const gameData = await Model.findAll({
-            include: [
-                {
-
-                }
-            ]
-        })
-
-        res.render('gameData', {
-            playerRank
-        })
-
-    } catch (err) {
-        console.log(err)
-    }
-})
-
-
-
-router.get('/', async (req, res) => {
+router.get('/Ranks ', async (req, res) => {
     try {
         const playerRank = await Players.findAll({
             include: [
