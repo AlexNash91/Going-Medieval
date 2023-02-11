@@ -11,22 +11,23 @@ const ranks = function () {
                 let row = document.createElement('tr')
 
                 let cell_1 = document.createElement('th')
-                cell_1.innerHTML = ;
+                cell_1.textContent = data[i].ranking;
 
 
                 let cell_2 = document.createElement('td')
-                cell_2.innerHTML = ;
+                cell_2.textContent = data[i].name;
 
 
 
                 let cell_3 = document.createElement('td')
-                cell_3.innerHTML = ;
+                cell_3.textContent = data[i].Kingdom;
 
-                
+                // tbody.appendChild(row)
             }
 
-            const displayContainer = document.getElementById('ranking');
-            displayContainer.innerHTML = displayStrings;
+            
+
+    
 
         })
         .catch(err => console.log(err))
@@ -56,6 +57,22 @@ ranks()
 
 
 
+// example code
+// let table = document.createElement('table');
+
+// data.forEach(rowData => {
+//   let row = document.createElement('tr');
+
+//   for (let key in rowData) {
+//     let cell = document.createElement('td');
+//     cell.textContent = rowData[key];
+//     row.appendChild(cell);
+//   }
+
+//   table.appendChild(row);
+// });
+
+// document.body.appendChild(table);
 
 
 
@@ -72,32 +89,7 @@ ranks()
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// backup code
 // const ranks = function () {
 //     fetch('/ranks')
 //         .then(resp => resp.json())
