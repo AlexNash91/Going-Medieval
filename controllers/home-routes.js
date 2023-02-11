@@ -111,6 +111,12 @@ router.post('/register', async (req, res) => {
       res.status(404).end();
     }
   });
+
+  router.get('/game', (req, res) => {
+    
+    res.render('game');
+});
+
 module.exports = router
 
 
