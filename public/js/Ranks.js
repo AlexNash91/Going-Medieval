@@ -4,12 +4,8 @@ const ranks = function () {
         .then(data => {
             console.log(data)
             
-            for (var i = 0; i < data.length; i++) {
-                console.log(data[i])
-                console.log('t')
-                console.log("Name: " + data[i].name + " Kingdom: " + data[i].kingdom + " Ranking: " + data[i].ranking)
-
-                const table = document.getElementsByClassName('table-group-divider')[0]
+            for (var i = 0; i < data.length; i++) {               
+                 const table = document.getElementsByClassName('table-group-divider')[0]
 
                 // create a new document fragment
                 const fragment = document.createDocumentFragment()
@@ -35,9 +31,8 @@ const ranks = function () {
                 player.appendChild(fragment)
                 table.appendChild(player)
             }
-
-
         })
+        
         .catch(err => console.log(err))
 }
 
