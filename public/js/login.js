@@ -18,7 +18,7 @@ const loginFormHandler = async (event) => {
       }
     }
   };
-  
+
   const signupFormHandler = async (event) => {
     event.preventDefault();
   
@@ -40,10 +40,4 @@ const loginFormHandler = async (event) => {
     }
   };
   
-  document
-    .querySelector('.login-form')
-    .addEventListener('submit', loginFormHandler);
-  
-  document
-    .querySelector('.registration')
-    .addEventListener('submit', signupFormHandler);
+  document.querySelector('#login-form').addEventListener('submit', loginFormHandler);
