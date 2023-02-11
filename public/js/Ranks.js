@@ -7,7 +7,7 @@ const ranks = function () {
             for (var i = 0; i < data.length; i++) {
                 console.log(data[i])
                 console.log('t')
-                // console.log("Name: " + data[i].name + " Kingdom: " + data[i].kingdom + " Ranking: " + data[i].ranking)
+                console.log("Name: " + data[i].name + " Kingdom: " + data[i].kingdom + " Ranking: " + data[i].ranking)
 
                 const table = document.getElementById('tbody')
 
@@ -23,7 +23,7 @@ const ranks = function () {
 
                 // set content within those new elements
                 rank.textContent = `${data[i].ranking}`
-                name.textContent = `${data[i]. name}`
+                name.textContent = `${data[i].name}`
                 kingdom.textContent = `${data[i].kingdom}`
 
                 // append to fragments
@@ -39,7 +39,6 @@ const ranks = function () {
 
         })
         .catch(err => console.log(err))
-
 }
 
 ranks()
