@@ -8,22 +8,55 @@ const ranks = function () {
                 console.log(data[i])
                 console.log('t')
                 // console.log("Name: " + data[i].name + " Kingdom: " + data[i].kingdom + " Ranking: " + data[i].ranking)
-                let row = document.createElement('tr')
 
-                let cell_1 = document.createElement('th')
-                cell_1.textContent = data[i].ranking;
+                document.getElementById('tr')
+                // create a new document fragment
+                const fragment = document.createDocumentFragment()
+                // create html elements
+                const rank = document.createElement('th')
+                rank.setAttribute('scope', 'row')
+                const name = document.createElement('td')
+                const kingdom = document.createElement('td')
+                // set content within those new elements
+                rank.textContent = `${data[i].ranking]}`
+                name.textContent = `${data[i]. name}`
+                kingdom.textContent = `${data[i].kingdom}`
+                // append to fragments
+                fragment.appendChild(rank)
+                fragment.appendChild(name)
+                fragment.appendChild(kingdom)
+
+                
 
 
-                let cell_2 = document.createElement('td')
-                cell_2.textContent = data[i].name;
 
 
 
-                let cell_3 = document.createElement('td')
-                cell_3.textContent = data[i].Kingdom;
 
-                // tbody.appendChild(row)
-            }
+
+
+
+
+
+
+            //     // create html elements
+            //     let row = document.createElement('tr')
+
+            //     let cell_1 = document.createElement('th')
+            //     cell_1.innerHTML = `${data[i].ranking};`
+
+
+            //     let cell_2 = document.createElement('td')
+            //     cell_2.textContent = `${data[i].name}`;
+
+
+
+            //     let cell_3 = document.createElement('td')
+            //     cell_3.textContent = `${data[i].Kingdom}`;
+
+            //     // append all of the elements together
+            //     // tbody.appendChild(row)
+            // }
 
             
 
@@ -44,8 +77,19 @@ ranks()
 
 
 
+// more example code 
+// const element  = document.getElementById('ul'); // assuming ul exists
+// const fragment = document.createDocumentFragment();
+// const browsers = ['Firefox', 'Chrome', 'Opera',
+//     'Safari', 'Internet Explorer'];
 
+// browsers.forEach((browser) => {
+//     const li = document.createElement('li');
+//     li.textContent = browser;
+//     fragment.appendChild(li);
+// });
 
+// element.appendChild(fragment);
 
 
 
