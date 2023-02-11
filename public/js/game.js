@@ -76,6 +76,18 @@ gameScene.create = function () {
                 let res = data[i].res
                 let own = data[i].own
 
+                window['t' + (i)].on("pointerover", (function (index) {
+                    return function () {
+                        window['t' + (index)].setAlpha(.5);
+                    }
+                })(i));
+
+                window['t' + (i)].on("pointerout", (function (index) {
+                    return function () {
+                        window['t' + (index)].clearAlpha();
+                    }
+                })(i));
+
                 //adds on click functionality to the tile
                 window['t' + (i)].on("pointerdown", (function (index) {
                     return function () {
