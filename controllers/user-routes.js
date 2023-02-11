@@ -61,4 +61,15 @@ router.post('/logout', (req, res) => {
   }
 });
 
+router.post('/register', (req, res) => {
+  const { username, password } = req.body;
+  connection.query('INSERT INTO User (username, password) VALUES (?, ?)', [username, password], (error, results) => {
+    if (error) {
+      return res.status(500).json({ error });
+    }
+    res.status(200).json({ message: 'User registered successfully' });
+  });
+});
 module.exports = router;
+
+

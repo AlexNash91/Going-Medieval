@@ -42,6 +42,14 @@ router.get('/ranks', async (req, res) => {
     }
 })
 
+router.get('/register', async (req,res) => {
+    if (req.session.logged_in) {
+        res.redirect('/');
+        return;
+    }
+
+    res.render('register');
+});
 module.exports = router
 
 
