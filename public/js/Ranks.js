@@ -21,4 +21,3 @@ const ranks = function () {
 }
 
 ranks()
-
