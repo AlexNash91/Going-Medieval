@@ -84,21 +84,21 @@ gameScene.create = function () {
 
                 window['t' + (i)].on("pointerout", (function (index) {
                     return function () {
-                        window['t' + (index)].clearAlpha();
+                        window['t' + (index)].setAlpha(1);
                     }
                 })(i));
 
-                //adds on click functionality to the tile
+                //adds on click functionality to the tile - clears the tint on any tile that isnt the one being clicked
                 window['t' + (i)].on("pointerdown", (function (index) {
                     return function () {
                         for (var j = 0; j < data.length; j++) {
                             if (j !== index) {
-                                window['t' + (j)].setAlpha(1);
+                                window['t' + (j)].clearTint();
                             }
                         }
                         let activeTile = [id, spr, res, own]
 
-                        window['t' + (index)].setAlpha(.5);
+                        window['t' + (index)].setTint(0xff00ff);
                         console.log(activeTile)
 
                         // Update the text object with the contents of activeTile
