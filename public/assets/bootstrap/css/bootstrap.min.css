@@ -126,6 +126,11 @@ h6 {
     line-height: 1.2
 }
 
+.header-img {
+    background-image: url("../assets/header/headerimage.png");
+    width: 100%;
+  }
+
 .h1,
 h1 {
     font-size: calc(1.375rem + 1.5vw)
