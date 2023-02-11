@@ -9,58 +9,33 @@ const ranks = function () {
                 console.log('t')
                 // console.log("Name: " + data[i].name + " Kingdom: " + data[i].kingdom + " Ranking: " + data[i].ranking)
 
-                document.getElementById('tr')
+                const table = document.getElementById('tbody')
+
                 // create a new document fragment
                 const fragment = document.createDocumentFragment()
+
                 // create html elements
+                const player = document.createElement('tr')
                 const rank = document.createElement('th')
                 rank.setAttribute('scope', 'row')
                 const name = document.createElement('td')
                 const kingdom = document.createElement('td')
+
                 // set content within those new elements
-                rank.textContent = `${data[i].ranking]}`
+                rank.textContent = `${data[i].ranking}`
                 name.textContent = `${data[i]. name}`
                 kingdom.textContent = `${data[i].kingdom}`
+
                 // append to fragments
                 fragment.appendChild(rank)
                 fragment.appendChild(name)
                 fragment.appendChild(kingdom)
 
-                
+                // append fragment to list
+                player.appendChild(fragment)
+                table.appendChild(player)
+            }
 
-
-
-
-
-
-
-
-
-
-
-
-            //     // create html elements
-            //     let row = document.createElement('tr')
-
-            //     let cell_1 = document.createElement('th')
-            //     cell_1.innerHTML = `${data[i].ranking};`
-
-
-            //     let cell_2 = document.createElement('td')
-            //     cell_2.textContent = `${data[i].name}`;
-
-
-
-            //     let cell_3 = document.createElement('td')
-            //     cell_3.textContent = `${data[i].Kingdom}`;
-
-            //     // append all of the elements together
-            //     // tbody.appendChild(row)
-            // }
-
-            
-
-    
 
         })
         .catch(err => console.log(err))
