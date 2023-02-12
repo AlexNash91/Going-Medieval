@@ -1,14 +1,8 @@
-//Uncaught ReferenceError: require is not defined
-// const Mapset = require("../../Models/Mapset");
-
-//Uncaught SyntaxError: Cannot use import statement outside a module
-// import Mapset from "../../Models/Mapset";
-
-
 // create new scene
 let gameScene = new Phaser.Scene('Game');
 
 let player = "MEEEEEEEEE"
+let activeTile = []
 
 //set config
 let config = {
@@ -48,17 +42,18 @@ gameScene.create = function () {
     button.setInteractive();
     button.on('pointerdown', function () {
         console.log('Button clicked!');
-        
-            //CURRENTLY BORKED - See Issue #52
-            // Mapset.update({
-            //   own: player
-            // }, {
-            //   where: {
-            //     id: activeTile[0]
-            //   }
-            // }).then(function (result) {
-            //   console.log("Data updated successfully!");
-            // });
+        fetch('/api/map', {
+            method: 'PATCH',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ id: activeTile[0], own: player })
+          })
+            .then(res => res.json())
+            .then(data => console.log(data))
+            .catch(error => console.error(error));
+          
+          
     });
 
     //Fetchs data from the mapset table and builds the map tiles with that data.  Also turns on interactivity and adds pointerover functions.  Note the invocation of IIFE in the pointerover and pointerout functions.  this was required to get those functions to alter the alpha.  That is why "index" is being used in the function instead of "i"
@@ -96,7 +91,7 @@ gameScene.create = function () {
                                 window['t' + (j)].clearTint();
                             }
                         }
-                        let activeTile = [id, spr, res, own]
+                        activeTile = [id, spr, res, own]
 
                         window['t' + (index)].setTint(0xff00ff);
                         console.log(activeTile)

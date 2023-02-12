@@ -69,20 +69,18 @@ router.get('/api/map', async (req, res) => {
     }
 })
 
-router.patch('/gpatch', async (req, res) => {
-  const { username, password } = req.body;
-
+router.patch('/api/map', async (req, res) => {
   try {
-    // Create a new user
-    const claim = new Mapset({});
-    await Mapset.update();
-
-    // Store the user ID in the session
-    req.session.userId = user._id;
-
-    return res.status(200).json({ message: 'Tile claimed successfully.' });
-  } catch (error) {
-    return res.status(500).json({ error: 'Failed to register user.' });
+    const updatedMapset = await Mapset.update(
+      { own: req.body.own },
+      { where: { id: req.body.id } }
+    );
+    res.json(updatedMapset);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({
+      error: "Error updating mapset in the database."
+    });
   }
 });
 
