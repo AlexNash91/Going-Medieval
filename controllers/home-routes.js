@@ -104,6 +104,23 @@ router.get('/api/map', async (req, res) => {
     }
 })
 
+router.patch('/gpatch', async (req, res) => {
+  const { username, password } = req.body;
+
+  try {
+    // Create a new user
+    const claim = new Mapset({});
+    await Mapset.update();
+
+    // Store the user ID in the session
+    req.session.userId = user._id;
+
+    return res.status(200).json({ message: 'Tile claimed successfully.' });
+  } catch (error) {
+    return res.status(500).json({ error: 'Failed to register user.' });
+  }
+});
+
 router.get('/ranks', async (req, res) => {
     try {
         const playerRank = await Players.findAll()
