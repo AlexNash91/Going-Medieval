@@ -2,9 +2,9 @@ const Units = require('./units')
 
 class Archer extends Units {
     constructor(ATK, DEF, HP) {
-        ATK = 10
-        DEF = 10
-        HP = 10    
+        ATK = 12
+        DEF = 2
+        HP = 15 
     }   
 }
 
