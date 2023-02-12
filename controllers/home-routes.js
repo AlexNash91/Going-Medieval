@@ -1,7 +1,10 @@
 const router = require('express').Router();
 const { Mapset, Players, User } = require('../models');
-
+const bodyParser = require('body-parser');
 // GET request for map on homepage
+
+router.use(bodyParser.json());
+
 router.get('/', async (req, res) => {
     try {
         const homeData = await Mapset.findAll();
@@ -46,7 +49,6 @@ router.post('/login', async (req, res) => {
   
       req.session.save(() => {
         req.session.user_id = userData.id;
-        req.session.username = userData.username;
         req.session.logged_in = true;
   
         res.json({ user: userData, message: 'You are now logged in!' });
@@ -84,23 +86,27 @@ router.get('/register', async (req,res) => {
 
     res.render('register');
 });
+
 router.post('/register', async (req, res) => {
-    try {
-      const dbUserData = await User.create({
-        username: req.body.username,
-        password: req.body.password,
-      });
+  const { username, password } = req.body;
   
-      req.session.save(() => {
-        req.session.loggedIn = true;
-  
-        res.status(200).json(dbUserData);
-      });
-    } catch (err) {
-      console.log(err);
-      res.status(500).json(err);
-    }
-  });
+  if (!username || !password) {
+    return res.status(400).json({ error: 'Username and password are required.' });
+  }
+
+  try {
+    // Create a new user
+    const user = new User({ username, password });
+    await user.save();
+
+    // Store the user ID in the session
+    req.session.userId = user._id;
+
+    return res.status(200).json({ message: 'User registered successfully.' });
+  } catch (error) {
+    return res.status(500).json({ error: 'Failed to register user.' });
+  }
+});
   
   router.post('/logout', (req, res) => {
     if (req.session.logged_in) {
