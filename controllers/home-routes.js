@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { Mapset, Players, User } = require('../models');
 const bodyParser = require('body-parser');
+const bcrypt = require('bcrypt');
 // GET request for map on homepage
 
 router.use(bodyParser.json());
@@ -28,36 +29,70 @@ router.get('/login', (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
-    try {
-      const userData = await User.findOne({ where: { username: req.body.username } });
+  const { username, password } = req.body;
   
-      if (!userData) {
-        res
-          .status(400)
-          .json({ message: 'Incorrect username or password, please try again' });
-        return;
-      }
-  
-      const validPassword = await userData.checkPassword(req.body.password);
-  
-      if (!validPassword) {
-        res
-          .status(400)
-          .json({ message: 'Incorrect username or password, please try again' });
-        return;
-      }
-  
-      req.session.save(() => {
-        req.session.user_id = userData.id;
-        req.session.logged_in = true;
-  
-        res.json({ user: userData, message: 'You are now logged in!' });
-      });
-  
-    } catch (err) {
-      res.status(400).json(err);
+  if (!username || !password) {
+    return res.status(400).json({ error: 'Username and password are required.' });
+  }
+
+  try {
+    const user = await User.findOne({ where: {username} });
+    if (!user) {
+      return res.status(401).json({ error: 'Incorrect username.' });
     }
-  });
+
+    // const isMatch = await bcrypt.compare(password, user.password);
+    // if (!isMatch) {
+    //   return res.status(401).json({ error: 'Incorrect password.' });
+    // }
+    const pw = await User.findOne({ where: {password}});
+    if (!pw) {
+     return res.status(401).json({error: 'Incorrect password'}) 
+    }
+
+    req.session.save(() => {
+      req.session.user_id = user.id;
+      req.session.logged_in = true;
+
+    return res.status(200).json({ message: 'User logged in successfully.' });
+  })
+  } catch (error) {
+    return res.status(500).json({ error: 'Failed to login user.' });
+  }
+});
+
+
+// router.post('/login', async (req, res) => {
+//     try {
+//       const userData = await User.findOne({ where: { username: req.body.username } });
+  
+//       if (!userData) {
+//         res
+//           .status(400)
+//           .json({ message: 'Incorrect username or password, please try again' });
+//         return;
+//       }
+  
+//       const validPassword = await userData.checkPassword(req.body.password);
+  
+//       if (!validPassword) {
+//         res
+//           .status(400)
+//           .json({ message: 'Incorrect username or password, please try again' });
+//         return;
+//       }
+  
+//       req.session.save(() => {
+//         req.session.user_id = userData.id;
+//         req.session.logged_in = true;
+  
+//         res.json({ user: userData, message: 'You are now logged in!' });
+//       });
+  
+//     } catch (err) {
+//       res.status(400).json(err);
+//     }
+//   });
   
 
 router.get('/api/map', async (req, res) => {
@@ -95,11 +130,10 @@ router.post('/register', async (req, res) => {
   }
 
   try {
-    // Create a new user
+   
     const user = new User({ username, password });
     await user.save();
 
-    // Store the user ID in the session
     req.session.userId = user._id;
 
     return res.status(200).json({ message: 'User registered successfully.' });
