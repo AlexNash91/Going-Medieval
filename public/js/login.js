@@ -17,7 +17,8 @@ const loginFormHandler = async (event) => {
       } else {
         alert('Failed to log in.');
       }
-      return response.json();
+      const data = await response.json();
+      console.log(data);
     }
   };
   
