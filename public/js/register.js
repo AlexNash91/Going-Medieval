@@ -1,3 +1,4 @@
+
 const signupFormHandler = async (event) => {
     event.preventDefault();
   
@@ -15,7 +16,10 @@ const signupFormHandler = async (event) => {
         document.location.replace('/');
       } else {
         alert('Failed to sign up.');
+        console.log(response);
       }
+      const data = await response.json();
+      console.log(data);
     }
   };
   document.querySelector('#registration').addEventListener('submit', signupFormHandler); 
