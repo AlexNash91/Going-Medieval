@@ -2,10 +2,11 @@ const ranks = function () {
     fetch('/ranks')
         .then(resp => resp.json())
         .then(data => {
-            console.log(data)
+            data.reverse()
             
-            for (var i = 0; i < data.length; i++) {               
-                 const table = document.getElementsByClassName('table-group-divider')[0]
+            for (var i = 0; i < data.length; i++) {
+
+                const table = document.getElementsByClassName('table-group-divider')[0]
 
                 // create a new document fragment
                 const fragment = document.createDocumentFragment()
@@ -32,7 +33,7 @@ const ranks = function () {
                 table.appendChild(player)
             }
         })
-        
+
         .catch(err => console.log(err))
 }
 
