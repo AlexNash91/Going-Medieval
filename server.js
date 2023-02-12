@@ -4,7 +4,7 @@ const express = require('express');
 const session = require('express-session');
 const exphbs = require('express-handlebars');
 // const router = require('express').Router()
-const {Mapset} = require('./Models')
+const { Mapset, Player, Players } = require('./Models');
 
 const routes = require('./controllers');
 const sequelize = require('./config/connection');
@@ -39,26 +39,23 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log('Now listening'));
+  setInterval(async () => {
+    console.log("Tick!");
+    updatePlayerResource();
+  }, 1000);
 });
 
+async function updatePlayerResource() {
+  const mapsets = await Mapset.findAll();
+  for (const mapset of mapsets) {
+    const player = await Players.findOne({
+      where: { name: mapset.own },
+    });
+    if (player) {
+      await player.increment(mapset.res, { by: 1 });
+    }
+  }
+}
 
-//server tick  Commented for now
-// setInterval(() => {
-//     //change to correct table_name and column_name
-//   connection.query('SELECT * FROM table_name', (error, results) => {
-//     if (error) {
-//       console.error(error);
-//     } else {
-//       results.forEach(row => {
-//         // Update logic
-//         connection.query('UPDATE table_name SET column_name = ? WHERE id = ?', [newValue, row.id], (error, results) => {
-//           if (error) {
-//             console.error(error);
-//           }
-//         });
-//       });
-//     }
-//   });
-// }, 30000); // 30 seconds in milliseconds  - set higher for production.
 
 

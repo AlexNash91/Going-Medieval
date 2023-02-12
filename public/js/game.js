@@ -20,7 +20,7 @@ gameScene.preload = function () {
     this.load.image('forest', './Assets/Tiles/0009.png');
     this.load.image('hills', './Assets/Tiles/0020.png');
     this.load.image('mountain', './Assets/Tiles/0167.png');
-    this.load.image('water', './Assets/Tiles/0986.png')
+    this.load.image('water', './Assets/Tiles/0986.png');
 };
 
 //called once after preload ends  
@@ -34,13 +34,13 @@ gameScene.create = function () {
     //creates the text object to be displayed
     self.activeTileText = self.add.text(20, 20, '', { font: '24px Arial', fill: '#ffffff' });
 
-    //creates button to test claiming the active tile
-    let button = self.add.rectangle(160,200, 120, 50, 0x000000);
-    button.setStrokeStyle(2, 0xffffff);
-    let buttonText = self.add.text(160,200,'Claim Tile', { font: '24px Arial', fill: '#ffffff' });
-    buttonText.setOrigin(0.5);
-    button.setInteractive();
-    button.on('pointerdown', function () {
+    //CLAIM BUTTON = creates simTickBtn to test claiming the active tile
+    let claimBtn = self.add.rectangle(160,200, 120, 50, 0x000000);
+    claimBtn.setStrokeStyle(2, 0xffffff);
+    let claimBtnText = self.add.text(160,200,'Claim Tile', { font: '24px Arial', fill: '#ffffff' });
+    claimBtnText.setOrigin(0.5);
+    claimBtn.setInteractive();
+    claimBtn.on('pointerdown', function () {
         console.log('Button clicked!');
         fetch('/api/map', {
             method: 'PATCH',
@@ -52,57 +52,74 @@ gameScene.create = function () {
             .then(res => res.json())
             .then(data => console.log(data))
             .catch(error => console.error(error));
-          
-          
     });
 
-    //Fetchs data from the mapset table and builds the map tiles with that data.  Also turns on interactivity and adds pointerover functions.  Note the invocation of IIFE in the pointerover and pointerout functions.  this was required to get those functions to alter the alpha.  That is why "index" is being used in the function instead of "i"
-    fetch('/api/map')
+    //SIMULATE TICK BUTTON = clicking this will simulate a server tick - code later added to server.
+    let simTickBtn = self.add.rectangle(160,25, 120, 50, 0x000000);
+    simTickBtn.setStrokeStyle(2, 0xffffff);
+    let buttonText = self.add.text(160,25,'Sim Tick', { font: '24px Arial', fill: '#ffffff' });
+    buttonText.setOrigin(0.5);
+    simTickBtn.setInteractive();
+    simTickBtn.on("pointerdown", function () {
+        console.log("Simulated Tick")
+        fetch('/api/map')
         .then(resp => resp.json())
-        .then(data => {
-            for (var i = 0; i < data.length; i++) {
-                window['t' + (i)] = self.add.sprite(data[i].x, data[i].y, data[i].spr);
-                window['t' + (i)].setDepth(0);
-                window['t' + (i)].setInteractive();
-
-                let text;  //may be redundant DELETE LATER
-                let id = data[i].id
-                let spr = data[i].spr
-                let res = data[i].res
-                let own = data[i].own
-
-                window['t' + (i)].on("pointerover", (function (index) {
-                    return function () {
-                        window['t' + (index)].setAlpha(.5);
-                    }
-                })(i));
-
-                window['t' + (i)].on("pointerout", (function (index) {
-                    return function () {
-                        window['t' + (index)].setAlpha(1);
-                    }
-                })(i));
-
-                //adds on click functionality to the tile - clears the tint on any tile that isnt the one being clicked
-                window['t' + (i)].on("pointerdown", (function (index) {
-                    return function () {
-                        for (var j = 0; j < data.length; j++) {
-                            if (j !== index) {
-                                window['t' + (j)].clearTint();
-                            }
-                        }
-                        activeTile = [id, spr, res, own]
-
-                        window['t' + (index)].setTint(0xff00ff);
-                        console.log(activeTile)
-
-                        // Update the text object with the contents of activeTile
-                        self.activeTileText.setText(`ID: ${activeTile[0]} \nSpr: ${activeTile[1]} \nRes: ${activeTile[2]} \nOwn: ${activeTile[3]}`);
-                    }
-                })(i));
+        .then(resources => {
+            for (var i = 0; i < resources.length; i++) {
             }
         })
         .catch(err => console.log(err))
+
+    })
+
+    //Fetchs data from the mapset table and builds the map tiles with that data.  Also turns on interactivity and adds pointerover functions.  Note the invocation of IIFE in the pointerover and pointerout functions.  this was required to get those functions to alter the alpha.  That is why "index" is being used in the function instead of "i"
+    fetch('/api/map')
+    .then(resp => resp.json())
+    .then(data => {
+        for (var i = 0; i < data.length; i++) {
+            window['t' + (i)] = self.add.sprite(data[i].x, data[i].y, data[i].spr);
+            window['t' + (i)].setDepth(0);
+            window['t' + (i)].setInteractive();
+
+            let text;  //may be redundant DELETE LATER
+            let id = data[i].id
+            let spr = data[i].spr
+            let res = data[i].res
+            let own = data[i].own
+
+            window['t' + (i)].on("pointerover", (function (index) {
+                return function () {
+                    window['t' + (index)].setAlpha(.5);
+                }
+            })(i));
+
+            window['t' + (i)].on("pointerout", (function (index) {
+                return function () {
+                    window['t' + (index)].setAlpha(1);
+                }
+            })(i));
+
+            //adds on click functionality to the tile - clears the tint on any tile that isnt the one being clicked
+            window['t' + (i)].on("pointerdown", (function (index) {
+                return function () {
+                    for (var j = 0; j < data.length; j++) {
+                        if (j !== index) {
+                            window['t' + (j)].clearTint();
+                        }
+                    }
+                    activeTile = [id, spr, res, own]
+
+                    window['t' + (index)].setTint(0xff00ff);
+                    console.log(activeTile)
+
+                    // Update the text object with the contents of activeTile
+                    self.activeTileText.setText(`ID: ${activeTile[0]} \nSpr: ${activeTile[1]} \nRes: ${activeTile[2]} \nOwn: ${activeTile[3]}`);
+                }
+            })(i));
+        }
+    })
+    .catch(err => console.log(err))
+
 };
 
 gameScene.update = function () {
