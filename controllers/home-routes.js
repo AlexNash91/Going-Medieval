@@ -41,10 +41,6 @@ router.post('/login', async (req, res) => {
       return res.status(401).json({ error: 'Incorrect username.' });
     }
 
-    // const isMatch = await bcrypt.compare(password, user.password);
-    // if (!isMatch) {
-    //   return res.status(401).json({ error: 'Incorrect password.' });
-    // }
     const pw = await User.findOne({ where: {password}});
     if (!pw) {
      return res.status(401).json({error: 'Incorrect password'}) 
@@ -52,6 +48,7 @@ router.post('/login', async (req, res) => {
 
     req.session.save(() => {
       req.session.user_id = user.id;
+      req.session.username = user.username;
       req.session.logged_in = true;
 
     return res.status(200).json({ message: 'User logged in successfully.' });
@@ -61,39 +58,6 @@ router.post('/login', async (req, res) => {
   }
 });
 
-
-// router.post('/login', async (req, res) => {
-//     try {
-//       const userData = await User.findOne({ where: { username: req.body.username } });
-  
-//       if (!userData) {
-//         res
-//           .status(400)
-//           .json({ message: 'Incorrect username or password, please try again' });
-//         return;
-//       }
-  
-//       const validPassword = await userData.checkPassword(req.body.password);
-  
-//       if (!validPassword) {
-//         res
-//           .status(400)
-//           .json({ message: 'Incorrect username or password, please try again' });
-//         return;
-//       }
-  
-//       req.session.save(() => {
-//         req.session.user_id = userData.id;
-//         req.session.logged_in = true;
-  
-//         res.json({ user: userData, message: 'You are now logged in!' });
-//       });
-  
-//     } catch (err) {
-//       res.status(400).json(err);
-//     }
-//   });
-  
 
 router.get('/api/map', async (req, res) => {
     try {
@@ -138,18 +102,21 @@ router.get('/register', async (req,res) => {
 });
 
 router.post('/register', async (req, res) => {
-  const { username, password } = req.body;
+  const { username, password, kingdom } = req.body;
   
-  if (!username || !password) {
+  if (!username || !password || !kingdom) {
     return res.status(400).json({ error: 'Username and password are required.' });
   }
 
   try {
-   
-    const user = new User({ username, password });
+    const user = new User({username, password, kingdom});
     await user.save();
 
-    req.session.userId = user._id;
+    req.session.save(() => {
+      req.session.user_id = user.id;
+      req.session.username = user.username;
+      req.session.logged_in = true;
+    });
 
     return res.status(200).json({ message: 'User registered successfully.' });
   } catch (error) {

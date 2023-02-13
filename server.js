@@ -4,8 +4,8 @@ const express = require('express');
 const session = require('express-session');
 const exphbs = require('express-handlebars');
 // const router = require('express').Router()
-const { Mapset, Player, Players } = require('./Models');
-
+const { Mapset, User, Players } = require('./Models');
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const routes = require('./controllers');
 const sequelize = require('./config/connection');
 const helpers = require('./utils/helpers');
@@ -19,8 +19,17 @@ const PORT = process.env.PORT || 3001;
 // Set up sessions
 const sess = {
   secret: 'Super secret secret',
+  cookie: {
+    maxAge: 300000,
+    httpOnly: true,
+    secure: false,
+    sameSite: 'strict',
+  },
   resave: false,
   saveUninitialized: true,
+  store: new SequelizeStore({
+    db: sequelize
+  })
 };
 
 app.use(session(sess));
@@ -49,13 +58,11 @@ async function updatePlayerResource() {
   const mapsets = await Mapset.findAll();
   for (const mapset of mapsets) {
     const player = await Players.findOne({
-      where: { name: mapset.own },
+      where: {username: mapset.own },
     });
     if (player) {
       await player.increment(mapset.res, { by: 1 });
     }
   }
 }
-
-
 

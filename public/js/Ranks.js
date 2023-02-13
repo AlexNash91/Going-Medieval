@@ -20,7 +20,7 @@ const ranks = function () {
 
                 // set content within those new elements
                 rank.textContent = `${data[i].ranking}`
-                name.textContent = `${data[i].name}`
+                name.textContent = `${data[i].username}`
                 kingdom.textContent = `${data[i].kingdom}`
 
                 // append to fragments

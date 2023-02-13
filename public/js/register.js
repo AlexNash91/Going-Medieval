@@ -4,11 +4,11 @@ const signupFormHandler = async (event) => {
   
     const username = document.querySelector('#username').value.trim();
     const password = document.querySelector('#password').value.trim();
-  
-    if (username && password) {
+    const kingdom = document.querySelector('#kingdom').value.trim();
+    if (username && password && kingdom) {
       const response = await fetch('/register', {
         method: 'POST',
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ username, password, kingdom }),
         headers: { 'Content-Type': 'application/json' },
       });
   

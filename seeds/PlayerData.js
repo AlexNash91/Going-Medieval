@@ -3,7 +3,7 @@ const { Players } = require('../models');
 const PlayerData = [
 
     {
-        name: 'johncrally',
+        username: 'johncrally',
         kingdom: 'Brules Abode',
         ranking: '5',
         wood: '100',
@@ -18,7 +18,7 @@ const PlayerData = [
 
     },
     {
-        name: 'crisscross',
+        username: 'crisscross',
         kingdom: 'Cross Castle',
         ranking: '4',
         wood: '200',
@@ -33,7 +33,7 @@ const PlayerData = [
 
     },
     {
-        name: 'dagnabbit',
+        username: 'dagnabbit',
         kingdom: 'Montana Manor',
         ranking: '3',
         wood: '300',
@@ -48,7 +48,7 @@ const PlayerData = [
 
     },
     {
-        name: 'aggrocrag',
+        username: 'aggrocrag',
         kingdom: 'Cragula Castle',
         ranking: '2',
         wood: '500',
@@ -62,7 +62,7 @@ const PlayerData = [
         defending: null,
     },
     {
-        name: 'DaKing',
+        username: 'DaKing',
         kingdom: 'Kings Cross',
         ranking: '1',
         wood: '700',
