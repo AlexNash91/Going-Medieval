@@ -35,18 +35,6 @@ Mapset.init(
             type: DataTypes.STRING,
             allowNull: true,
         },
-        soldiers: {
-            type: DataTypes.INTEGER,
-            allowNull: true,
-        },
-        archers: {
-            type: DataTypes.INTEGER,
-            allowNull: true,
-        },
-        knights: {
-            type: DataTypes.INTEGER,
-            allowNull: true,
-        },
         ATK: {
             type: DataTypes.INTEGER,
             allowNull: false,
@@ -60,7 +48,6 @@ Mapset.init(
             allowNull: false
         },
     },
-
     {
         sequelize,
         freezeTableName: true,
