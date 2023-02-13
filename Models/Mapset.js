@@ -23,7 +23,7 @@ Mapset.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
-        def: {
+        def1: {
             type: DataTypes.STRING,
             allowNull: false,
         },
@@ -39,7 +39,7 @@ Mapset.init(
             type: DataTypes.INTEGER,
             allowNull: false,
         },
-        DEF: {
+        DEF2: {
             type: DataTypes.INTEGER,
             allowNull: false,
         },
@@ -51,9 +51,8 @@ Mapset.init(
     {
         sequelize,
         freezeTableName: true,
-        underscored: true,
         modelName: "Mapset",
-        timestamps: false
+        timestamps: false,
     },
 );
 
