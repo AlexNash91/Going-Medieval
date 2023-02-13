@@ -54,23 +54,24 @@ gameScene.create = function () {
             .catch(error => console.error(error));
     });
 
-    //SIMULATE TICK BUTTON = clicking this will simulate a server tick - code later added to server.
-    let simTickBtn = self.add.rectangle(160,25, 120, 50, 0x000000);
-    simTickBtn.setStrokeStyle(2, 0xffffff);
-    let buttonText = self.add.text(160,25,'Sim Tick', { font: '24px Arial', fill: '#ffffff' });
+    //BUTTON BLOCK: section that adds code for all conditional buttons 
+    let atkBtn = self.add.rectangle(160,25, 120, 50, 0x000000);
+    atkBtn.setStrokeStyle(2, 0xffffff);
+    let buttonText = self.add.text(160,25,'Attack', { font: '24px Arial', fill: '#ffffff' });
     buttonText.setOrigin(0.5);
-    simTickBtn.setInteractive();
-    simTickBtn.on("pointerdown", function () {
-        console.log("Simulated Tick")
-        fetch('/api/map')
-        .then(resp => resp.json())
-        .then(resources => {
-            for (var i = 0; i < resources.length; i++) {
-            }
-        })
-        .catch(err => console.log(err))
-
+    atkBtn.setInteractive();
+    atkBtn.on("pointerdown", function () {    
     })
+
+    let impBtn = self.add.rectangle(160,25, 120, 50, 0x000000);
+    atkBtn.setStrokeStyle(2, 0xffffff);
+    let impBtnText = self.add.text(160,25,'Attack', { font: '24px Arial', fill: '#ffffff' });
+    impBtnText.setOrigin(0.5);
+    impBtn.setInteractive();
+    impBtn.on("pointerdown", function () {    
+    })
+
+
 
     //Fetchs data from the mapset table and builds the map tiles with that data.  Also turns on interactivity and adds pointerover functions.  Note the invocation of IIFE in the pointerover and pointerout functions.  this was required to get those functions to alter the alpha.  That is why "index" is being used in the function instead of "i"
     fetch('/api/map')
