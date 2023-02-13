@@ -65,7 +65,7 @@ Players.init(
         freezeTableName: true,
         underscored: true,
         timestamps: false,
-        modelName: "Players", s
+        modelName: "Players", 
     }
 );
 
