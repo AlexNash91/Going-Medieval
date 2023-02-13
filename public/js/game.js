@@ -71,6 +71,14 @@ gameScene.create = function () {
     impBtn.on("pointerdown", function () {    
     })
 
+    let genBtn = self.add.rectangle(160,25, 120, 50, 0x000000);
+    genBtn.setStrokeStyle(2, 0xffffff);
+    let genBtnText = self.add.text(160,25,'Attack', { font: '24px Arial', fill: '#ffffff' });
+    genBtnText.setOrigin(0.5);
+    genBtn.setInteractive();
+    genBtn.on("pointerdown", function () {    
+    })
+
 
 
     //Fetchs data from the mapset table and builds the map tiles with that data.  Also turns on interactivity and adds pointerover functions.  Note the invocation of IIFE in the pointerover and pointerout functions.  this was required to get those functions to alter the alpha.  That is why "index" is being used in the function instead of "i"
