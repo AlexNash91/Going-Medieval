@@ -126,7 +126,14 @@ gameScene.create = function () {
     genSol.on("pointerdown", function () {    
         console.log('Button clicked!');
         // update number of soldiers in player db
-    })
+        // ('./ranks')
+        fetch('/ranks')
+            .then(resp => {
+                let solCnt = resp.soldiers
+                let newSolCnt = solCnt + 1
+
+            })
+    )
 
     let genArc = self.add.rectangle(160, 425, 120, 50, 0x000000);
     genArc.setStrokeStyle(2, 0xffffff);
@@ -136,6 +143,7 @@ gameScene.create = function () {
     genArc.on("pointerdown", function () {    
         console.log('Button clicked!');
         // update number of archers in player db
+        // ('./ranks')
     })
 
     let genKni = self.add.rectangle(160, 475, 120, 50, 0x000000);
@@ -146,6 +154,7 @@ gameScene.create = function () {
     genKni.on("pointerdown", function () {    
         console.log('Button clicked!');
         // update number of knights in player db
+        // ('./ranks)
     })
 
 
