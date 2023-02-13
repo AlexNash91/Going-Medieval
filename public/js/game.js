@@ -63,18 +63,49 @@ gameScene.create = function () {
     // atkBtn.setInteractive();
     // atkBtn.on("pointerdown", function () { 
     //     console.log('Button clicked!');
+    //     // Asks how many units you want to send
     //     // start attack time function
 
     // })
 
     // let impBtn = self.add.rectangle(160,25, 120, 50, 0x000000);
-    // atkBtn.setStrokeStyle(2, 0xffffff);
+    // impBtn.setStrokeStyle(2, 0xffffff);
     // let impBtnText = self.add.text(160,25,'Improve Troops', { font: '24px Arial', fill: '#ffffff' });
     // impBtnText.setOrigin(0.5);
     // impBtn.setInteractive();
     // impBtn.on("pointerdown", function () {   
     //     console.log('Button clicked!'); 
-    //     // update stats of troops 
+    //     // Brings up options to improve units
+    // })
+
+    // let impSol = self.add.rectangle(160,25, 120, 50, 0x000000);
+    // atkSol.setStrokeStyle(2, 0xffffff);
+    // let impSolText = self.add.text(160,25,'Improve Soldiers', { font: '24px Arial', fill: '#ffffff' });
+    // impSolText.setOrigin(0.5);
+    // impSol.setInteractive();
+    // impSol.on("pointerdown", function () {   
+    //     console.log('Button clicked!'); 
+    //     // update stats of soldiers
+    // })
+
+    // let impArc = self.add.rectangle(160,25, 120, 50, 0x000000);
+    // impArcBtn.setStrokeStyle(2, 0xffffff);
+    // let impArcText = self.add.text(160,25,'Improve Archers', { font: '24px Arial', fill: '#ffffff' });
+    // impArcText.setOrigin(0.5);
+    // impArc.setInteractive();
+    // impArc.on("pointerdown", function () {   
+    //     console.log('Button clicked!'); 
+    //     // update stats of archers
+    // })
+
+    // let impKni = self.add.rectangle(160,25, 120, 50, 0x000000);
+    // impKni.setStrokeStyle(2, 0xffffff);
+    // let impKniText = self.add.text(160,25,'Improve Knights', { font: '24px Arial', fill: '#ffffff' });
+    // impKniText.setOrigin(0.5);
+    // impKni.setInteractive();
+    // impKni.on("pointerdown", function () {   
+    //     console.log('Button clicked!'); 
+    //     // update stats of knights 
     // })
 
     // let genBtn = self.add.rectangle(160,25, 120, 50, 0x000000);
@@ -88,7 +119,7 @@ gameScene.create = function () {
     // })
 
     // let genSol = self.add.rectangle(160,25, 120, 50, 0x000000);
-    // genBtn.setStrokeStyle(2, 0xffffff);
+    // genSol.setStrokeStyle(2, 0xffffff);
     // let genSolText = self.add.text(160,25,'Train Soldier', { font: '24px Arial', fill: '#ffffff' });
     // genSolText.setOrigin(0.5);
     // genSol.setInteractive();
@@ -98,7 +129,7 @@ gameScene.create = function () {
     // })
 
     // let genArc = self.add.rectangle(160,25, 120, 50, 0x000000);
-    // genBtn.setStrokeStyle(2, 0xffffff);
+    // genArc.setStrokeStyle(2, 0xffffff);
     // let genArcText = self.add.text(160,25,'Train Archer', { font: '24px Arial', fill: '#ffffff' });
     // genArcText.setOrigin(0.5);
     // genArc.setInteractive();
@@ -108,7 +139,7 @@ gameScene.create = function () {
     // })
 
     // let genKni = self.add.rectangle(160,25, 120, 50, 0x000000);
-    // genBtn.setStrokeStyle(2, 0xffffff);
+    // genKni.setStrokeStyle(2, 0xffffff);
     // let genKniText = self.add.text(160,25,'Train Knight', { font: '24px Arial', fill: '#ffffff' });
     // genKniText.setOrigin(0.5);
     // genKni.setInteractive();
