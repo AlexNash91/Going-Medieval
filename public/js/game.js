@@ -56,97 +56,97 @@ gameScene.create = function () {
 
     // BUTTON BLOCK: section that adds code for all conditional buttons 
     
-    // let atkBtn = self.add.rectangle(160,25, 120, 50, 0x000000);
-    // atkBtn.setStrokeStyle(2, 0xffffff);
-    // let buttonText = self.add.text(160,25,'Attack', { font: '24px Arial', fill: '#ffffff' });
-    // buttonText.setOrigin(0.5);
-    // atkBtn.setInteractive();
-    // atkBtn.on("pointerdown", function () { 
-    //     console.log('Button clicked!');
-    //     // Asks how many units you want to send
-    //     // start attack time function
+    let atkBtn = self.add.rectangle(160,75, 120, 50, 0x000000);
+    atkBtn.setStrokeStyle(2, 0xffffff);
+    let buttonText = self.add.text(160,75,'Attack', { font: '24px Arial', fill: '#ffffff' });
+    buttonText.setOrigin(0.5);
+    atkBtn.setInteractive();
+    atkBtn.on("pointerdown", function () { 
+        console.log('Button clicked!');
+        // Asks how many units you want to send
+        // start attack time function
 
-    // })
+    })
 
-    // let impBtn = self.add.rectangle(160,25, 120, 50, 0x000000);
-    // impBtn.setStrokeStyle(2, 0xffffff);
-    // let impBtnText = self.add.text(160,25,'Improve Troops', { font: '24px Arial', fill: '#ffffff' });
-    // impBtnText.setOrigin(0.5);
-    // impBtn.setInteractive();
-    // impBtn.on("pointerdown", function () {   
-    //     console.log('Button clicked!'); 
-    //     // Brings up options to improve units
-    // })
+    let impBtn = self.add.rectangle(160, 125, 120, 50, 0x000000);
+    impBtn.setStrokeStyle(2, 0xffffff);
+    let impBtnText = self.add.text(160, 125,'Improve Troops', { font: '24px Arial', fill: '#ffffff' });
+    impBtnText.setOrigin(0.5);
+    impBtn.setInteractive();
+    impBtn.on("pointerdown", function () {   
+        console.log('Button clicked!'); 
+        // Brings up options to improve units
+    })
 
-    // let impSol = self.add.rectangle(160,25, 120, 50, 0x000000);
-    // atkSol.setStrokeStyle(2, 0xffffff);
-    // let impSolText = self.add.text(160,25,'Improve Soldiers', { font: '24px Arial', fill: '#ffffff' });
-    // impSolText.setOrigin(0.5);
-    // impSol.setInteractive();
-    // impSol.on("pointerdown", function () {   
-    //     console.log('Button clicked!'); 
-    //     // update stats of soldiers
-    // })
+    let impSol = self.add.rectangle(160, 175, 120, 50, 0x000000);
+    impSol.setStrokeStyle(2, 0xffffff);
+    let impSolText = self.add.text(160, 175,'Improve Soldiers', { font: '24px Arial', fill: '#ffffff' });
+    impSolText.setOrigin(0.5);
+    impSol.setInteractive();
+    impSol.on("pointerdown", function () {   
+        console.log('Button clicked!'); 
+        // update stats of soldiers
+    })
 
-    // let impArc = self.add.rectangle(160,25, 120, 50, 0x000000);
-    // impArcBtn.setStrokeStyle(2, 0xffffff);
-    // let impArcText = self.add.text(160,25,'Improve Archers', { font: '24px Arial', fill: '#ffffff' });
-    // impArcText.setOrigin(0.5);
-    // impArc.setInteractive();
-    // impArc.on("pointerdown", function () {   
-    //     console.log('Button clicked!'); 
-    //     // update stats of archers
-    // })
+    let impArc = self.add.rectangle(160, 225, 120, 50, 0x000000);
+    impArc.setStrokeStyle(2, 0xffffff);
+    let impArcText = self.add.text(160, 225,'Improve Archers', { font: '24px Arial', fill: '#ffffff' });
+    impArcText.setOrigin(0.5);
+    impArc.setInteractive();
+    impArc.on("pointerdown", function () {   
+        console.log('Button clicked!'); 
+        // update stats of archers
+    })
 
-    // let impKni = self.add.rectangle(160,25, 120, 50, 0x000000);
-    // impKni.setStrokeStyle(2, 0xffffff);
-    // let impKniText = self.add.text(160,25,'Improve Knights', { font: '24px Arial', fill: '#ffffff' });
-    // impKniText.setOrigin(0.5);
-    // impKni.setInteractive();
-    // impKni.on("pointerdown", function () {   
-    //     console.log('Button clicked!'); 
-    //     // update stats of knights 
-    // })
+    let impKni = self.add.rectangle(160, 275, 120, 50, 0x000000);
+    impKni.setStrokeStyle(2, 0xffffff);
+    let impKniText = self.add.text(160, 275,'Improve Knights', { font: '24px Arial', fill: '#ffffff' });
+    impKniText.setOrigin(0.5);
+    impKni.setInteractive();
+    impKni.on("pointerdown", function () {   
+        console.log('Button clicked!'); 
+        // update stats of knights 
+    })
 
-    // let genBtn = self.add.rectangle(160,25, 120, 50, 0x000000);
-    // genBtn.setStrokeStyle(2, 0xffffff);
-    // let genBtnText = self.add.text(160,25,'Train Troops', { font: '24px Arial', fill: '#ffffff' });
-    // genBtnText.setOrigin(0.5);
-    // genBtn.setInteractive();
-    // genBtn.on("pointerdown", function () {    
-    //     console.log('Button clicked!');
-    //     // calls function to bring up unit creation options
-    // })
+    let genBtn = self.add.rectangle(160, 325, 120, 50, 0x000000);
+    genBtn.setStrokeStyle(2, 0xffffff);
+    let genBtnText = self.add.text(160, 325,'Train Troops', { font: '24px Arial', fill: '#ffffff' });
+    genBtnText.setOrigin(0.5);
+    genBtn.setInteractive();
+    genBtn.on("pointerdown", function () {    
+        console.log('Button clicked!');
+        // calls function to bring up unit creation options
+    })
 
-    // let genSol = self.add.rectangle(160,25, 120, 50, 0x000000);
-    // genSol.setStrokeStyle(2, 0xffffff);
-    // let genSolText = self.add.text(160,25,'Train Soldier', { font: '24px Arial', fill: '#ffffff' });
-    // genSolText.setOrigin(0.5);
-    // genSol.setInteractive();
-    // genSol.on("pointerdown", function () {    
-    //     console.log('Button clicked!');
-    //     // update number of soldiers in player db
-    // })
+    let genSol = self.add.rectangle(160, 375, 120, 50, 0x000000);
+    genSol.setStrokeStyle(2, 0xffffff);
+    let genSolText = self.add.text(160, 375,'Train Soldier', { font: '24px Arial', fill: '#ffffff' });
+    genSolText.setOrigin(0.5);
+    genSol.setInteractive();
+    genSol.on("pointerdown", function () {    
+        console.log('Button clicked!');
+        // update number of soldiers in player db
+    })
 
-    // let genArc = self.add.rectangle(160,25, 120, 50, 0x000000);
-    // genArc.setStrokeStyle(2, 0xffffff);
-    // let genArcText = self.add.text(160,25,'Train Archer', { font: '24px Arial', fill: '#ffffff' });
-    // genArcText.setOrigin(0.5);
-    // genArc.setInteractive();
-    // genArc.on("pointerdown", function () {    
-    //     console.log('Button clicked!');
-    //     // update number of archers in player db
-    // })
+    let genArc = self.add.rectangle(160, 425, 120, 50, 0x000000);
+    genArc.setStrokeStyle(2, 0xffffff);
+    let genArcText = self.add.text(160, 425,'Train Archer', { font: '24px Arial', fill: '#ffffff' });
+    genArcText.setOrigin(0.5);
+    genArc.setInteractive();
+    genArc.on("pointerdown", function () {    
+        console.log('Button clicked!');
+        // update number of archers in player db
+    })
 
-    // let genKni = self.add.rectangle(160,25, 120, 50, 0x000000);
-    // genKni.setStrokeStyle(2, 0xffffff);
-    // let genKniText = self.add.text(160,25,'Train Knight', { font: '24px Arial', fill: '#ffffff' });
-    // genKniText.setOrigin(0.5);
-    // genKni.setInteractive();
-    // genKni.on("pointerdown", function () {    
-    //     console.log('Button clicked!');
-    //     // update number of knights in player db
-    // })
+    let genKni = self.add.rectangle(160, 475, 120, 50, 0x000000);
+    genKni.setStrokeStyle(2, 0xffffff);
+    let genKniText = self.add.text(160, 475,'Train Knight', { font: '24px Arial', fill: '#ffffff' });
+    genKniText.setOrigin(0.5);
+    genKni.setInteractive();
+    genKni.on("pointerdown", function () {    
+        console.log('Button clicked!');
+        // update number of knights in player db
+    })
 
 
 
