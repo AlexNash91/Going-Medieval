@@ -1,13 +1,7 @@
 const { DataTypes } = require('sequelize')
 const Units = require('./units')
 
-class Archer extends Units {
-    constructor(ATK, DEF, HP) {
-        ATK = 12
-        DEF = 2
-        HP = 15
-    }
-}
+class Archer extends Units { }
 
 Archer.init(
     {

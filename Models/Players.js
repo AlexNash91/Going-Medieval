@@ -60,5 +60,6 @@ Players.init(
         modelName: "Players", s
     }
 );
+
 module.exports = Players;
 
