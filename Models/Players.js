@@ -22,42 +22,52 @@ Players.init(
         ranking: {
             type: DataTypes.INTEGER,
             allowNull: false,
+            defaultValue: 0,
         },
         wood: {
             type: DataTypes.INTEGER,
             allowNull: false,
+            defaultValue: 0
         },
         stone: {
             type: DataTypes.INTEGER,
             allowNull: false,
+            defaultValue: 0
         },
         iron: {
             type: DataTypes.INTEGER,
             allowNull: false,
+            defaultValue: 0
         },
         food: {
             type: DataTypes.INTEGER,
             allowNull: false,
+            defaultValue: 0
         },
         archers: {
             type: DataTypes.INTEGER,
             allowNull: false,
+            defaultValue: 0
         },
         soldiers: {
             type: DataTypes.INTEGER,
             allowNull: false,
+            defaultValue: 0
         },
         knights: {
             type: DataTypes.INTEGER,
             allowNull: false,
+            defaultValue: 0
         },
         attacking: {
             type: DataTypes.INTEGER,
             allowNull: true,
+            defaultValue: 1
         },
         defending: {
             type: DataTypes.INTEGER,
             allowNull: true,
+            defaultValue: 1
         }
     },
     {

@@ -99,22 +99,20 @@ router.get('/register', async (req,res) => {
 });
 
 router.post('/register', async (req, res) => {
-  const { username, password, kingdom } = req.body;
-  
+  const {username, password, kingdom} = req.body;
   if (!username || !password || !kingdom) {
     return res.status(400).json({ error: 'Username and password are required.' });
   }
 
   try {
-    const user = new User({username, password, kingdom});
+    const user = await new User({username, password, kingdom});
     await user.save();
-
+    const player = await new Players({username, kingdom});
+    await player.save();
     req.session.save(() => {
-    req.session.user_id = user.id;
-      req.session.logged_in = true;
-
-    return res.status(200).json({ message: 'User registered successfully.' });
-  })
+    req.session.userId = user._id;
+  });
+    return res.status(200).json({message: 'User registered successfully.' });
   } catch (error) {
     return res.status(500).json({ error: 'Failed to register user.' });
   }
