@@ -1,1 +1,0 @@
-const { Knight } = require('../troops/knight.js')

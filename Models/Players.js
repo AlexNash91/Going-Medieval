@@ -51,6 +51,14 @@ Players.init(
             type: DataTypes.INTEGER,
             allowNull: false,
         },
+        attacking: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+        },
+        defending: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+        }
     },
     {
         sequelize,
