@@ -8,4 +8,4 @@ const Knight = require('./troops/knight')
 
 
 
-module.exports = { User, Players, Mapset, Units, Archer, Soldier, Knight};
+module.exports = { User, Players, Mapset, Units, Archer, Soldier, Knight };
