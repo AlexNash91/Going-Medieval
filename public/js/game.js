@@ -65,7 +65,7 @@ gameScene.create = function () {
 
     let impBtn = self.add.rectangle(160,25, 120, 50, 0x000000);
     atkBtn.setStrokeStyle(2, 0xffffff);
-    let impBtnText = self.add.text(160,25,'Attack', { font: '24px Arial', fill: '#ffffff' });
+    let impBtnText = self.add.text(160,25,'Improve Troops', { font: '24px Arial', fill: '#ffffff' });
     impBtnText.setOrigin(0.5);
     impBtn.setInteractive();
     impBtn.on("pointerdown", function () {    
@@ -73,7 +73,7 @@ gameScene.create = function () {
 
     let genBtn = self.add.rectangle(160,25, 120, 50, 0x000000);
     genBtn.setStrokeStyle(2, 0xffffff);
-    let genBtnText = self.add.text(160,25,'Attack', { font: '24px Arial', fill: '#ffffff' });
+    let genBtnText = self.add.text(160,25,'Train Troops', { font: '24px Arial', fill: '#ffffff' });
     genBtnText.setOrigin(0.5);
     genBtn.setInteractive();
     genBtn.on("pointerdown", function () {    
