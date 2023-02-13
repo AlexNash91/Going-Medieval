@@ -45,12 +45,9 @@ router.post('/login', async (req, res) => {
     if (!pw) {
      return res.status(401).json({error: 'Incorrect password'}) 
     }
-
     req.session.save(() => {
-      req.session.user_id = user.id;
-      req.session.username = user.username;
+     req.session.user_id = user.id;
       req.session.logged_in = true;
-
     return res.status(200).json({ message: 'User logged in successfully.' });
   })
   } catch (error) {
@@ -95,7 +92,7 @@ router.get('/ranks', async (req, res) => {
 router.get('/register', async (req,res) => {
     if (req.session.logged_in) {
         res.redirect('/');
-        return;
+        return;   
     }
 
     res.render('register');
@@ -113,21 +110,32 @@ router.post('/register', async (req, res) => {
     await user.save();
 
     req.session.save(() => {
-      req.session.user_id = user.id;
-      req.session.username = user.username;
+    req.session.user_id = user.id;
       req.session.logged_in = true;
-    });
 
     return res.status(200).json({ message: 'User registered successfully.' });
+  })
   } catch (error) {
     return res.status(500).json({ error: 'Failed to register user.' });
   }
 });
-  
+
+router.get('/logout', (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      return res.status(500).json({ error: 'Failed to logout user.' });
+    }
+
+    return res.redirect('/');
+  });
+});
+
   router.post('/logout', (req, res) => {
     if (req.session.logged_in) {
       req.session.destroy(() => {
         res.status(204).end();
+        res.redirect('/');
+        return;
       });
     } else {
       res.status(404).end();
@@ -138,7 +146,6 @@ router.post('/register', async (req, res) => {
     
     res.render('game');
 });
-
 module.exports = router
 
 
