@@ -116,46 +116,72 @@ gameScene.create = function () {
     genBtn.on("pointerdown", function () {    
         console.log('Button clicked!');
         // calls function to bring up unit creation options
+        
     })
 
+    let soldiers = 0
+    
     let genSol = self.add.rectangle(160, 375, 120, 50, 0x000000);
     genSol.setStrokeStyle(2, 0xffffff);
     let genSolText = self.add.text(160, 375,'Train Soldier', { font: '24px Arial', fill: '#ffffff' });
     genSolText.setOrigin(0.5);
     genSol.setInteractive();
-    genSol.on("pointerdown", function () {    
+    genSol.on('pointerdown', function () {
         console.log('Button clicked!');
-        // update number of soldiers in player db
-        // ('./ranks')
-        fetch('/ranks')
-            .then(resp => {
-                let solCnt = resp.soldiers
-                let newSolCnt = solCnt + 1
-
-            })
-    )
+        fetch('/ranks', {
+            method: 'PATCH',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ soldiers: soldiers + 1 })
+          })
+            .then(res => res.json())
+            .then(data => console.log(data))
+            .catch(error => console.error(error));
+    });
+             
+                
+    let archers = 0
 
     let genArc = self.add.rectangle(160, 425, 120, 50, 0x000000);
     genArc.setStrokeStyle(2, 0xffffff);
     let genArcText = self.add.text(160, 425,'Train Archer', { font: '24px Arial', fill: '#ffffff' });
     genArcText.setOrigin(0.5);
     genArc.setInteractive();
-    genArc.on("pointerdown", function () {    
+    genArc.on('pointerdown', function () {
         console.log('Button clicked!');
-        // update number of archers in player db
-        // ('./ranks')
-    })
+        fetch('/ranks', {
+            method: 'PATCH',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ archers: archers + 1 })
+          })
+            .then(res => res.json())
+            .then(data => console.log(data))
+            .catch(error => console.error(error));
+    });
+    
+    let knights = 0
 
     let genKni = self.add.rectangle(160, 475, 120, 50, 0x000000);
     genKni.setStrokeStyle(2, 0xffffff);
     let genKniText = self.add.text(160, 475,'Train Knight', { font: '24px Arial', fill: '#ffffff' });
     genKniText.setOrigin(0.5);
     genKni.setInteractive();
-    genKni.on("pointerdown", function () {    
+    genKni.on('pointerdown', function () {
         console.log('Button clicked!');
-        // update number of knights in player db
-        // ('./ranks)
-    })
+        fetch('/ranks', {
+            method: 'PATCH',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ knights: knights + 1 })
+          })
+            .then(res => res.json())
+            .then(data => console.log(data))
+            .catch(error => console.error(error));
+    });
 
 
 
