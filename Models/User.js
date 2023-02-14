@@ -1,6 +1,5 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
-const Players = require('./Players');
 
 class User extends Model {}
 
@@ -30,14 +29,6 @@ User.init(
     }
   },
   {
-    // hooks: {
-    // afterCreate: async (user) => {
-    //   Players.create({
-    //     name: user.username,
-    //     kingdom: user.kingdom,
-    //   });
-    // }  
-    // },
     sequelize,
     timestamps: false,
     freezeTableName: true,

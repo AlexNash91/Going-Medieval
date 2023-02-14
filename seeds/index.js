@@ -6,8 +6,8 @@ const MapSetData = require ('./MapSetData')
 const seedAll = async () => {
     await sequelize.sync({ force: true });
 
-    await playerData();
-   await userData();
+    await userData();
+    await playerData();  
    await MapSetData();
     process.exit(0);
   };
