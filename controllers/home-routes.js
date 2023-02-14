@@ -80,6 +80,22 @@ router.patch('/api/map', async (req, res) => {
   }
 });
 
+// ranks path
+router.patch('/ranks', async (req, res) => {
+  try {
+    const updatedPlayer = await Players.update(
+      { penSol: req.body.penSol },
+      { where: { username: req.body.username } }
+    );
+    res.json(updatedPlayer);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({
+      error: "Error updating player in the database."
+    });
+  }
+});
+
 router.get('/ranks', async (req, res) => {
     try {
         const playerRank = await Players.findAll()
