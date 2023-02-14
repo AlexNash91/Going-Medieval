@@ -136,13 +136,14 @@ gameScene.create = function () {
             },
             body: JSON.stringify({ username: user, penSol: sol })
           })
-            console.log("Button clicked!")
+            // console.log("Button clicked!")
             .then(res => res.json())
             .then(data => console.log(data))
             .catch(error => console.error(error));
     });
              
                 
+   let arc = true
    
     let genArc = self.add.rectangle(160, 325, 120, 50, 0x000000);
     genArc.setStrokeStyle(2, 0xffffff);
@@ -156,15 +157,15 @@ gameScene.create = function () {
             headers: {
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ penArc })
+            body: JSON.stringify({ username: user, penArc: arc })
           })
-            console.log("Button clicked!")
+            // console.log("Button clicked!")
             .then(res => res.json())
             .then(data => console.log(data))
             .catch(error => console.error(error));
     });
     
-    
+    let kni = true
     let genKni = self.add.rectangle(160, 375, 120, 50, 0x000000);
     genKni.setStrokeStyle(2, 0xffffff);
     let genKniText = self.add.text(160, 375,'Train Knight', { font: '24px Arial', fill: '#ffffff' });
@@ -177,9 +178,9 @@ gameScene.create = function () {
             headers: {
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ penKni })
+            body: JSON.stringify({ username: user, penKni: kni })
           })
-            console.log("Button clicked!")
+            // console.log("Button clicked!")
             .then(res => res.json())
             .then(data => console.log(data))
             .catch(error => console.error(error));
