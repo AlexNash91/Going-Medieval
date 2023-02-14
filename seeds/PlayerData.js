@@ -16,6 +16,9 @@ const PlayerData = [
         penSol: false,
         penArc: false,
         penKni: false,
+        ATK: 0,
+        DEF2: 0,
+        HP: 0,
     },
     {
         username: 'crisscross',
@@ -31,7 +34,9 @@ const PlayerData = [
         penSol: false,
         penArc: false,
         penKni: false,
-
+        ATK: 0,
+        DEF2: 0,
+        HP: 0,
     },
     {
         username: 'dagnabbit',
@@ -47,6 +52,9 @@ const PlayerData = [
         penSol: false,
         penArc: false,
         penKni: false,
+        ATK: 0,
+        DEF2: 0,
+        HP: 0,
     },
     {
         username: 'aggrocrag',
@@ -63,7 +71,9 @@ const PlayerData = [
         defending: null,
         penSol: false,
         penArc: false,
-        penKni: false,
+        penKni: false,ATK: 0,
+        DEF2: 0,
+        HP: 0,
     },
     {
         username: 'DaKing',
@@ -79,6 +89,9 @@ const PlayerData = [
         penSol: false,
         penArc: false,
         penKni: false,
+        ATK: 0,
+        DEF2: 0,
+        HP: 0,
     }
 ];
 const seedPlayers = () => Players.bulkCreate(PlayerData);
