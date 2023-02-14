@@ -45,7 +45,7 @@ router.post('/login', async (req, res) => {
      return res.status(401).json({error: 'Incorrect password'}) 
     }
     req.session.save(() => {
-      req.session.id = user.id;
+      req.session.user_id = user.id;
       req.session.logged_in = true;
     return res.status(200).json({ message: 'User logged in successfully.' });
   })
@@ -123,7 +123,7 @@ router.post('/register', async (req, res) => {
     const user = await new Players({username, password, kingdom});
     await user.save();
     req.session.save(() => {
-    req.session.id = user.id;
+    req.session.user_id = user.id;
   });
     return res.status(200).json({message: 'User registered successfully.' });
   } catch (error) {
