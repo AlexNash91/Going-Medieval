@@ -17,7 +17,7 @@ const PlayerData = [
         penArc: false,
         penKni: false,
         ATK: 0,
-        DEF2: 0,
+        DEF: 0,
         HP: 0,
     },
     {
@@ -35,7 +35,7 @@ const PlayerData = [
         penArc: false,
         penKni: false,
         ATK: 0,
-        DEF2: 0,
+        DEF: 0,
         HP: 0,
     },
     {
@@ -53,7 +53,7 @@ const PlayerData = [
         penArc: false,
         penKni: false,
         ATK: 0,
-        DEF2: 0,
+        DEF: 0,
         HP: 0,
     },
     {
@@ -72,7 +72,7 @@ const PlayerData = [
         penSol: false,
         penArc: false,
         penKni: false,ATK: 0,
-        DEF2: 0,
+        DEF: 0,
         HP: 0,
     },
     {
@@ -90,7 +90,7 @@ const PlayerData = [
         penArc: false,
         penKni: false,
         ATK: 0,
-        DEF2: 0,
+        DEF: 0,
         HP: 0,
     }
 ];

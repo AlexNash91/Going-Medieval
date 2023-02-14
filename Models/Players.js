@@ -70,11 +70,7 @@ Players.init(
             allowNull: false,
             defaultValue: 0
         },
-        attacking: {
-            type: DataTypes.INTEGER,
-            allowNull: true,
-        },
-        defending: {
+        targeting: {
             type: DataTypes.INTEGER,
             allowNull: true,
         },
@@ -95,15 +91,15 @@ Players.init(
         },
         ATK: {
             type: DataTypes.INTEGER,
-            allowNull: false,
+            allowNull: true,
         },
         DEF: {
             type: DataTypes.INTEGER,
-            allowNull: false,
+            allowNull: true,
         },
         HP: {
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: true
         },
     },
     {
