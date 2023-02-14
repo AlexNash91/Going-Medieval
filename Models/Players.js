@@ -17,7 +17,11 @@ Players.init(
         },
         kingdom: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
+        },
+        kingdomTile: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
         },
         ranking: {
             type: DataTypes.INTEGER,
@@ -62,12 +66,10 @@ Players.init(
         attacking: {
             type: DataTypes.INTEGER,
             allowNull: true,
-            defaultValue: 1
         },
         defending: {
             type: DataTypes.INTEGER,
             allowNull: true,
-            defaultValue: 1
         },
         penSol: {
             type: DataTypes.BOOLEAN,
