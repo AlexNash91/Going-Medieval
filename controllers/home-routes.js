@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Mapset, Players, User } = require('../models');
+const { Mapset, Players} = require('../models');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 // GET request for map on homepage
@@ -30,23 +30,22 @@ router.get('/login', (req, res) => {
 
 router.post('/login', async (req, res) => {
   const { username, password } = req.body;
-  
   if (!username || !password) {
     return res.status(400).json({ error: 'Username and password are required.' });
   }
 
   try {
-    const user = await User.findOne({ where: {username} });
+    const user = await Players.findOne({ where: {username} });
     if (!user) {
       return res.status(401).json({ error: 'Incorrect username.' });
     }
 
-    const pw = await User.findOne({ where: {password}});
+    const pw = await Players.findOne({ where: {password}});
     if (!pw) {
      return res.status(401).json({error: 'Incorrect password'}) 
     }
     req.session.save(() => {
-     req.session.user_id = user.id;
+      req.session.id = user.id;
       req.session.logged_in = true;
     return res.status(200).json({ message: 'User logged in successfully.' });
   })
@@ -105,12 +104,10 @@ router.post('/register', async (req, res) => {
   }
 
   try {
-    const user = await new User({username, password, kingdom});
+    const user = await new Players({username, password, kingdom});
     await user.save();
-    const player = await new Players({username, kingdom});
-    await player.save();
     req.session.save(() => {
-    req.session.userId = user._id;
+    req.session.id = user.id;
   });
     return res.status(200).json({message: 'User registered successfully.' });
   } catch (error) {

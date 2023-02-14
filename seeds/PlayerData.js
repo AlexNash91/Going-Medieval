@@ -4,6 +4,7 @@ const PlayerData = [
 
     {
         username: 'johncrally',
+        password: 'brulegrool',
         kingdom: 'Brules Abode',
         ranking: '5',
         wood: '100',
@@ -19,6 +20,7 @@ const PlayerData = [
     },
     {
         username: 'crisscross',
+        password: 'crosscriss',
         kingdom: 'Cross Castle',
         ranking: '4',
         wood: '200',
@@ -34,6 +36,7 @@ const PlayerData = [
     },
     {
         username: 'dagnabbit',
+        password: 'butteredcorn',
         kingdom: 'Montana Manor',
         ranking: '3',
         wood: '300',
@@ -49,6 +52,7 @@ const PlayerData = [
     },
     {
         username: 'aggrocrag',
+        password: 'aggthatcrag',
         kingdom: 'Cragula Castle',
         ranking: '2',
         wood: '500',
@@ -63,6 +67,7 @@ const PlayerData = [
     },
     {
         username: 'DaKing',
+        password: 'royalty',
         kingdom: 'Kings Cross',
         ranking: '1',
         wood: '700',
