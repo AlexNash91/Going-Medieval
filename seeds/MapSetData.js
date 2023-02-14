@@ -7,7 +7,6 @@ const MapSetData = [
     spr: "mountain",
     def1: "field",
     res: "iron",
-    own: "no one",    
   },
   {
     x: 600,
@@ -15,8 +14,6 @@ const MapSetData = [
     spr: "mountain",
     def1: "field",
     res: "iron",
-    own: "no one",
-    
   },
   {
     x: 750,
@@ -24,7 +21,6 @@ const MapSetData = [
     spr: "mountain",
     def1: "field",
     res: "iron",
-    own: "no one",
   },
   {
     x: 900,
@@ -32,7 +28,6 @@ const MapSetData = [
     spr: "mountain",
     def1: "field",
     res: "iron",
-    own: "no one",    
   },
   {
     x: 1050,
@@ -40,7 +35,6 @@ const MapSetData = [
     spr: "mountain",
     def1: "field",
     res: "iron",
-    own: "no one",    
   },
   {
     x: 525,
@@ -48,7 +42,6 @@ const MapSetData = [
     spr: "mountain",
     def1: "field",
     res: "iron",
-    own: "no one",    
   },
   {
     x: 675,
@@ -56,7 +49,6 @@ const MapSetData = [
     spr: "mountain",
     def1: "field",
     res: "iron",
-    own: "no one",    
   },
   {
     x: 825,
@@ -64,7 +56,6 @@ const MapSetData = [
     spr: "mountain",
     def1: "field",
     res: "iron",
-    own: "no one",    
   },
   {
     x: 975,
@@ -72,7 +63,6 @@ const MapSetData = [
     spr: "mountain",
     def1: "field",
     res: "iron",
-    own: "no one",    
   },
   {
     x: 450,
@@ -80,7 +70,6 @@ const MapSetData = [
     spr: "mountain",
     def1: "field",
     res: "iron",
-    own: "no one",    
   },
   {
     x: 600,
@@ -88,7 +77,6 @@ const MapSetData = [
     spr: "field",
     def1: "field",
     res: "food",
-    own: "no one",    
   },
   {
     x: 750,
@@ -96,7 +84,6 @@ const MapSetData = [
     spr: "field",
     def1: "field",
     res: "food",
-    own: "no one",    
   },
   {
     x: 900,
@@ -104,7 +91,6 @@ const MapSetData = [
     spr: "field",
     def1: "field",
     res: "food",
-    own: "no one",    
   },
   {
     x: 1050,
@@ -112,7 +98,6 @@ const MapSetData = [
     spr: "mountain",
     def1: "field",
     res: "iron",
-    own: "no one",    
   },
   {
     x: 525,
@@ -120,7 +105,6 @@ const MapSetData = [
     spr: "field",
     def1: "field",
     res: "food",
-    own: "no one",    
   },
   {
     x: 675,
@@ -128,7 +112,6 @@ const MapSetData = [
     spr: "field",
     def1: "field",
     res: "food",
-    own: "no one",    
   },
   {
     x: 825,
@@ -136,7 +119,6 @@ const MapSetData = [
     spr: "field",
     def1: "field",
     res: "food",
-    own: "no one",    
   },
   {
     x: 975,
@@ -144,7 +126,6 @@ const MapSetData = [
     spr: "field",
     def1: "field",
     res: "food",
-    own: "no one",    
   },
   {
     x: 450,
@@ -152,7 +133,6 @@ const MapSetData = [
     spr: "mountain",
     def1: "field",
     res: "iron",
-    own: "no one",    
   },
   {
     x: 600,
@@ -160,7 +140,6 @@ const MapSetData = [
     spr: "hills",
     def1: "field",
     res: "stone",
-    own: "no one",    
   },
   {
     x: 750,
@@ -168,8 +147,6 @@ const MapSetData = [
     spr: "water",
     def1: "water",
     res: "food",
-    own: "no one",ATK: 0,
-    
   },
   {
     x: 900,
@@ -177,7 +154,6 @@ const MapSetData = [
     spr: "forest",
     def1: "field",
     res: "wood",
-    own: "no one",
   },
   {
     x: 1050,
@@ -185,7 +161,6 @@ const MapSetData = [
     spr: "mountain",
     def1: "field",
     res: "iron",
-    own: "no one",    
   },
   {
     x: 525,
@@ -193,7 +168,6 @@ const MapSetData = [
     spr: "field",
     def1: "field",
     res: "food",
-    own: "no one",    
   },
   {
     x: 675,
@@ -201,7 +175,6 @@ const MapSetData = [
     spr: "field",
     def1: "field",
     res: "food",
-    own: "no one",    
   },
   {
     x: 825,
@@ -209,7 +182,6 @@ const MapSetData = [
     spr: "field",
     def1: "field",
     res: "food",
-    own: "no one",   
   },
   {
     x: 975,
@@ -217,7 +189,6 @@ const MapSetData = [
     spr: "field",
     def1: "field",
     res: "food",
-    own: "no one",    
   },
   {
     x: 450,
@@ -225,7 +196,6 @@ const MapSetData = [
     spr: "mountain",
     def1: "field",
     res: "iron",
-    own: "no one",    
   },
   {
     x: 600,
@@ -233,7 +203,6 @@ const MapSetData = [
     spr: "field",
     def1: "field",
     res: "food",
-    own: "no one",    
   },
   {
     x: 750,
@@ -241,7 +210,6 @@ const MapSetData = [
     spr: "field",
     def1: "field",
     res: "food",
-    own: "no one",    
   },
   {
     x: 900,
@@ -249,7 +217,6 @@ const MapSetData = [
     spr: "field",
     def1: "field",
     res: "food",
-    own: "no one",    
   },
   {
     x: 1050,
@@ -257,7 +224,6 @@ const MapSetData = [
     spr: "mountain",
     def1: "field",
     res: "iron",
-    own: "no one",    
   },
   {
     x: 525,
@@ -265,7 +231,6 @@ const MapSetData = [
     spr: "mountain",
     def1: "field",
     res: "iron",
-    own: "no one",   
   },
   {
     x: 675,
@@ -273,7 +238,6 @@ const MapSetData = [
     spr: "mountain",
     def1: "field",
     res: "iron",
-    own: "no one",    
   },
   {
     x: 825,
@@ -281,7 +245,6 @@ const MapSetData = [
     spr: "mountain",
     def1: "field",
     res: "iron",
-    own: "no one",    
   },
   {
     x: 975,
@@ -289,7 +252,6 @@ const MapSetData = [
     spr: "mountain",
     def1: "field",
     res: "iron",
-    own: "no one",   
   },
   {
     x: 450,
@@ -297,7 +259,6 @@ const MapSetData = [
     spr: "mountain",
     def1: "field",
     res: "iron",
-    own: "no one",    
   },
   {
     x: 600,
@@ -305,7 +266,6 @@ const MapSetData = [
     spr: "mountain",
     def1: "field",
     res: "iron",
-    own: "no one",    
   },
   {
     x: 750,
@@ -313,7 +273,6 @@ const MapSetData = [
     spr: "mountain",
     def1: "field",
     res: "iron",
-    own: "no one",    
   },
   {
     x: 900,
@@ -321,7 +280,6 @@ const MapSetData = [
     spr: "mountain",
     def1: "field",
     res: "iron",
-    own: "no one",    
   },
   {
     x: 1050,
@@ -329,7 +287,6 @@ const MapSetData = [
     spr: "mountain",
     def1: "field",
     res: "iron",
-    own: "no one",
   },
 ];
 const seedMap = () => Mapset.bulkCreate(MapSetData);
