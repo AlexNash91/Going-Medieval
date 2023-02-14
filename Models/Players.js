@@ -1,26 +1,26 @@
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
 
-class Players extends Model {}
+class Players extends Model { }
 
 Players.init(
-  {
-    id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true,
-      autoIncrement: true,
-    },
+    {
+        id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            primaryKey: true,
+            autoIncrement: true,
+        },
         username: {
             type: DataTypes.STRING,
             allowNull: false,
         },
         password: {
-          type: DataTypes.STRING,
-          allowNull: false,
-          validate: {
-            len: [8],
-          },
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                len: [8],
+            },
         },
         kingdom: {
             type: DataTypes.STRING,
@@ -78,26 +78,27 @@ Players.init(
         },
         penSol: {
             type: DataTypes.BOOLEAN,
-            allowNull: true,
+            allowNull: false,
             defaultValue: false,
         },
-        penArc: {type: 
-            DataTypes.BOOLEAN,
-            allowNull: true,
+        penArc: {
+            type:
+                DataTypes.BOOLEAN,
+            allowNull: false,
             defaultValue: false,
         },
         penKni: {
             type: DataTypes.BOOLEAN,
-            allowNull: true,
+            allowNull: false,
             defaultValue: false,
         },
     },
-  {
-    sequelize,
-    freezeTableName: true,
-    timestamps: false,
-    modelName: "Players",
-  }
+    {
+        sequelize,
+        freezeTableName: true,
+        timestamps: false,
+        modelName: "Players",
+    }
 );
 
 module.exports = Players;
