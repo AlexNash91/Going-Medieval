@@ -119,8 +119,9 @@ gameScene.create = function () {
         
     // })
 
-    let soldiers = 0
-    
+    let sol = true
+    let user = "Alex"
+
     let genSol = self.add.rectangle(160, 275, 120, 50, 0x000000);
     genSol.setStrokeStyle(2, 0xffffff);
     let genSolText = self.add.text(160, 275,'Train Soldier', { font: '24px Arial', fill: '#ffffff' });
@@ -133,7 +134,7 @@ gameScene.create = function () {
             headers: {
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ soldiers: soldiers + 1 })
+            body: JSON.stringify({ username: user, penSol: sol })
           })
             console.log("Button clicked!")
             .then(res => res.json())
@@ -142,8 +143,7 @@ gameScene.create = function () {
     });
              
                 
-    let archers = 0
-
+   
     let genArc = self.add.rectangle(160, 325, 120, 50, 0x000000);
     genArc.setStrokeStyle(2, 0xffffff);
     let genArcText = self.add.text(160, 325,'Train Archer', { font: '24px Arial', fill: '#ffffff' });
@@ -156,7 +156,7 @@ gameScene.create = function () {
             headers: {
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ archers: archers + 1 })
+            body: JSON.stringify({ penArc })
           })
             console.log("Button clicked!")
             .then(res => res.json())
@@ -164,8 +164,7 @@ gameScene.create = function () {
             .catch(error => console.error(error));
     });
     
-    let knights = 0
-
+    
     let genKni = self.add.rectangle(160, 375, 120, 50, 0x000000);
     genKni.setStrokeStyle(2, 0xffffff);
     let genKniText = self.add.text(160, 375,'Train Knight', { font: '24px Arial', fill: '#ffffff' });
@@ -178,7 +177,7 @@ gameScene.create = function () {
             headers: {
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ knights: knights + 1 })
+            body: JSON.stringify({ penKni })
           })
             console.log("Button clicked!")
             .then(res => res.json())

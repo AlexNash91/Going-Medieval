@@ -15,7 +15,9 @@ const PlayerData = [
         knights: 0,
         attacking: null,
         defending: null,
-
+        penSol: false,
+        penArc: false,
+        penKni: false,
     },
     {
         username: 'crisscross',
@@ -30,6 +32,9 @@ const PlayerData = [
         knights: 0,
         attacking: null,
         defending: null,
+        penSol: false,
+        penArc: false,
+        penKni: false,
 
     },
     {
@@ -45,7 +50,9 @@ const PlayerData = [
         knights: 0,
         attacking: null,
         defending: null,
-
+        penSol: false,
+        penArc: false,
+        penKni: false,
     },
     {
         username: 'aggrocrag',
@@ -60,6 +67,9 @@ const PlayerData = [
         knights: 0,
         attacking: null,
         defending: null,
+        penSol: false,
+        penArc: false,
+        penKni: false,
     },
     {
         username: 'DaKing',
@@ -74,6 +84,9 @@ const PlayerData = [
         knights: 0,
         attacking: null,
         defending: null,
+        penSol: false,
+        penArc: false,
+        penKni: false,
     }
 ];
 const seedPlayers = () => Players.bulkCreate(PlayerData);

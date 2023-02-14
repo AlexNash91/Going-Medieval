@@ -68,7 +68,22 @@ Players.init(
             type: DataTypes.INTEGER,
             allowNull: true,
             defaultValue: 1
-        }
+        },
+        penSol: {
+            type: DataTypes.BOOLEAN,
+            allowNull: true,
+            defaultValue: false,
+        },
+        penArc: {type: 
+            DataTypes.BOOLEAN,
+            allowNull: true,
+            defaultValue: false,
+        },
+        penKni: {
+            type: DataTypes.BOOLEAN,
+            allowNull: true,
+            defaultValue: false,
+        },
     },
     {
         sequelize,
