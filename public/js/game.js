@@ -167,6 +167,7 @@ gameScene.create = function () {
     });
     
     let kni = true
+    
     let genKni = self.add.rectangle(160, 375, 120, 50, 0x000000);
     genKni.setStrokeStyle(2, 0xffffff);
     let genKniText = self.add.text(160, 375,'Train Knight', { font: '24px Arial', fill: '#ffffff' });

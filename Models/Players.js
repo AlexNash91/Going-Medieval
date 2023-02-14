@@ -82,8 +82,7 @@ Players.init(
             defaultValue: false,
         },
         penArc: {
-            type:
-                DataTypes.BOOLEAN,
+            type: DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: false,
         },
