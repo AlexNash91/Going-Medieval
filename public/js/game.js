@@ -68,19 +68,19 @@ gameScene.create = function () {
 
     })
 
-    let impBtn = self.add.rectangle(160, 125, 120, 50, 0x000000);
-    impBtn.setStrokeStyle(2, 0xffffff);
-    let impBtnText = self.add.text(160, 125,'Improve Troops', { font: '24px Arial', fill: '#ffffff' });
-    impBtnText.setOrigin(0.5);
-    impBtn.setInteractive();
-    impBtn.on("pointerdown", function () {   
-        console.log('Button clicked!'); 
-        // Brings up options to improve units
-    })
+    // let impBtn = self.add.rectangle(160, 125, 120, 50, 0x000000);
+    // impBtn.setStrokeStyle(2, 0xffffff);
+    // let impBtnText = self.add.text(160, 125,'Improve Troops', { font: '24px Arial', fill: '#ffffff' });
+    // impBtnText.setOrigin(0.5);
+    // impBtn.setInteractive();
+    // impBtn.on("pointerdown", function () {   
+    //     console.log('Button clicked!'); 
+    //     // Brings up options to improve units
+    // })
 
-    let impSol = self.add.rectangle(160, 175, 120, 50, 0x000000);
+    let impSol = self.add.rectangle(160, 125, 120, 50, 0x000000);
     impSol.setStrokeStyle(2, 0xffffff);
-    let impSolText = self.add.text(160, 175,'Improve Soldiers', { font: '24px Arial', fill: '#ffffff' });
+    let impSolText = self.add.text(160, 125,'Improve Soldiers', { font: '24px Arial', fill: '#ffffff' });
     impSolText.setOrigin(0.5);
     impSol.setInteractive();
     impSol.on("pointerdown", function () {   
@@ -88,9 +88,9 @@ gameScene.create = function () {
         // update stats of soldiers
     })
 
-    let impArc = self.add.rectangle(160, 225, 120, 50, 0x000000);
+    let impArc = self.add.rectangle(160, 175, 120, 50, 0x000000);
     impArc.setStrokeStyle(2, 0xffffff);
-    let impArcText = self.add.text(160, 225,'Improve Archers', { font: '24px Arial', fill: '#ffffff' });
+    let impArcText = self.add.text(160, 175,'Improve Archers', { font: '24px Arial', fill: '#ffffff' });
     impArcText.setOrigin(0.5);
     impArc.setInteractive();
     impArc.on("pointerdown", function () {   
@@ -98,9 +98,9 @@ gameScene.create = function () {
         // update stats of archers
     })
 
-    let impKni = self.add.rectangle(160, 275, 120, 50, 0x000000);
+    let impKni = self.add.rectangle(160, 225, 120, 50, 0x000000);
     impKni.setStrokeStyle(2, 0xffffff);
-    let impKniText = self.add.text(160, 275,'Improve Knights', { font: '24px Arial', fill: '#ffffff' });
+    let impKniText = self.add.text(160, 225,'Improve Knights', { font: '24px Arial', fill: '#ffffff' });
     impKniText.setOrigin(0.5);
     impKni.setInteractive();
     impKni.on("pointerdown", function () {   
@@ -108,22 +108,23 @@ gameScene.create = function () {
         // update stats of knights 
     })
 
-    let genBtn = self.add.rectangle(160, 325, 120, 50, 0x000000);
-    genBtn.setStrokeStyle(2, 0xffffff);
-    let genBtnText = self.add.text(160, 325,'Train Troops', { font: '24px Arial', fill: '#ffffff' });
-    genBtnText.setOrigin(0.5);
-    genBtn.setInteractive();
-    genBtn.on("pointerdown", function () {    
-        console.log('Button clicked!');
-        // calls function to bring up unit creation options
+    // let genBtn = self.add.rectangle(160, 325, 120, 50, 0x000000);
+    // genBtn.setStrokeStyle(2, 0xffffff);
+    // let genBtnText = self.add.text(160, 325,'Train Troops', { font: '24px Arial', fill: '#ffffff' });
+    // genBtnText.setOrigin(0.5);
+    // genBtn.setInteractive();
+    // genBtn.on("pointerdown", function () {    
+    //     console.log('Button clicked!');
+    //     // calls function to bring up unit creation options
         
-    })
+    // })
 
-    let soldiers = 0
-    
-    let genSol = self.add.rectangle(160, 375, 120, 50, 0x000000);
+    let sol = true
+    let user = "Alex"
+
+    let genSol = self.add.rectangle(160, 275, 120, 50, 0x000000);
     genSol.setStrokeStyle(2, 0xffffff);
-    let genSolText = self.add.text(160, 375,'Train Soldier', { font: '24px Arial', fill: '#ffffff' });
+    let genSolText = self.add.text(160, 275,'Train Soldier', { font: '24px Arial', fill: '#ffffff' });
     genSolText.setOrigin(0.5);
     genSol.setInteractive();
     genSol.on('pointerdown', function () {
@@ -133,19 +134,20 @@ gameScene.create = function () {
             headers: {
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ soldiers: soldiers + 1 })
+            body: JSON.stringify({ username: user, penSol: sol })
           })
+            // console.log("Button clicked!")
             .then(res => res.json())
             .then(data => console.log(data))
             .catch(error => console.error(error));
     });
              
                 
-    let archers = 0
-
-    let genArc = self.add.rectangle(160, 425, 120, 50, 0x000000);
+   let arc = true
+   
+    let genArc = self.add.rectangle(160, 325, 120, 50, 0x000000);
     genArc.setStrokeStyle(2, 0xffffff);
-    let genArcText = self.add.text(160, 425,'Train Archer', { font: '24px Arial', fill: '#ffffff' });
+    let genArcText = self.add.text(160, 325,'Train Archer', { font: '24px Arial', fill: '#ffffff' });
     genArcText.setOrigin(0.5);
     genArc.setInteractive();
     genArc.on('pointerdown', function () {
@@ -155,18 +157,18 @@ gameScene.create = function () {
             headers: {
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ archers: archers + 1 })
+            body: JSON.stringify({ username: user, penArc: arc })
           })
+            // console.log("Button clicked!")
             .then(res => res.json())
             .then(data => console.log(data))
             .catch(error => console.error(error));
     });
     
-    let knights = 0
-
-    let genKni = self.add.rectangle(160, 475, 120, 50, 0x000000);
+    let kni = true
+    let genKni = self.add.rectangle(160, 375, 120, 50, 0x000000);
     genKni.setStrokeStyle(2, 0xffffff);
-    let genKniText = self.add.text(160, 475,'Train Knight', { font: '24px Arial', fill: '#ffffff' });
+    let genKniText = self.add.text(160, 375,'Train Knight', { font: '24px Arial', fill: '#ffffff' });
     genKniText.setOrigin(0.5);
     genKni.setInteractive();
     genKni.on('pointerdown', function () {
@@ -176,8 +178,9 @@ gameScene.create = function () {
             headers: {
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ knights: knights + 1 })
+            body: JSON.stringify({ username: user, penKni: kni })
           })
+            // console.log("Button clicked!")
             .then(res => res.json())
             .then(data => console.log(data))
             .catch(error => console.error(error));
@@ -240,3 +243,7 @@ gameScene.update = function () {
 
 //create new game
 let game = new Phaser.Game(config);
+
+function attackInit() {}
+
+function attack() {}
