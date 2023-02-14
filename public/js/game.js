@@ -65,6 +65,7 @@ gameScene.create = function () {
         console.log('Button clicked!');
         // Asks how many units you want to send
         // start attack time function
+        attackInit()
 
     })
 
@@ -120,7 +121,7 @@ gameScene.create = function () {
     // })
 
     let sol = true
-    let user = "Alex"
+    let user = "johncrally"
 
     let genSol = self.add.rectangle(160, 275, 120, 50, 0x000000);
     genSol.setStrokeStyle(2, 0xffffff);
@@ -166,6 +167,7 @@ gameScene.create = function () {
     });
     
     let kni = true
+    
     let genKni = self.add.rectangle(160, 375, 120, 50, 0x000000);
     genKni.setStrokeStyle(2, 0xffffff);
     let genKniText = self.add.text(160, 375,'Train Knight', { font: '24px Arial', fill: '#ffffff' });
@@ -244,6 +246,8 @@ gameScene.update = function () {
 //create new game
 let game = new Phaser.Game(config);
 
-function attackInit() {}
+function attackInit() {
+    function attack() {}
+}
 
-function attack() {}
+
