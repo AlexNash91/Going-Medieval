@@ -91,6 +91,18 @@ Players.init(
             allowNull: false,
             defaultValue: false,
         },
+        ATK: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
+        DEF: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
+        HP: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
     },
     {
         sequelize,

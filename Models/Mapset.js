@@ -35,18 +35,6 @@ Mapset.init(
             type: DataTypes.STRING,
             allowNull: true,
         },
-        ATK: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-        },
-        DEF2: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-        },
-        HP: {
-            type: DataTypes.INTEGER,
-            allowNull: false
-        },
     },
     {
         sequelize,

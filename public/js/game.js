@@ -65,7 +65,7 @@ gameScene.create = function () {
         console.log('Button clicked!');
         // Asks how many units you want to send
         // start attack time function
-        attackInit()
+        // attackInit()
 
     })
 
@@ -86,7 +86,8 @@ gameScene.create = function () {
     impSol.setInteractive();
     impSol.on("pointerdown", function () {   
         console.log('Button clicked!'); 
-        // update stats of soldiers
+        // PATCH request for mapset
+        // increment data for DAM, DEF, and HP
     })
 
     let impArc = self.add.rectangle(160, 175, 120, 50, 0x000000);
@@ -96,7 +97,8 @@ gameScene.create = function () {
     impArc.setInteractive();
     impArc.on("pointerdown", function () {   
         console.log('Button clicked!'); 
-        // update stats of archers
+        // PATCH request for mapset
+        // increment data for DAM, DEF, and HP
     })
 
     let impKni = self.add.rectangle(160, 225, 120, 50, 0x000000);
@@ -106,7 +108,8 @@ gameScene.create = function () {
     impKni.setInteractive();
     impKni.on("pointerdown", function () {   
         console.log('Button clicked!'); 
-        // update stats of knights 
+        // PATCH request for mapset
+        // increment data for DAM, DEF, and HP 
     })
 
     // let genBtn = self.add.rectangle(160, 325, 120, 50, 0x000000);
@@ -246,8 +249,19 @@ gameScene.update = function () {
 //create new game
 let game = new Phaser.Game(config);
 
+attack(); {
+    // FETCH request compares player stats with enemy stats
+    // determines a winner
+    // PATCH request updates player stats as well as new tile assignment
+}
+
 function attackInit() {
-    function attack() {}
+    // calculate amount of turns to get to selected tile
+    // d=√((x2 – x1)² + (y2 – y1)²)
+    // decrement turns left with each tick
+    // conditional that checks if turns left === 0
+    // when 0, run attack function
+    attack()
 }
 
 
