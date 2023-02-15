@@ -49,26 +49,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log('Now listening'));
   setInterval(async () => {
-    resolveCombat();
+    // resolveCombat();
     claimTile();
     genPlayerUnits();
     genPlayerResource();
     genPlayerRank();
+    //genplayerstats();
     // attack();
     console.log("Reload and Restart");
   }, tickRate);
 });
-
-
-async function resolveCombat() {
-  console.log("Begin Combat!")
-  console.log("End Combat!")
-}
-
-async function genPlayerUnits() {
-  console.log("Begin Combat!")
-  console.log("End Combat!")
-}
 
 async function claimTile () {
   console.log("Begin Claim!");
@@ -82,24 +72,24 @@ async function claimTile () {
       },
     });
 
-    // Loop through each player and update the corresponding mapset row
+    //loops through each player and update the corresponding mapset row
     for (const player of players) {
       const username = player.username;
       const penClaim = player.penClaim;
 
-      // Find the corresponding mapset row
+      //finds the corresponding mapset row
       const mapset = await Mapset.findByPk(penClaim);
       if (!mapset) {
         throw new Error(`Mapset with id ${penClaim} not found`);
       }
 
-      // Update the own column of the mapset row
+      //updates the own column of the mapset row
       await mapset.update({
         own: username,
       });
     }
 
-    // Set all penClaim cells to null
+    //sets all penClaim cells to null
     await Players.update({ penClaim: null }, {
       where: { penClaim: { [Op.not]: null } }
     });
@@ -111,19 +101,99 @@ async function claimTile () {
   }
 };
 
+// async function resolveCombat () {
+//   console.log("Begin Attack!");
+//   try {
+//     // Find all players with a non-null value in the targeting
+//     const players = await Players.findAll({
+//       where: {
+//         targeting: {
+//           [Op.not]: null,
+//         },
+//       },
+//     });
+
+//     //loops through each player and update the corresponding mapset row
+//     for (const player of players) {
+//       const username = player.username;
+//       const penClaim = player.penClaim;
+
+//       //finds the corresponding mapset row
+//       const mapset = await Mapset.findByPk(penClaim);
+//       if (!mapset) {
+//         throw new Error(`Mapset with id ${penClaim} not found`);
+//       }
+
+//       //updates the own column of the mapset row
+//       await mapset.update({
+//         own: username,
+//       });
+//     }
+
+//     //sets all penClaim cells to null
+//     await Players.update({ penClaim: null }, {
+//       where: { penClaim: { [Op.not]: null } }
+//     });
+
+//     console.log("End Claim!");
+//   } catch (err) {
+//     console.log(err);
+//     throw err;
+//   }
+// };
+
+async function genPlayerUnits() {
+  console.log("Begin generating units!")
+  try {
+    const players = await Players.findAll({
+      where: {
+        training: {
+          [Op.not]: null,
+        },
+      },
+    });
+    for (const player of players) {
+      const { training } = player;
+      if (training.includes("soldier")) {
+        await player.increment("soldiers");
+        await player.decrement("food", { by: 5 });
+        await player.decrement("stone");
+      }
+      if (training.includes("knight")) {
+        await player.increment("knights");
+        await player.decrement("food", { by: 5 });
+        await player.decrement("iron");
+      }
+      if (training.includes("archer")) {
+        await player.increment("archers");
+        await player.decrement("food", { by: 5 });
+        await player.decrement("wood");
+      }
+      await player.update({ training: null });
+    }
+
+    console.log("Units generated successfully!")
+  } catch (err) {
+    console.error("Error generating units:", err);
+  }
+}
+
+
 async function genPlayerResource() {
   console.log("Begin generating resources!")
-  const mapsets = await Mapset.findAll();
-  for (const mapset of mapsets) {
-    const player = await Players.findOne({
-      where: { username: mapset.own },
-    });
-    if (player) {
-      await player.increment(mapset.res, { by: 1 });
-    }
+  const players = await Players.findAll();
+  for (const player of players) {
+    const { archers, soldiers, knights } = player;
+    const updatedPlayer = {
+      ATK: player.ATK + archers * 5 + soldiers * 2 + knights * 3,
+      DEF: player.DEF + archers * 1 + soldiers * 1 + knights * 5,
+      HP: player.HP + archers * 1 + soldiers * 4 + knights * 3,
+    };
+    await player.update(updatedPlayer);
   }
   console.log("End generating resources!")
 }
+
 
 async function genPlayerRank() {
   console.log("Begin calculating ranks!")

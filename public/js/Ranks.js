@@ -2,8 +2,16 @@ const ranks = function () {
     fetch('/ranks')
         .then(resp => resp.json())
         .then(data => {
-            data.reverse()
-            
+            const placement = []
+            for (i = 0; i < data.length; i++) {
+                console.log(typeof (data[i].ranking))
+                console.log(data[i].ranking)
+                placement.push(data[i].ranking)
+                console.log(placement)
+            }
+            placement.sort((a, b) => b - a)
+            console.log(placement)
+
             for (var i = 0; i < data.length; i++) {
 
                 const table = document.getElementsByClassName('table-group-divider')[0]
