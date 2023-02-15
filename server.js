@@ -1,6 +1,4 @@
-const tickRate = 5000
-let countdownIntervalId;
-let isCountingDown = false;
+const tickRate = 60000
 
 const { Op } = require('sequelize');
 const path = require('path');
@@ -50,10 +48,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log('Now listening'));
-
-  // Set up the first interval to update the timeRemaining field
-
- // Set up the second interval to update the tickRate field
   setInterval(async () => {
     resolveCombat();
     claimTile();
@@ -61,36 +55,8 @@ sequelize.sync({ force: false }).then(() => {
     genPlayerResource();
     genPlayerRank();
     console.log("Reload and Restart");
-    // countDown();
-    // Update the tickRate field to its new value
-    await Tick.update({ timer: tickRate }, { where: { id: 1 } });
   }, tickRate);
 });
-
-async function countDown() {
-  if (isCountingDown) {
-    // If an interval is already running, return without doing anything
-    return;
-  }
-
-  let startTime = Date.now();
-  // Call this function every 1000ms
-  countdownIntervalId = setInterval(() => {
-    let elapsedTime = Date.now() - startTime;
-    let timeRemaining = tickRate - elapsedTime;
-    console.log(timeRemaining);
-
-    Tick.update({ timer: timeRemaining }, { where: { id: 1 } });
-    if (timeRemaining <= 0) {
-      clearInterval(countdownIntervalId);
-      countdownIntervalId = null;
-      isCountingDown = false;
-      return; // Reset the flag and return
-    }
-  }, 1000);
-
-  isCountingDown = true;
-}
 
 
 async function resolveCombat() {
