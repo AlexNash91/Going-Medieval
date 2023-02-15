@@ -3,7 +3,7 @@ let gameScene = new Phaser.Scene('Game');
 
 let username = "johncrally"
 let activeTile = []
-let reloadTime = 30000
+let reloadTime = 15000
 let sprites = []
 let sol = true
 let arc = true
@@ -26,6 +26,7 @@ gameScene.preload = function () {
     this.load.image('hills', './Assets/Tiles/0020.png');
     this.load.image('mountain', './Assets/Tiles/0167.png');
     this.load.image('water', './Assets/Tiles/0986.png');
+    this.load.image('castle', './Assets/Tiles/1014.png');
 };
 
 //called once after preload ends  
@@ -48,17 +49,48 @@ gameScene.create = function () {
     claimBtnText.setOrigin(0.5);
     claimBtn.setInteractive();
     claimBtn.on('pointerdown', function () {
-        console.log('Button clicked!');
-        fetch('/claim', {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ username: username, penClaim: activeTile[0] })
-        })
-            .then(res => res.json())
-            .then(data => console.log(data))
-            .catch(error => console.error(error));
+        if (activeTile[4] == null) {
+            console.log("Claimming Tile")
+            fetch('/claim', {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username: username, penClaim: activeTile[0] })
+
+            })
+                .then(res => res.json())
+                .then(data => console.log(data))
+                .catch(error => console.error(error));
+        } else { console.log("CANNOT CLAIM TILE IS ALREADY TAKEN") }
+    });
+
+    // set kingdom location
+    let kingBtn = self.add.rectangle(500, 600, 200, 50, 0x000000);
+    kingBtn.setStrokeStyle(2, 0xffffff);
+    let kingBtnText = self.add.text(500, 600, 'Set Kingdom', { font: '24px Arial', fill: '#ffffff' });
+    kingBtnText.setOrigin(0.5);
+    kingBtn.setInteractive();
+    kingBtn.on('pointerdown', function () {
+        if (activeTile[4] == null) {
+            console.log("Setting Kingdom!")
+            fetch('/kingdom', {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username: username, kingdomTile: activeTile[0], cas: "castle", id: activeTile[0] })
+
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    kingBtn.destroy();
+                    kingBtnText.destroy();
+                    buildmap();
+                })
+                .catch(error => console.error(error));
+        } else { console.log("CANNOT SETTLE TILE IS ALREADY TAKEN") }
     });
 
     // ATTACK BUTTON  
@@ -234,10 +266,11 @@ gameScene.create = function () {
             .then(resp => resp.json())
             .then(data => {
                 for (var i = 0; i < data.length; i++) {
-                    window['t' + (i)] = self.add.sprite(data[i].x, data[i].y, data[i].spr);
+                    window['t' + (i)] = self.add.sprite(data[i].x, data[i].y, data[i].spr).setDepth(0).setInteractive();
+                    if (data[i].cas) {
+                        window['t' + (i)] = self.add.sprite(data[i].x, data[i].y + 10, data[i].cas).setDepth(1).setInteractive();
+                    }
                     sprites.push(window['t' + (i)]); // Add the sprite object to the array
-                    window['t' + (i)].setDepth(0);
-                    window['t' + (i)].setInteractive();
 
                     let text;  //may be redundant DELETE LATER
                     let id = data[i].id
@@ -289,7 +322,3 @@ gameScene.update = function () {
 
 //create new game
 let game = new Phaser.Game(config);
-
-
-
-

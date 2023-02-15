@@ -1,4 +1,4 @@
-const tickRate = 60000
+const tickRate = 30000
 
 const { Op } = require('sequelize');
 const path = require('path');

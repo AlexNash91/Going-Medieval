@@ -91,6 +91,40 @@ router.patch('/claim', async (req, res) => {
   }
 });
 
+router.patch('/targeting', async (req, res) => {
+  try {
+    const updatedPlayers = await Players.update(
+      { targeting: req.body.targeting },
+      { where: { username: req.body.username } }
+    );
+    res.json(updatedPlayers);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+router.patch('/kingdom', async (req, res) => {
+  try {
+    const updatedPlayers = await Players.update(
+      { kingdomTile: req.body.kingdomTile },
+      { where: { username: req.body.username } }
+    );
+    const updatedMapset = await Mapset.update(
+      { cas: req.body.cas },
+      { where: { id: req.body.id } }
+    );
+    const responseData = {
+      updatedPlayers: updatedPlayers,
+      updatedMapset: updatedMapset
+    };
+    res.json(responseData);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
 // ranks path
 router.patch('/ranks', async (req, res) => {
   try {
