@@ -52,7 +52,7 @@ router.post('/login', async (req, res) => {
     userData = user.dataValues;
     req.session.save(() => {
       req.session.user_id = user.id;
-      req.session.username = user.username;
+      req.session.username = username;
       req.session.logged_in = true;
     return res.status(200).json({ message: 'User logged in successfully.', wood: user.wood, stone: user.stone, iron: user.iron, food: user.food });
   })
@@ -202,7 +202,7 @@ router.post('/register', async (req, res) => {
     await user.save();
     req.session.save(() => {
     req.session.user_id = user.id;
-    req.session.username = user.username;
+    req.session.username = username;
   });
     return res.status(200).json({message: 'User registered successfully.' });
   } catch (error) {
