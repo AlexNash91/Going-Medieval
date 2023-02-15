@@ -7,7 +7,6 @@ const MapSetData = [
     spr: "mountain",
     defSpr: "field",
     res: "iron",
-    cas: "castle",
   },
   {
     x: 600,

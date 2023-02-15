@@ -1,7 +1,7 @@
 // create new scene
 let gameScene = new Phaser.Scene('Game');
 
-let username = "johncrally"
+let localUsername = "johncrally"
 let activeTile = []
 let reloadTime = 15000
 let sprites = []
@@ -38,7 +38,7 @@ gameScene.create = function () {
     box.setStrokeStyle(10, 0x000000);
 
     //creates the text object to be displayed
-    self.activeTileText = self.add.text(20, 20, '', { font: '24px Arial', fill: '#ffffff' });
+    self.activeTileText = self.add.text(225, 20, '', { font: '24px Arial', fill: '#ffffff' });
 
     // ------------------------------BUTTON BLOCK: section that adds code for all buttons----------------------------------------------
 
@@ -56,7 +56,7 @@ gameScene.create = function () {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ username: username, penClaim: activeTile[0] })
+                body: JSON.stringify({ username: localUsername, penClaim: activeTile[0] })
 
             })
                 .then(res => res.json())
@@ -66,32 +66,56 @@ gameScene.create = function () {
     });
 
     // set kingdom location
-    let kingBtn = self.add.rectangle(500, 600, 200, 50, 0x000000);
-    kingBtn.setStrokeStyle(2, 0xffffff);
-    let kingBtnText = self.add.text(500, 600, 'Set Kingdom', { font: '24px Arial', fill: '#ffffff' });
-    kingBtnText.setOrigin(0.5);
-    kingBtn.setInteractive();
-    kingBtn.on('pointerdown', function () {
-        if (activeTile[4] == null) {
-            console.log("Setting Kingdom!")
-            fetch('/kingdom', {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ username: username, kingdomTile: activeTile[0], cas: "castle", id: activeTile[0] })
+    let testBtn = self.add.rectangle(600, 700, 200, 50, 0x000000);
+    testBtn.setStrokeStyle(2, 0xffffff);
+    testBtn.setInteractive();
+    testBtn.on('pointerdown', function () {
+        console.log('localUsername:', localUsername);
+        console.log('activeTile[0]:', activeTile[0]);
+        console.log('id:', activeTile[0]);
+        fetch('/kingdom', {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username: localUsername, own: localUsername, kingdomTile: activeTile[0], cas: "castle", id: activeTile[0] })
+        })
+    })
 
-            })
-                .then(res => res.json())
-                .then(data => {
-                    console.log(data);
-                    kingBtn.destroy();
-                    kingBtnText.destroy();
-                    buildmap();
-                })
-                .catch(error => console.error(error));
-        } else { console.log("CANNOT SETTLE TILE IS ALREADY TAKEN") }
-    });
+
+    fetch(`/players?username=${localUsername}`)
+        .then(res => res.json())
+        .then(data => {
+            if (data.length && data[0].kingdomTile === null) {
+                let kingBtn = self.add.rectangle(500, 600, 200, 50, 0x000000);
+                kingBtn.setStrokeStyle(2, 0xffffff);
+                let kingBtnText = self.add.text(500, 600, 'Set Kingdom', { font: '24px Arial', fill: '#ffffff' });
+                kingBtnText.setOrigin(0.5);
+                kingBtn.setInteractive();
+                kingBtn.on('pointerdown', function () {
+                    if (activeTile[4] == null) {
+                        console.log("Setting Kingdom!")
+                        fetch('/kingdom', {
+                            method: 'PATCH',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ username: localUsername, own: localUsername, kingdomTile: activeTile[0], cas: "castle", id: activeTile[0] })
+
+                        })
+                            .then(res => res.json())
+                            .then(data => {
+                                console.log(data);
+                                kingBtn.destroy();
+                                kingBtnText.destroy();
+                                buildmap();
+                            })
+                            .catch(error => console.error(error));
+                    } else { console.log("CANNOT SETTLE TILE IS ALREADY TAKEN") }
+                });
+            }
+        })
+        .catch(error => console.error(error));
 
     // ATTACK BUTTON  
     let atkBtn = self.add.rectangle(160, 75, 120, 50, 0x000000);
@@ -129,7 +153,7 @@ gameScene.create = function () {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ username: username, penSol: sol })
+            body: JSON.stringify({ username: localUsername, penSol: sol })
         })
             // console.log("Button clicked!")
             .then(res => res.json())
@@ -150,7 +174,7 @@ gameScene.create = function () {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ username: username, penArc: arc })
+            body: JSON.stringify({ username: localUsername, penArc: arc })
         })
             // console.log("Button clicked!")
             .then(res => res.json())
@@ -171,88 +195,13 @@ gameScene.create = function () {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ username: username, penKni: kni })
+            body: JSON.stringify({ username: localUsername, penKni: kni })
         })
             // console.log("Button clicked!")
             .then(res => res.json())
             .then(data => console.log(data))
             .catch(error => console.error(error));
     });
-
-    // IMPROVE SOLDIERS BUTTON
-    // let impSol = self.add.rectangle(160, 125, 120, 50, 0x000000);
-    // impSol.setStrokeStyle(2, 0xffffff);
-    // let impSolText = self.add.text(160, 125, 'Improve Soldiers', { font: '24px Arial', fill: '#ffffff' });
-    // impSolText.setOrigin(0.5);
-    // impSol.setInteractive();
-    // impSol.on("pointerdown", function () {
-    //     console.log('Button clicked!');
-    //     // PATCH request for mapset
-
-    //     // fetch('/api/map', {
-    //     //     method: 'PATCH',
-    //     //     headers: {
-    //     //       'Content-Type': 'application/json'
-    //     //     },
-    //     //     body: JSON.stringify({ })
-    //     //   })
-    //     //     .then(res => res.json())
-    //     //     .then(data => console.log(data))
-    //     //     .catch(error => console.error(error));
-
-    //     // increment data for DAM, DEF, and HP
-    // })
-
-    // // IMPROVE ARCHERS BUTTON
-    // let impArc = self.add.rectangle(160, 175, 120, 50, 0x000000);
-    // impArc.setStrokeStyle(2, 0xffffff);
-    // let impArcText = self.add.text(160, 175, 'Improve Archers', { font: '24px Arial', fill: '#ffffff' });
-    // impArcText.setOrigin(0.5);
-    // impArc.setInteractive();
-    // impArc.on("pointerdown", function () {
-    //     console.log('Button clicked!');
-    //     // PATCH request for mapset
-
-    //     // fetch('/api/map', {
-    //     //     method: 'PATCH',
-    //     //     headers: {
-    //     //       'Content-Type': 'application/json'
-    //     //     },
-    //     //     body: JSON.stringify({ })
-    //     //   })
-    //     //     .then(res => res.json())
-    //     //     .then(data => console.log(data))
-    //     //     .catch(error => console.error(error));
-
-    //     // increment data for DAM, DEF, and HP
-    // })
-
-    // // IMPROVE KNIGHTS BUTTON
-    // let impKni = self.add.rectangle(160, 225, 120, 50, 0x000000);
-    // impKni.setStrokeStyle(2, 0xffffff);
-    // let impKniText = self.add.text(160, 225, 'Improve Knights', { font: '24px Arial', fill: '#ffffff' });
-    // impKniText.setOrigin(0.5);
-    // impKni.setInteractive();
-    // impKni.on("pointerdown", function () {
-    //     console.log('Button clicked!');
-    // PATCH request for mapset
-
-    // fetch('/api/map', {
-    //     method: 'PATCH',
-    //     headers: {
-    //       'Content-Type': 'application/json'
-    //     },
-    //     body: JSON.stringify({ })
-    //   })
-    //     .then(res => res.json())
-    //     .then(data => console.log(data))
-    //     .catch(error => console.error(error));
-
-    // increment data for DAM, DEF, and HP 
-    // })
-
-
-
 
     //Fetchs data from the mapset table and builds the map tiles with that data.  Also turns on interactivity and adds pointerover functions.  Note the invocation of IIFE in the pointerover and pointerout functions.  this was required to get those functions to alter the alpha.  That is why "index" is being used in the function instead of "i"
     function buildmap() {

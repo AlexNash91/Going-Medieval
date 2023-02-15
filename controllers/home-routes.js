@@ -69,10 +69,10 @@ router.get('/api/map', async (req, res) => {
     }
 })
 
-router.get('/api/timer', async (req, res) => {
+router.get('/players', async (req, res) => {
   try {
-      const retTimer = await Tick.findAll()
-      res.json(retTimer)
+      const playersData = await Players.findAll()
+      res.json(playersData)
   } catch (err) {
       console.log(err)
   }
@@ -106,12 +106,13 @@ router.patch('/targeting', async (req, res) => {
 
 router.patch('/kingdom', async (req, res) => {
   try {
+    console.log('req.body:', req.body);
     const updatedPlayers = await Players.update(
       { kingdomTile: req.body.kingdomTile },
       { where: { username: req.body.username } }
     );
     const updatedMapset = await Mapset.update(
-      { cas: req.body.cas },
+      { cas: req.body.cas, own: req.body.own },
       { where: { id: req.body.id } }
     );
     const responseData = {
