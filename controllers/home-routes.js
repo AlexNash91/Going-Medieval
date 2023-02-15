@@ -79,6 +79,18 @@ router.get('/players', async (req, res) => {
   }
 })
 
+router.patch('/players', async (req, res) => {
+  try {
+    const updatedPlayers = await Players.update(
+      {training: req.body.training},
+      {where: { username: req.body.username}}
+    )
+  }catch (err) {
+    console.log(error)
+    res.status(500).send('Internal Service Error')
+  }
+})
+
 router.patch('/claim', async (req, res) => {
   try {
     const updatedPlayers = await Players.update(
