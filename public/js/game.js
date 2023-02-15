@@ -95,21 +95,88 @@ gameScene.create = function () {
     attackBtn.setStrokeStyle(2, 0x000000);
     let attackBtnText = self.add.text(340, 670, 'ATTACK!', { font: '24px Arial', fill: '#000000' });
     attackBtnText.setOrigin(0.5);
+    // attackBtn.setInteractive();
+    // attackBtn.on('pointerdown', function () {
+    //     if (activeTile[3] == null && activeTile[3] !== localUsername) {
+    //         messageText.setText(`Claiming the ${activeTile[1]}!`); console.log("Claiming the tile!")
+    //         fetch('/claim', {
+    //             method: 'PATCH',
+    //             headers: {
+    //                 'Content-Type': 'application/json'
+    //             },
+    //             body: JSON.stringify({ username: localUsername, penClaim: activeTile[0] })
+
+    //         })
+    //             .then(res => res.json())
+    //             .then(data => console.log(data))
+    //             .catch(error => console.error(error));
+    //     } else if (activeTile[3] !== null && activeTile[3] !== localUsername) {
+    //         messageText.setText("CANNOT CLAIM TILE IS ALREADY TAKEN"); console.log("CANNOT CLAIM TILE IS ALREADY TAKEN")
+    //     } else { messageText.setText("YOU ALREADY OWN THIS"); console.log("YOU ALREADY OWN THIS") }
+    // });
 
     let trainSolBtn = self.add.rectangle(200, 560, 120, 50, 0xffffff);
     trainSolBtn.setStrokeStyle(2, 0x000000);
     let trainSolBtnText = self.add.text(200, 560, 'Soldiers', { font: '24px Arial', fill: '#000000' });
     trainSolBtnText.setOrigin(0.5);
+    trainSolBtn.setInteractive();
+    trainSolBtn.on('pointerdown', function () {
+        if (activeTile[3] === localUsername) {
+            messageText.setText(`Training Soldiers!`); console.log("Training Soldiers!")
+            fetch('/players', {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username: localUsername, training: "soldier"})
+            })
+                .then(res => res.json())
+                .then(data => console.log(data))
+                .catch(error => console.error(error));
+        } else { messageText.setText("Cannot train, not enough resources"); console.log("Cannot train, not enough resources") }
+    });
 
     let trainArcBtn = self.add.rectangle(200, 615, 120, 50, 0xffffff);
     trainArcBtn.setStrokeStyle(2, 0x000000);
     let trainArcBtnText = self.add.text(200, 615, 'Archers', { font: '24px Arial', fill: '#000000' });
     trainArcBtnText.setOrigin(0.5);
+    trainArcBtn.setInteractive();
+    trainArcBtn.on('pointerdown', function () {
+        if (activeTile[3] === localUsername) {
+            messageText.setText(`Training Archers!`); console.log("Training Archers!")
+            fetch('/players', {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username: localUsername, training: "soldier"})
+            })
+                .then(res => res.json())
+                .then(data => console.log(data))
+                .catch(error => console.error(error));
+        } else { messageText.setText("Cannot train, not enough resources"); console.log("Cannot train, not enough resources") }
+    });
 
     let trainKniBtn = self.add.rectangle(200, 670, 120, 50, 0xffffff);
     trainKniBtn.setStrokeStyle(2, 0x000000);
     let trainKniBtnText = self.add.text(200, 670, 'Knights', { font: '24px Arial', fill: '#000000' });
     trainKniBtnText.setOrigin(0.5);
+    trainKniBtn.setInteractive();
+    trainKniBtn.on('pointerdown', function () {
+        if (activeTile[3] === localUsername) {
+            messageText.setText(`Training Soldiers!`); console.log("Training Soldiers!")
+            fetch('/players', {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username: localUsername, training: "soldier"})
+            })
+                .then(res => res.json())
+                .then(data => console.log(data))
+                .catch(error => console.error(error));
+        } else { messageText.setText("Cannot train, not enough resources"); console.log("Cannot train, not enough resources") }
+    });
 
     fetch(`/players?username=${localUsername}`)
         .then(res => res.json())
