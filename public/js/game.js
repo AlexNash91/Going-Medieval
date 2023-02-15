@@ -91,6 +91,7 @@ gameScene.create = function () {
         } else { messageText.setText("YOU ALREADY OWN THIS"); console.log("YOU ALREADY OWN THIS") }
     });
 
+    // ATTACK BUTTON
     let attackBtn = self.add.rectangle(340, 670, 120, 50, 0xff00000);
     attackBtn.setStrokeStyle(2, 0x000000);
     let attackBtnText = self.add.text(340, 670, 'ATTACK!', { font: '24px Arial', fill: '#000000' });
@@ -115,13 +116,13 @@ gameScene.create = function () {
     //     } else { messageText.setText("YOU ALREADY OWN THIS"); console.log("YOU ALREADY OWN THIS") }
     // });
 
+    // TRAIN SOLDIER BUTTON
     let trainSolBtn = self.add.rectangle(200, 560, 120, 50, 0xffffff);
     trainSolBtn.setStrokeStyle(2, 0x000000);
     let trainSolBtnText = self.add.text(200, 560, 'Soldiers', { font: '24px Arial', fill: '#000000' });
     trainSolBtnText.setOrigin(0.5);
     trainSolBtn.setInteractive();
     trainSolBtn.on('pointerdown', function () {
-        if (activeTile[3] === localUsername) {
             messageText.setText(`Training Soldiers!`); console.log("Training Soldiers!")
             fetch('/players', {
                 method: 'PATCH',
@@ -133,17 +134,16 @@ gameScene.create = function () {
                 .then(res => res.json())
                 .then(data => console.log(data))
                 .catch(error => console.error(error));
-        } else { messageText.setText("Cannot train, not enough resources"); console.log("Cannot train, not enough resources") }
     });
 
+    // TRAIN ARCHER BUTTON
     let trainArcBtn = self.add.rectangle(200, 615, 120, 50, 0xffffff);
     trainArcBtn.setStrokeStyle(2, 0x000000);
     let trainArcBtnText = self.add.text(200, 615, 'Archers', { font: '24px Arial', fill: '#000000' });
     trainArcBtnText.setOrigin(0.5);
     trainArcBtn.setInteractive();
     trainArcBtn.on('pointerdown', function () {
-        if (activeTile[3] === localUsername) {
-            messageText.setText(`Training Archers!`); console.log("Training Archers!")
+        messageText.setText(`Training Archers!!`); console.log("Training Archers!")
             fetch('/players', {
                 method: 'PATCH',
                 headers: {
@@ -154,17 +154,16 @@ gameScene.create = function () {
                 .then(res => res.json())
                 .then(data => console.log(data))
                 .catch(error => console.error(error));
-        } else { messageText.setText("Cannot train, not enough resources"); console.log("Cannot train, not enough resources") }
     });
 
+    // TRAIN KNIGHT BUTTON
     let trainKniBtn = self.add.rectangle(200, 670, 120, 50, 0xffffff);
     trainKniBtn.setStrokeStyle(2, 0x000000);
     let trainKniBtnText = self.add.text(200, 670, 'Knights', { font: '24px Arial', fill: '#000000' });
     trainKniBtnText.setOrigin(0.5);
     trainKniBtn.setInteractive();
     trainKniBtn.on('pointerdown', function () {
-        if (activeTile[3] === localUsername) {
-            messageText.setText(`Training Soldiers!`); console.log("Training Soldiers!")
+        messageText.setText(`Training Knights!`); console.log("Training Knights!")
             fetch('/players', {
                 method: 'PATCH',
                 headers: {
@@ -175,9 +174,9 @@ gameScene.create = function () {
                 .then(res => res.json())
                 .then(data => console.log(data))
                 .catch(error => console.error(error));
-        } else { messageText.setText("Cannot train, not enough resources"); console.log("Cannot train, not enough resources") }
     });
 
+    // SET KINGDOM BUTTON
     fetch(`/players?username=${localUsername}`)
         .then(res => res.json())
         .then(data => {
