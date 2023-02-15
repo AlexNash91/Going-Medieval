@@ -5,6 +5,9 @@ let username = "johncrally"
 let activeTile = []
 let reloadTime = 30000
 let sprites = []
+let sol = true
+let arc = true
+let kni = true
 
 //set config
 let config = {
@@ -36,6 +39,8 @@ gameScene.create = function () {
     //creates the text object to be displayed
     self.activeTileText = self.add.text(20, 20, '', { font: '24px Arial', fill: '#ffffff' });
 
+    // ------------------------------BUTTON BLOCK: section that adds code for all buttons----------------------------------------------
+
     //CLAIM BUTTON = creates simTickBtn to test claiming the active tile
     let claimBtn = self.add.rectangle(500, 500, 120, 50, 0x000000);
     claimBtn.setStrokeStyle(2, 0xffffff);
@@ -56,8 +61,7 @@ gameScene.create = function () {
             .catch(error => console.error(error));
     });
 
-    // BUTTON BLOCK: section that adds code for all conditional buttons 
-
+    // ATTACK BUTTON  
     let atkBtn = self.add.rectangle(160, 75, 120, 50, 0x000000);
     atkBtn.setStrokeStyle(2, 0xffffff);
     let buttonText = self.add.text(160, 75, 'Attack', { font: '24px Arial', fill: '#ffffff' });
@@ -65,22 +69,10 @@ gameScene.create = function () {
     atkBtn.setInteractive();
     atkBtn.on("pointerdown", function () {
         console.log('Button clicked!');
-        // Asks how many units you want to send
-        // start attack time function
-        // attackInit()
-
+        attackInit()
     })
 
-    // let impBtn = self.add.rectangle(160, 125, 120, 50, 0x000000);
-    // impBtn.setStrokeStyle(2, 0xffffff);
-    // let impBtnText = self.add.text(160, 125,'Improve Troops', { font: '24px Arial', fill: '#ffffff' });
-    // impBtnText.setOrigin(0.5);
-    // impBtn.setInteractive();
-    // impBtn.on("pointerdown", function () {   
-    //     console.log('Button clicked!'); 
-    //     // Brings up options to improve units
-    // })
-
+    // IMPROVE SOLDIERS BUTTON
     let impSol = self.add.rectangle(160, 125, 120, 50, 0x000000);
     impSol.setStrokeStyle(2, 0xffffff);
     let impSolText = self.add.text(160, 125, 'Improve Soldiers', { font: '24px Arial', fill: '#ffffff' });
@@ -89,9 +81,22 @@ gameScene.create = function () {
     impSol.on("pointerdown", function () {
         console.log('Button clicked!');
         // PATCH request for mapset
+
+        // fetch('/api/map', {
+        //     method: 'PATCH',
+        //     headers: {
+        //       'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify({ })
+        //   })
+        //     .then(res => res.json())
+        //     .then(data => console.log(data))
+        //     .catch(error => console.error(error));
+
         // increment data for DAM, DEF, and HP
     })
 
+    // IMPROVE ARCHERS BUTTON
     let impArc = self.add.rectangle(160, 175, 120, 50, 0x000000);
     impArc.setStrokeStyle(2, 0xffffff);
     let impArcText = self.add.text(160, 175, 'Improve Archers', { font: '24px Arial', fill: '#ffffff' });
@@ -100,9 +105,22 @@ gameScene.create = function () {
     impArc.on("pointerdown", function () {
         console.log('Button clicked!');
         // PATCH request for mapset
+
+        // fetch('/api/map', {
+        //     method: 'PATCH',
+        //     headers: {
+        //       'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify({ })
+        //   })
+        //     .then(res => res.json())
+        //     .then(data => console.log(data))
+        //     .catch(error => console.error(error));
+
         // increment data for DAM, DEF, and HP
     })
 
+    // IMPROVE KNIGHTS BUTTON
     let impKni = self.add.rectangle(160, 225, 120, 50, 0x000000);
     impKni.setStrokeStyle(2, 0xffffff);
     let impKniText = self.add.text(160, 225, 'Improve Knights', { font: '24px Arial', fill: '#ffffff' });
@@ -111,23 +129,22 @@ gameScene.create = function () {
     impKni.on("pointerdown", function () {
         console.log('Button clicked!');
         // PATCH request for mapset
+
+        // fetch('/api/map', {
+        //     method: 'PATCH',
+        //     headers: {
+        //       'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify({ })
+        //   })
+        //     .then(res => res.json())
+        //     .then(data => console.log(data))
+        //     .catch(error => console.error(error));
+
         // increment data for DAM, DEF, and HP 
     })
 
-    // let genBtn = self.add.rectangle(160, 325, 120, 50, 0x000000);
-    // genBtn.setStrokeStyle(2, 0xffffff);
-    // let genBtnText = self.add.text(160, 325,'Train Troops', { font: '24px Arial', fill: '#ffffff' });
-    // genBtnText.setOrigin(0.5);
-    // genBtn.setInteractive();
-    // genBtn.on("pointerdown", function () {    
-    //     console.log('Button clicked!');
-    //     // calls function to bring up unit creation options
-
-    // })
-
-    let sol = true
-    let user = "johncrally"
-
+    // TRAIN SOLDIERS BUTTON
     let genSol = self.add.rectangle(160, 275, 120, 50, 0x000000);
     genSol.setStrokeStyle(2, 0xffffff);
     let genSolText = self.add.text(160, 275, 'Train Soldier', { font: '24px Arial', fill: '#ffffff' });
@@ -140,7 +157,7 @@ gameScene.create = function () {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ username: user, penSol: sol })
+            body: JSON.stringify({ username: username, penSol: sol })
         })
             // console.log("Button clicked!")
             .then(res => res.json())
@@ -148,9 +165,7 @@ gameScene.create = function () {
             .catch(error => console.error(error));
     });
 
-
-    let arc = true
-
+    // TRAIN ARCHERS BUTTON
     let genArc = self.add.rectangle(160, 325, 120, 50, 0x000000);
     genArc.setStrokeStyle(2, 0xffffff);
     let genArcText = self.add.text(160, 325, 'Train Archer', { font: '24px Arial', fill: '#ffffff' });
@@ -163,16 +178,15 @@ gameScene.create = function () {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ username: user, penArc: arc })
+            body: JSON.stringify({ username: username, penArc: arc })
         })
             // console.log("Button clicked!")
             .then(res => res.json())
             .then(data => console.log(data))
             .catch(error => console.error(error));
     });
-
-    let kni = true
-
+  
+    // TRAIN KNIGHTS BUTTON
     let genKni = self.add.rectangle(160, 375, 120, 50, 0x000000);
     genKni.setStrokeStyle(2, 0xffffff);
     let genKniText = self.add.text(160, 375, 'Train Knight', { font: '24px Arial', fill: '#ffffff' });
@@ -185,7 +199,7 @@ gameScene.create = function () {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ username: user, penKni: kni })
+            body: JSON.stringify({ username: username, penKni: kni })
         })
             // console.log("Button clicked!")
             .then(res => res.json())
@@ -254,7 +268,6 @@ gameScene.create = function () {
         }
 
     buildmap();
-
     this.time.addEvent({ delay: reloadTime, callback: buildmap, callbackScope: this, loop: true});
 };
 
@@ -263,3 +276,45 @@ gameScene.update = function () {
 
 //create new game
 let game = new Phaser.Game(config);
+
+// --------------------------------------------------Attacking functions---------------------------------------------------------------
+attack(); {
+    // FETCH request gets ATK from Mapset
+    // Player ATK must be higher than opponents HP + DEF
+    // determines a winner
+
+    // let ATK = your ATK
+    // let HP = opponents HP
+    // let DEF = opponents DEF
+
+    // if (ATK > HP + DEF ) {
+    //     console.log("You win!")
+    // }
+
+    // PATCH request updates tile assignment
+    //     fetch('/api/map', {
+    //         method: 'PATCH',
+    //         headers: {
+    //           'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify({ id:, own:  })
+    //       })
+    //         .then(res => res.json())
+    //         .then(data => console.log(data))
+    //         .catch(error => console.error(error));
+}
+
+function attackInit() {
+    // calculate amount of turns to get to selected tile
+    // d=√((x2 – x1)² + (y2 – y1)²)
+    // decrement turns left with each tick
+    const turns = "amount of turns left"
+    // conditional that checks if turns left === 0
+    if (turns === 0) {
+        attack()
+    }
+    // when 0, run attack function  
+}
+
+// timer1.timer
+
