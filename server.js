@@ -181,17 +181,19 @@ async function genPlayerUnits() {
 
 async function genPlayerResource() {
   console.log("Begin generating resources!")
-  const mapsets = await Mapset.findAll();
-  for (const mapset of mapsets) {
-    const player = await Players.findOne({
-      where: { username: mapset.own },
-    });
-    if (player) {
-      await player.increment(mapset.res, { by: 1 });
-    }
+  const players = await Players.findAll();
+  for (const player of players) {
+    const { archers, soldiers, knights } = player;
+    const updatedPlayer = {
+      ATK: player.ATK + archers * 5 + soldiers * 2 + knights * 3,
+      DEF: player.DEF + archers * 1 + soldiers * 1 + knights * 5,
+      HP: player.HP + archers * 1 + soldiers * 4 + knights * 3,
+    };
+    await player.update(updatedPlayer);
   }
   console.log("End generating resources!")
 }
+
 
 async function genPlayerRank() {
   console.log("Begin calculating ranks!")
