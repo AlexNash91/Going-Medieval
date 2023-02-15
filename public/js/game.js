@@ -1,7 +1,7 @@
 // create new scene
 let gameScene = new Phaser.Scene('Game');
 
-let localUsername = "johncrally"
+let localUsername = 'johncrally'
 let activeTile = []
 let reloadTime = 15000
 let sprites = []
