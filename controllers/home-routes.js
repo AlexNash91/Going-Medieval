@@ -20,6 +20,7 @@ router.get('/', async (req, res) => {
     }
 })
 
+
 router.get('/login', (req, res) => {
   console.log("i am in GET login")
     if (req.session.logged_in) {
@@ -51,6 +52,7 @@ router.post('/login', async (req, res) => {
     userData = user.dataValues;
     req.session.save(() => {
       req.session.user_id = user.id;
+      req.session.username = user.username;
       req.session.logged_in = true;
     return res.status(200).json({ message: 'User logged in successfully.', wood: user.wood, stone: user.stone, iron: user.iron, food: user.food });
   })
@@ -63,7 +65,8 @@ router.post('/login', async (req, res) => {
 router.get('/api/map', async (req, res) => {
     try {
         const gameData = await Mapset.findAll()
-        res.json(gameData)
+        const username = req.session.username
+        res.json({gameData, username})
     } catch (err) {
         console.log(err)
     }
@@ -75,6 +78,31 @@ router.get('/players', async (req, res) => {
       res.json(playersData)
   } catch (err) {
       console.log(err)
+  }
+})
+
+router.patch('/players', async (req, res) => {
+  try {
+    const updatedPlayers = await Players.update(
+      {training: req.body.training},
+      {where: {username: req.body.username}}
+    )
+  }catch (err) {
+    console.log(error)
+    res.status(500).send('Internal Service Error')
+  }
+})
+
+router.patch('/target', async (req, res) => {
+  try {
+    const updatedPlayers = await Players.update(
+      {targeting: req.body.targeting},
+      {where: {username: req.body.username}}
+    );
+    res.json(updatedPlayers);
+  }catch (err) {
+    console.log(error)
+    res.status(500).send('Internal Service Error')
   }
 })
 
@@ -174,6 +202,7 @@ router.post('/register', async (req, res) => {
     await user.save();
     req.session.save(() => {
     req.session.user_id = user.id;
+    req.session.username = user.username;
   });
     return res.status(200).json({message: 'User registered successfully.' });
   } catch (error) {

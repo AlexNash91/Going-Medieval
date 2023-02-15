@@ -1,7 +1,8 @@
 // create new scene
 let gameScene = new Phaser.Scene('Game');
 
-let localUsername = "johncrally"
+let localUsername;
+
 let activeTile = []
 let reloadTime = 15000
 let sprites = []
@@ -61,10 +62,6 @@ gameScene.create = function () {
     //draws a box to place text over - placeholder
     self.add.sprite(270, 400, 'scroll').setScale(.94).setDepth(0)
 
-    // ------------------------------BUTTON BLOCK: section that adds code for all buttons
-     // ------------------------------BUTTON BLOCK: section that adds code for all buttons
-      // ------------------------------BUTTON BLOCK: section that adds code for all buttons
-       // ------------------------------BUTTON BLOCK: section that adds code for all buttons
 
     //CLAIM BUTTON = creates simTickBtn to test claiming the active tile
     let claimBtn = self.add.rectangle(340, 560, 120, 50, 0x000000);
@@ -91,26 +88,88 @@ gameScene.create = function () {
         } else { messageText.setText("YOU ALREADY OWN THIS"); console.log("YOU ALREADY OWN THIS") }
     });
 
+    // ATTACK BUTTON
     let attackBtn = self.add.rectangle(340, 670, 120, 50, 0xff00000);
     attackBtn.setStrokeStyle(2, 0x000000);
     let attackBtnText = self.add.text(340, 670, 'ATTACK!', { font: '24px Arial', fill: '#000000' });
     attackBtnText.setOrigin(0.5);
+    attackBtn.setInteractive();
+    attackBtn.on('pointerdown', function () {
+        messageText.setText(`Attacking ${activeTile[0]}`); console.log("Now Attacking")
+        fetch('/target', {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username: localUsername, targeting: activeTile[0] })
 
+        })
+            .then(res => res.json())
+            .then(data => console.log(data))
+            .catch(error => console.error(error));
+    });
+
+    // TRAIN SOLDIER BUTTON
     let trainSolBtn = self.add.rectangle(200, 560, 120, 50, 0xffffff);
     trainSolBtn.setStrokeStyle(2, 0x000000);
     let trainSolBtnText = self.add.text(200, 560, 'Soldiers', { font: '24px Arial', fill: '#000000' });
     trainSolBtnText.setOrigin(0.5);
+    trainSolBtn.setInteractive();
+    trainSolBtn.on('pointerdown', function () {
+        messageText.setText(`Training Soldiers!`); console.log("Training Soldiers!")
+        fetch('/players', {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username: localUsername, training: "soldier" })
+        })
+            .then(res => res.json())
+            .then(data => console.log(data))
+            .catch(error => console.error(error));
+    });
 
+    // TRAIN ARCHER BUTTON
     let trainArcBtn = self.add.rectangle(200, 615, 120, 50, 0xffffff);
     trainArcBtn.setStrokeStyle(2, 0x000000);
     let trainArcBtnText = self.add.text(200, 615, 'Archers', { font: '24px Arial', fill: '#000000' });
     trainArcBtnText.setOrigin(0.5);
+    trainArcBtn.setInteractive();
+    trainArcBtn.on('pointerdown', function () {
+        messageText.setText(`Training Archers!!`); console.log("Training Archers!")
+        fetch('/players', {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username: localUsername, training: "archer" })
+        })
+            .then(res => res.json())
+            .then(data => console.log(data))
+            .catch(error => console.error(error));
+    });
 
+    // TRAIN KNIGHT BUTTON
     let trainKniBtn = self.add.rectangle(200, 670, 120, 50, 0xffffff);
     trainKniBtn.setStrokeStyle(2, 0x000000);
     let trainKniBtnText = self.add.text(200, 670, 'Knights', { font: '24px Arial', fill: '#000000' });
     trainKniBtnText.setOrigin(0.5);
+    trainKniBtn.setInteractive();
+    trainKniBtn.on('pointerdown', function () {
+        messageText.setText(`Training Knights!`); console.log("Training Knights!")
+        fetch('/players', {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username: localUsername, training: "knight" })
+        })
+            .then(res => res.json())
+            .then(data => console.log(data))
+            .catch(error => console.error(error));
+    });
 
+    // SET KINGDOM BUTTON
     fetch(`/players?username=${localUsername}`)
         .then(res => res.json())
         .then(data => {
@@ -143,9 +202,10 @@ gameScene.create = function () {
                     } else if (activeTile[4] == null && activeTile[1] !== "field") {
                         messageText.setText("I'm sorry, but that is not a field.  Look for the grass tiles.");
                         console.log("CANNOT SETTLE TILE IS NOT A FIELD")
-                    } else { 
+                    } else {
                         messageText.setText("I'm sorry, but that area has already been claimed.");
-                        console.log("CANNOT SETTLE TILE IS ALREADY OWNED") }
+                        console.log("CANNOT SETTLE TILE IS ALREADY OWNED")
+                    }
                 });
             }
         })
@@ -162,18 +222,20 @@ gameScene.create = function () {
         fetch('/api/map')
             .then(resp => resp.json())
             .then(data => {
-                for (var i = 0; i < data.length; i++) {
-                    window['t' + (i)] = self.add.sprite(data[i].x, data[i].y, data[i].spr).setDepth(0).setInteractive();
-                    if (data[i].cas) {
-                        window['t' + (i)] = self.add.sprite(data[i].x, data[i].y + 10, data[i].cas).setDepth(1).setInteractive();
+                localUsername = data.username
+                console.log("localUsername: " + localUsername)
+                for (var i = 0; i < data.gameData.length; i++) {
+                    window['t' + (i)] = self.add.sprite(data.gameData[i].x, data.gameData[i].y, data.gameData[i].spr).setDepth(0).setInteractive();
+                    if (data.gameData[i].cas) {
+                        window['t' + (i)] = self.add.sprite(data.gameData[i].x, data.gameData[i].y + 10, data.gameData[i].cas).setDepth(1).setInteractive();
                     }
                     sprites.push(window['t' + (i)]); // Add the sprite object to the array
 
                     let text;  //may be redundant DELETE LATER
-                    let id = data[i].id
-                    let spr = data[i].spr
-                    let res = data[i].res
-                    let own = data[i].own
+                    let id = data.gameData[i].id
+                    let spr = data.gameData[i].spr
+                    let res = data.gameData[i].res
+                    let own = data.gameData[i].own
 
                     window['t' + (i)].on("pointerover", (function (index) {
                         return function () {
@@ -190,7 +252,7 @@ gameScene.create = function () {
                     //adds on click functionality to the tile - clears the tint on any tile that isnt the one being clicked
                     window['t' + (i)].on("pointerdown", (function (index) {
                         return function () {
-                            for (var j = 0; j < data.length; j++) {
+                            for (var j = 0; j < data.gameData.length; j++) {
                                 if (j !== index) {
                                     window['t' + (j)].clearTint();
                                 }
