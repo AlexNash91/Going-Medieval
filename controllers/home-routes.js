@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 // GET request for map on homepage
 
 router.use(bodyParser.json());
+let userData
 
 router.get('/', async (req, res) => {
     try {
@@ -20,6 +21,7 @@ router.get('/', async (req, res) => {
 })
 
 router.get('/login', (req, res) => {
+  console.log("i am in GET login")
     if (req.session.logged_in) {
         res.redirect('/');
         return;
@@ -29,6 +31,7 @@ router.get('/login', (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
+  console.log("I am in POST login")
   const { username, password } = req.body;
   if (!username || !password) {
     return res.status(400).json({ error: 'Username and password are required.' });
@@ -44,11 +47,14 @@ router.post('/login', async (req, res) => {
     if (!pw) {
      return res.status(401).json({error: 'Incorrect password'}) 
     }
+    console.log(user, "User")
+    userData = user.dataValues;
     req.session.save(() => {
       req.session.id = user.id;
       req.session.logged_in = true;
-    return res.status(200).json({ message: 'User logged in successfully.' });
+    return res.status(200).json({ message: 'User logged in successfully.', wood: user.wood, stone: user.stone, iron: user.iron, food: user.food });
   })
+  
   } catch (error) {
     return res.status(500).json({ error: 'Failed to login user.' });
   }
@@ -154,9 +160,12 @@ router.get('/logout', (req, res) => {
   });
 
   router.get('/game', (req, res) => {
+    console.log("please let this be right", userData, "this is User Data");
     
-    res.render('game');
+    res.render('game', { resources : userData});    
+    // if we can get value of username in this function we can request row from database 
 });
+
 module.exports = router
 
 

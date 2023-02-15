@@ -45,21 +45,21 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log('Now listening'));
-  setInterval(async () => {
-    console.log("Tick!");
-    updatePlayerResource();
-  }, 1000);
+  // setInterval(async () => {
+  //   console.log("Tick!");
+  //   updatePlayerResource();
+  // }, 1000);
 });
 
-async function updatePlayerResource() {
-  const mapsets = await Mapset.findAll();
-  for (const mapset of mapsets) {
-    const player = await Players.findOne({
-      where: {username: mapset.own },
-    });
-    if (player) {
-      await player.increment(mapset.res, { by: 1 });
-    }
-  }
-}
+// async function updatePlayerResource() {
+//   const mapsets = await Mapset.findAll();
+//   for (const mapset of mapsets) {
+//     const player = await Players.findOne({
+//       where: {username: mapset.own },
+//     });
+//     if (player) {
+//       await player.increment(mapset.res, { by: 1 });
+//     }
+//   }
+// }
 
