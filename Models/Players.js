@@ -78,20 +78,9 @@ Players.init(
             type: DataTypes.INTEGER,
             allowNull: true,
         },
-        penSol: {
-            type: DataTypes.BOOLEAN,
-            allowNull: false,
-            defaultValue: false,
-        },
-        penArc: {
-            type: DataTypes.BOOLEAN,
-            allowNull: false,
-            defaultValue: false,
-        },
-        penKni: {
-            type: DataTypes.BOOLEAN,
-            allowNull: false,
-            defaultValue: false,
+        training: {
+            type: DataTypes.STRING,
+            allowNull: true,
         },
         ATK: {
             type: DataTypes.INTEGER,
