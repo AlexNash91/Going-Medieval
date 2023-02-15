@@ -210,6 +210,19 @@ router.get('/logout', (req, res) => {
     // if we can get value of username in this function we can request row from database 
 });
 
+router.patch('/targeting', async (req, res) => {
+  try {
+    const updatedPlayers = await Players.update(
+      { targeting: req.body.targeting },
+      { where: { username: req.body.username } }
+    );
+    res.json(updatedPlayers);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
 module.exports = router
 
 

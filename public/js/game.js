@@ -123,82 +123,22 @@ gameScene.create = function () {
     let buttonText = self.add.text(160, 75, 'Attack', { font: '24px Arial', fill: '#ffffff' });
     buttonText.setOrigin(0.5);
     atkBtn.setInteractive();
-    atkBtn.on("pointerdown", function () {
-        console.log('Button clicked!');
-        attackInit()
-    })
-
-    // IMPROVE SOLDIERS BUTTON
-    let impSol = self.add.rectangle(160, 125, 120, 50, 0x000000);
-    impSol.setStrokeStyle(2, 0xffffff);
-    let impSolText = self.add.text(160, 125, 'Improve Soldiers', { font: '24px Arial', fill: '#ffffff' });
-    impSolText.setOrigin(0.5);
-    impSol.setInteractive();
-    impSol.on("pointerdown", function () {
-        console.log('Button clicked!');
-        // PATCH request for mapset
-
-        // fetch('/api/map', {
-        //     method: 'PATCH',
-        //     headers: {
-        //       'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify({ })
-        //   })
-        //     .then(res => res.json())
-        //     .then(data => console.log(data))
-        //     .catch(error => console.error(error));
-
-        // increment data for DAM, DEF, and HP
-    })
-
-    // IMPROVE ARCHERS BUTTON
-    let impArc = self.add.rectangle(160, 175, 120, 50, 0x000000);
-    impArc.setStrokeStyle(2, 0xffffff);
-    let impArcText = self.add.text(160, 175, 'Improve Archers', { font: '24px Arial', fill: '#ffffff' });
-    impArcText.setOrigin(0.5);
-    impArc.setInteractive();
-    impArc.on("pointerdown", function () {
-        console.log('Button clicked!');
-        // PATCH request for mapset
-
-        // fetch('/api/map', {
-        //     method: 'PATCH',
-        //     headers: {
-        //       'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify({ })
-        //   })
-        //     .then(res => res.json())
-        //     .then(data => console.log(data))
-        //     .catch(error => console.error(error));
-
-        // increment data for DAM, DEF, and HP
-    })
-
-    // IMPROVE KNIGHTS BUTTON
-    let impKni = self.add.rectangle(160, 225, 120, 50, 0x000000);
-    impKni.setStrokeStyle(2, 0xffffff);
-    let impKniText = self.add.text(160, 225, 'Improve Knights', { font: '24px Arial', fill: '#ffffff' });
-    impKniText.setOrigin(0.5);
-    impKni.setInteractive();
-    impKni.on("pointerdown", function () {
-        console.log('Button clicked!');
-        // PATCH request for mapset
-
-        // fetch('/api/map', {
-        //     method: 'PATCH',
-        //     headers: {
-        //       'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify({ })
-        //   })
-        //     .then(res => res.json())
-        //     .then(data => console.log(data))
-        //     .catch(error => console.error(error));
-
-        // increment data for DAM, DEF, and HP 
-    })
+    atkBtn.on('pointerdown', function () {
+        if (activeTile[4] == null) {
+            console.log("Attacking Tile")
+            fetch('/claim', {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username: username, targeting: activeTile[0] })
+                
+            })
+                .then(res => res.json())
+                .then(data => console.log(data))
+                .catch(error => console.error(error));
+        } 
+    });
 
     // TRAIN SOLDIERS BUTTON
     let genSol = self.add.rectangle(160, 275, 120, 50, 0x000000);
@@ -331,4 +271,3 @@ gameScene.update = function () {
 
 //create new game
 let game = new Phaser.Game(config);
-
