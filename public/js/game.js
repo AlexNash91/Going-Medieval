@@ -3,7 +3,8 @@ let gameScene = new Phaser.Scene('Game');
 
 let username = "johncrally"
 let activeTile = []
-let reloadTime = 1000
+let reloadTime = 30000
+let sprites = []
 let sol = true
 let arc = true
 let kni = true
@@ -29,23 +30,6 @@ gameScene.preload = function () {
 
 //called once after preload ends  
 gameScene.create = function () {
-    fetch('/api/timer')
-        .then(resp => resp.json())
-        .then(data => {
-            const timerValue = data[0].timer;
-            console.log("Data: " + timerValue);
-            this.time.addEvent({
-                delay: timerValue + 1000,
-                callback: function () {
-                    // window.location.reload();
-                    buildmap();
-                },
-                callbackScope: this,
-                loop: true
-            });
-        })
-        .catch(err => console.log(err))
-
     let self = this;
     //draws a box to place text over - placeholder
     let box = self.add.rectangle(10, 0, 700, 920, 0x5a5a5a);
@@ -227,32 +211,39 @@ gameScene.create = function () {
 
     //Fetchs data from the mapset table and builds the map tiles with that data.  Also turns on interactivity and adds pointerover functions.  Note the invocation of IIFE in the pointerover and pointerout functions.  this was required to get those functions to alter the alpha.  That is why "index" is being used in the function instead of "i"
     function buildmap() {
+        // Loop through the array of existing sprite objects and destroy them
+        for (let i = 0; i < sprites.length; i++) {
+            sprites[i].destroy();
+        }
+        sprites = []; // Clear the array
+    
         fetch('/api/map')
             .then(resp => resp.json())
             .then(data => {
                 for (var i = 0; i < data.length; i++) {
                     window['t' + (i)] = self.add.sprite(data[i].x, data[i].y, data[i].spr);
+                    sprites.push(window['t' + (i)]); // Add the sprite object to the array
                     window['t' + (i)].setDepth(0);
                     window['t' + (i)].setInteractive();
-
+    
                     let text;  //may be redundant DELETE LATER
                     let id = data[i].id
                     let spr = data[i].spr
                     let res = data[i].res
                     let own = data[i].own
-
+    
                     window['t' + (i)].on("pointerover", (function (index) {
                         return function () {
                             window['t' + (index)].setAlpha(.5);
                         }
                     })(i));
-
+    
                     window['t' + (i)].on("pointerout", (function (index) {
                         return function () {
                             window['t' + (index)].setAlpha(1);
                         }
                     })(i));
-
+    
                     //adds on click functionality to the tile - clears the tint on any tile that isnt the one being clicked
                     window['t' + (i)].on("pointerdown", (function (index) {
                         return function () {
@@ -262,10 +253,10 @@ gameScene.create = function () {
                                 }
                             }
                             activeTile = [id, spr, res, own]
-
+    
                             window['t' + (index)].setTint(0xff00ff);
                             console.log(activeTile)
-
+    
                             // Update the text object with the contents of activeTile
                             self.activeTileText.setText(`ID: ${activeTile[0]} \nSpr: ${activeTile[1]} \nRes: ${activeTile[2]} \nOwn: ${activeTile[3]}`);
                         }
@@ -273,22 +264,11 @@ gameScene.create = function () {
                 }
             })
             .catch(err => console.log(err))
-
-    }
+            console.log("MAP BUILT!")
+        }
 
     buildmap();
-
-    fetch('/api/timer')
-        .then(response => response.json())
-        .then(data => {
-            // Find the timer with ID of 1 in the response
-            const timer1 = data.find(timer => timer.id === 1);
-            // Create a text object to display the timer value
-            this.add.text(600, 600
-                , `Timer value at ID 1: ${timer1.timer}`, { fontFamily: 'Arial', fontSize: 24, color: '#ffffff' });
-        })
-        .catch(error => console.error(error));
-
+    this.time.addEvent({ delay: reloadTime, callback: buildmap, callbackScope: this, loop: true});
 };
 
 gameScene.update = function () {
