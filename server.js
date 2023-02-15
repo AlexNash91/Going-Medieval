@@ -54,6 +54,7 @@ sequelize.sync({ force: false }).then(() => {
     genPlayerUnits();
     genPlayerResource();
     genPlayerRank();
+    attack();
     console.log("Reload and Restart");
   }, tickRate);
 });
@@ -143,4 +144,63 @@ async function genPlayerRank() {
     await player.update({ ranking });
     console.log("End calculating ranks!")
   }
+}
+
+async function attack() {
+//   //  gets ATK from Mapset
+
+// Where targeting is not null subtract that usernams ATK from the targeting's ID tile's HP
+// if targetings tiles HP is =< 0 kill player
+// kill player null all values of player row
+
+console.log("Attacking")
+const players = await Players.findAll({
+  where: { targetting: { [Op.not]: null } }
+})
+for (player of players) {
+  const maps = await Mapset.findAll({
+    where: { id: players.targetting }
+  })
+  for (map of maps) {
+    const rival = await Players.findOne({
+      where: {username: maps.own}
+    })
+    if (player.ATK > rival.DEF + rival.HP) {
+      console.log("You Died")
+      await Players.update({} {
+        where: { penClaim: { [Op.not]: null } }
+      });
+    }
+  }
+  
+
+}
+
+
+  
+//   // Player ATK must be higher than opponents HP + DEF
+//   // determines a winner
+
+  let ATK = "your ATK"
+  let HP = "opponents HP"
+  let DEF = "opponents DEF"
+
+  if (ATK > HP + DEF ) {
+      console.log("You win!")
+  }
+  else {
+    console.log("You Lose")
+  }
+
+//   // PATCH request updates tile assignment
+//   //     fetch('/api/map', {
+//   //         method: 'PATCH',
+//   //         headers: {
+//   //           'Content-Type': 'application/json'
+//   //         },
+//   //         body: JSON.stringify({ id:, own:  })
+//   //       })
+//   //         .then(res => res.json())
+//   //         .then(data => console.log(data))
+//   //         .catch(error => console.error(error));
 }
