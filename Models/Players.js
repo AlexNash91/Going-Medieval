@@ -53,7 +53,7 @@ Players.init(
         food: {
             type: DataTypes.INTEGER,
             allowNull: false,
-            defaultValue: 0
+            defaultValue: 50
         },
         archers: {
             type: DataTypes.INTEGER,

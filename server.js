@@ -54,7 +54,7 @@ sequelize.sync({ force: false }).then(() => {
     genPlayerUnits();
     genPlayerResource();
     genPlayerRank();
-    attack();
+    // attack();
     console.log("Reload and Restart");
   }, tickRate);
 });
@@ -146,35 +146,35 @@ async function genPlayerRank() {
   }
 }
 
-async function attack() {
-//   //  gets ATK from Mapset
+// async function attack() {
+// //   //  gets ATK from Mapset
 
-// Where targeting is not null subtract that usernams ATK from the targeting's ID tile's HP
-// if targetings tiles HP is =< 0 kill player
-// kill player null all values of player row
+// // Where targeting is not null subtract that usernams ATK from the targeting's ID tile's HP
+// // if targetings tiles HP is =< 0 kill player
+// // kill player null all values of player row
 
-console.log("Attacking")
-const players = await Players.findAll({
-  where: { targetting: { [Op.not]: null } }
-})
-for (player of players) {
-  const maps = await Mapset.findAll({
-    where: { id: players.targetting }
-  })
-  for (map of maps) {
-    const rival = await Players.findOne({
-      where: {username: maps.own}
-    })
-    if (player.ATK > rival.DEF + rival.HP) {
-      console.log("You Died")
-      await Players.update({} {
-        where: { penClaim: { [Op.not]: null } }
-      });
-    }
-  }
+// console.log("Attacking")
+// const players = await Players.findAll({
+//   where: { targetting: { [Op.not]: null } }
+// })
+// for (player of players) {
+//   const maps = await Mapset.findAll({
+//     where: { id: players.targetting }
+//   })
+//   for (map of maps) {
+//     const rival = await Players.findOne({
+//       where: {username: maps.own}
+//     })
+//     if (player.ATK > rival.DEF + rival.HP) {
+//       console.log("You Died")
+//       await Players.update({} {
+//         where: { penClaim: { [Op.not]: null } }
+//       });
+//     }
+//   }
   
 
-}
+// }
 
 
   
@@ -203,4 +203,3 @@ for (player of players) {
 //   //         .then(res => res.json())
 //   //         .then(data => console.log(data))
 //   //         .catch(error => console.error(error));
-}

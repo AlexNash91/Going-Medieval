@@ -3,6 +3,7 @@ let gameScene = new Phaser.Scene('Game');
 
 let localUsername = "johncrally"
 let activeTile = []
+let claimMessage = []
 let reloadTime = 15000
 let sprites = []
 let sol = true
@@ -25,31 +26,38 @@ gameScene.preload = function () {
     this.load.image('forest', './Assets/Tiles/0009.png');
     this.load.image('hills', './Assets/Tiles/0020.png');
     this.load.image('mountain', './Assets/Tiles/0167.png');
-    this.load.image('water', './Assets/Tiles/0986.png');
+    this.load.image('lake', './Assets/Tiles/0986.png');
     this.load.image('castle', './Assets/Tiles/1014.png');
+    this.load.image('scroll', './Assets/Tiles/scroll.png')
 };
 
 //called once after preload ends  
 gameScene.create = function () {
     let self = this;
     //draws a box to place text over - placeholder
-    let box = self.add.rectangle(10, 0, 700, 920, 0x5a5a5a);
-    //box border
-    box.setStrokeStyle(10, 0x000000);
+    self.add.sprite(230,375, 'scroll').setScale(1).setDepth(0)
+
+
+    let settledBox = self.add.rectangle(175, 30, 200, 50, 0x000000);
+    settledBox.setStrokeStyle(2, 0xffffff);
+    let settledBoxText = self.add.text(175, 30, 'Kingdom Settled!', { font: '24px Arial', fill: '#ffffff' });
+    settledBoxText.setOrigin(0.5);
 
     //creates the text object to be displayed
-    self.activeTileText = self.add.text(225, 20, '', { font: '24px Arial', fill: '#ffffff' });
+    self.activeTileText = self.add.text(10, 100, '', { font: '24px Arial', fill: '#ffffff' });
+    self.claimMessageText = self.add.text(10, 300, '', { font: '24px Arial', fill: '#ffffff' });
 
     // ------------------------------BUTTON BLOCK: section that adds code for all buttons----------------------------------------------
 
     //CLAIM BUTTON = creates simTickBtn to test claiming the active tile
-    let claimBtn = self.add.rectangle(500, 500, 120, 50, 0x000000);
+    
+    let claimBtn = self.add.rectangle(200, 300, 120, 50, 0x000000);
     claimBtn.setStrokeStyle(2, 0xffffff);
-    let claimBtnText = self.add.text(500, 500, 'Claim Tile', { font: '24px Arial', fill: '#ffffff' });
+    let claimBtnText = self.add.text(200, 300, 'Claim Tile', { font: '24px Arial', fill: '#ffffff' });
     claimBtnText.setOrigin(0.5);
     claimBtn.setInteractive();
     claimBtn.on('pointerdown', function () {
-        if (activeTile[4] == null) {
+        if (activeTile[3] == null && activeTile[3] !== localUsername ) {
             console.log("Claimming Tile")
             fetch('/claim', {
                 method: 'PATCH',
@@ -62,38 +70,23 @@ gameScene.create = function () {
                 .then(res => res.json())
                 .then(data => console.log(data))
                 .catch(error => console.error(error));
-        } else { console.log("CANNOT CLAIM TILE IS ALREADY TAKEN") }
+        } else if (activeTile[3] !== null && activeTile[3] !== localUsername ) {
+            self.claimMessageText.setText("CANNOT CLAIM TILE IS ALREADY TAKEN");console.log("CANNOT CLAIM TILE IS ALREADY TAKEN")
+        } else  { self.claimMessageText.setText("YOU ALREADY OWN THIS");console.log("YOU ALREADY OWN THIS") }
     });
-
-    // set kingdom location
-    let testBtn = self.add.rectangle(600, 700, 200, 50, 0x000000);
-    testBtn.setStrokeStyle(2, 0xffffff);
-    testBtn.setInteractive();
-    testBtn.on('pointerdown', function () {
-        console.log('localUsername:', localUsername);
-        console.log('activeTile[0]:', activeTile[0]);
-        console.log('id:', activeTile[0]);
-        fetch('/kingdom', {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ username: localUsername, own: localUsername, kingdomTile: activeTile[0], cas: "castle", id: activeTile[0] })
-        })
-    })
 
 
     fetch(`/players?username=${localUsername}`)
         .then(res => res.json())
         .then(data => {
             if (data.length && data[0].kingdomTile === null) {
-                let kingBtn = self.add.rectangle(500, 600, 200, 50, 0x000000);
+                let kingBtn = self.add.rectangle(175, 30, 200, 50, 0x000000);
                 kingBtn.setStrokeStyle(2, 0xffffff);
-                let kingBtnText = self.add.text(500, 600, 'Set Kingdom', { font: '24px Arial', fill: '#ffffff' });
+                let kingBtnText = self.add.text(175, 30, 'Set Kingdom', { font: '24px Arial', fill: '#ffffff' });
                 kingBtnText.setOrigin(0.5);
                 kingBtn.setInteractive();
                 kingBtn.on('pointerdown', function () {
-                    if (activeTile[4] == null) {
+                    if (activeTile[3] == null && activeTile[1] == "field") {
                         console.log("Setting Kingdom!")
                         fetch('/kingdom', {
                             method: 'PATCH',
@@ -111,97 +104,13 @@ gameScene.create = function () {
                                 buildmap();
                             })
                             .catch(error => console.error(error));
-                    } else { console.log("CANNOT SETTLE TILE IS ALREADY TAKEN") }
+                    } else if (activeTile[4] == null && activeTile[1] !== "field"){ 
+                        console.log("CANNOT SETTLE TILE IS NOT A FIELD") 
+                    } else {console.log("CANNOT SETTLE TILE IS ALREADY OWNED")}
                 });
             }
         })
         .catch(error => console.error(error));
-
-    // ATTACK BUTTON  
-    let atkBtn = self.add.rectangle(160, 75, 120, 50, 0x000000);
-    atkBtn.setStrokeStyle(2, 0xffffff);
-    let buttonText = self.add.text(160, 75, 'Attack', { font: '24px Arial', fill: '#ffffff' });
-    buttonText.setOrigin(0.5);
-    atkBtn.setInteractive();
-    atkBtn.on('pointerdown', function () {
-        if (activeTile[4] == null) {
-            console.log("Attacking Tile")
-            fetch('/claim', {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ username: username, targeting: activeTile[0] })
-                
-            })
-                .then(res => res.json())
-                .then(data => console.log(data))
-                .catch(error => console.error(error));
-        } 
-    });
-
-    // TRAIN SOLDIERS BUTTON
-    let genSol = self.add.rectangle(160, 275, 120, 50, 0x000000);
-    genSol.setStrokeStyle(2, 0xffffff);
-    let genSolText = self.add.text(160, 275, 'Train Soldier', { font: '24px Arial', fill: '#ffffff' });
-    genSolText.setOrigin(0.5);
-    genSol.setInteractive();
-    genSol.on('pointerdown', function () {
-        console.log('Button clicked!');
-        fetch('/ranks', {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ username: localUsername, penSol: sol })
-        })
-            // console.log("Button clicked!")
-            .then(res => res.json())
-            .then(data => console.log(data))
-            .catch(error => console.error(error));
-    });
-
-    // TRAIN ARCHERS BUTTON
-    let genArc = self.add.rectangle(160, 325, 120, 50, 0x000000);
-    genArc.setStrokeStyle(2, 0xffffff);
-    let genArcText = self.add.text(160, 325, 'Train Archer', { font: '24px Arial', fill: '#ffffff' });
-    genArcText.setOrigin(0.5);
-    genArc.setInteractive();
-    genArc.on('pointerdown', function () {
-        console.log('Button clicked!');
-        fetch('/ranks', {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ username: localUsername, penArc: arc })
-        })
-            // console.log("Button clicked!")
-            .then(res => res.json())
-            .then(data => console.log(data))
-            .catch(error => console.error(error));
-    });
-
-    // TRAIN KNIGHTS BUTTON
-    let genKni = self.add.rectangle(160, 375, 120, 50, 0x000000);
-    genKni.setStrokeStyle(2, 0xffffff);
-    let genKniText = self.add.text(160, 375, 'Train Knight', { font: '24px Arial', fill: '#ffffff' });
-    genKniText.setOrigin(0.5);
-    genKni.setInteractive();
-    genKni.on('pointerdown', function () {
-        console.log('Button clicked!');
-        fetch('/ranks', {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ username: localUsername, penKni: kni })
-        })
-            // console.log("Button clicked!")
-            .then(res => res.json())
-            .then(data => console.log(data))
-            .catch(error => console.error(error));
-    });
 
     //Fetchs data from the mapset table and builds the map tiles with that data.  Also turns on interactivity and adds pointerover functions.  Note the invocation of IIFE in the pointerover and pointerout functions.  this was required to get those functions to alter the alpha.  That is why "index" is being used in the function instead of "i"
     function buildmap() {
@@ -253,7 +162,14 @@ gameScene.create = function () {
                             console.log(activeTile)
 
                             // Update the text object with the contents of activeTile
-                            self.activeTileText.setText(`ID: ${activeTile[0]} \nSpr: ${activeTile[1]} \nRes: ${activeTile[2]} \nOwn: ${activeTile[3]}`);
+                            if (activeTile[3] == localUsername) {
+                                self.activeTileText.setText(`This ${activeTile[1]} is yours.\nIt generates 1 ${activeTile[2]} each day.`);
+                            } else if (activeTile[3] == null) {
+                                self.activeTileText.setText(`This ${activeTile[1]} can be claimed!\nIt generates 1 ${activeTile[2]} each day.`);
+                            } else {
+                                self.activeTileText.setText(`This ${activeTile[1]} is owned by ${activeTile[3]}.\nIt generates 1 ${activeTile[2]} each day.`);
+                            }
+                           
                         }
                     })(i));
                 }
