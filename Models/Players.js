@@ -71,7 +71,7 @@ Players.init(
             defaultValue: 0
         },
         targeting: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             allowNull: true,
         },
         penClaim: {

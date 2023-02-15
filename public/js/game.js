@@ -95,13 +95,13 @@ gameScene.create = function () {
     attackBtnText.setOrigin(0.5);
     attackBtn.setInteractive();
     attackBtn.on('pointerdown', function () {
-        messageText.setText(`Attacking ${activeTile[0]}`); console.log("Now Attacking")
+        messageText.setText(`Attacking ${activeTile[3]}`); console.log("Now Attacking")
         fetch('/target', {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ username: localUsername, targeting: activeTile[0] })
+            body: JSON.stringify({ username: localUsername, targeting: activeTile[3] })
 
         })
             .then(res => res.json())
