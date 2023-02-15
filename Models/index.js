@@ -1,4 +1,4 @@
 const Players = require('./Players');
 const Mapset = require('./Mapset')
-
-module.exports = { Players, Mapset,};
+const Tick = require('./Tick')
+module.exports = { Players, Mapset, Tick};
