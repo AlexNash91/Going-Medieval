@@ -23,6 +23,10 @@ Mapset.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
+        cas: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
         defSpr: {
             type: DataTypes.STRING,
             allowNull: false,
