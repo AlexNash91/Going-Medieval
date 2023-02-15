@@ -61,10 +61,6 @@ gameScene.create = function () {
     //draws a box to place text over - placeholder
     self.add.sprite(270, 400, 'scroll').setScale(.94).setDepth(0)
 
-    // ------------------------------BUTTON BLOCK: section that adds code for all buttons
-     // ------------------------------BUTTON BLOCK: section that adds code for all buttons
-      // ------------------------------BUTTON BLOCK: section that adds code for all buttons
-       // ------------------------------BUTTON BLOCK: section that adds code for all buttons
 
     //CLAIM BUTTON = creates simTickBtn to test claiming the active tile
     let claimBtn = self.add.rectangle(340, 560, 120, 50, 0x000000);
@@ -96,25 +92,21 @@ gameScene.create = function () {
     attackBtn.setStrokeStyle(2, 0x000000);
     let attackBtnText = self.add.text(340, 670, 'ATTACK!', { font: '24px Arial', fill: '#000000' });
     attackBtnText.setOrigin(0.5);
-    // attackBtn.setInteractive();
-    // attackBtn.on('pointerdown', function () {
-    //     if (activeTile[3] == null && activeTile[3] !== localUsername) {
-    //         messageText.setText(`Claiming the ${activeTile[1]}!`); console.log("Claiming the tile!")
-    //         fetch('/claim', {
-    //             method: 'PATCH',
-    //             headers: {
-    //                 'Content-Type': 'application/json'
-    //             },
-    //             body: JSON.stringify({ username: localUsername, penClaim: activeTile[0] })
+    attackBtn.setInteractive();
+    attackBtn.on('pointerdown', function () {
+        messageText.setText(`Attacking ${activeTile[0]}`); console.log("Now Attacking")
+        fetch('/target', {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username: localUsername, targeting: activeTile[0] })
 
-    //         })
-    //             .then(res => res.json())
-    //             .then(data => console.log(data))
-    //             .catch(error => console.error(error));
-    //     } else if (activeTile[3] !== null && activeTile[3] !== localUsername) {
-    //         messageText.setText("CANNOT CLAIM TILE IS ALREADY TAKEN"); console.log("CANNOT CLAIM TILE IS ALREADY TAKEN")
-    //     } else { messageText.setText("YOU ALREADY OWN THIS"); console.log("YOU ALREADY OWN THIS") }
-    // });
+        })
+            .then(res => res.json())
+            .then(data => console.log(data))
+            .catch(error => console.error(error));
+    });
 
     // TRAIN SOLDIER BUTTON
     let trainSolBtn = self.add.rectangle(200, 560, 120, 50, 0xffffff);
@@ -123,17 +115,17 @@ gameScene.create = function () {
     trainSolBtnText.setOrigin(0.5);
     trainSolBtn.setInteractive();
     trainSolBtn.on('pointerdown', function () {
-            messageText.setText(`Training Soldiers!`); console.log("Training Soldiers!")
-            fetch('/players', {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ username: localUsername, training: "soldier"})
-            })
-                .then(res => res.json())
-                .then(data => console.log(data))
-                .catch(error => console.error(error));
+        messageText.setText(`Training Soldiers!`); console.log("Training Soldiers!")
+        fetch('/players', {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username: localUsername, training: "soldier" })
+        })
+            .then(res => res.json())
+            .then(data => console.log(data))
+            .catch(error => console.error(error));
     });
 
     // TRAIN ARCHER BUTTON
@@ -144,16 +136,16 @@ gameScene.create = function () {
     trainArcBtn.setInteractive();
     trainArcBtn.on('pointerdown', function () {
         messageText.setText(`Training Archers!!`); console.log("Training Archers!")
-            fetch('/players', {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ username: localUsername, training: "archer"})
-            })
-                .then(res => res.json())
-                .then(data => console.log(data))
-                .catch(error => console.error(error));
+        fetch('/players', {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username: localUsername, training: "archer" })
+        })
+            .then(res => res.json())
+            .then(data => console.log(data))
+            .catch(error => console.error(error));
     });
 
     // TRAIN KNIGHT BUTTON
@@ -164,16 +156,16 @@ gameScene.create = function () {
     trainKniBtn.setInteractive();
     trainKniBtn.on('pointerdown', function () {
         messageText.setText(`Training Knights!`); console.log("Training Knights!")
-            fetch('/players', {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ username: localUsername, training: "knight"})
-            })
-                .then(res => res.json())
-                .then(data => console.log(data))
-                .catch(error => console.error(error));
+        fetch('/players', {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username: localUsername, training: "knight" })
+        })
+            .then(res => res.json())
+            .then(data => console.log(data))
+            .catch(error => console.error(error));
     });
 
     // SET KINGDOM BUTTON
@@ -209,9 +201,10 @@ gameScene.create = function () {
                     } else if (activeTile[4] == null && activeTile[1] !== "field") {
                         messageText.setText("I'm sorry, but that is not a field.  Look for the grass tiles.");
                         console.log("CANNOT SETTLE TILE IS NOT A FIELD")
-                    } else { 
+                    } else {
                         messageText.setText("I'm sorry, but that area has already been claimed.");
-                        console.log("CANNOT SETTLE TILE IS ALREADY OWNED") }
+                        console.log("CANNOT SETTLE TILE IS ALREADY OWNED")
+                    }
                 });
             }
         })

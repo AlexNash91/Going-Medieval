@@ -83,8 +83,21 @@ router.patch('/players', async (req, res) => {
   try {
     const updatedPlayers = await Players.update(
       {training: req.body.training},
-      {where: { username: req.body.username}}
+      {where: {username: req.body.username}}
     )
+  }catch (err) {
+    console.log(error)
+    res.status(500).send('Internal Service Error')
+  }
+})
+
+router.patch('/target', async (req, res) => {
+  try {
+    const updatedPlayers = await Players.update(
+      {targeting: req.body.targeting},
+      {where: {username: req.body.username}}
+    );
+    res.json(updatedPlayers);
   }catch (err) {
     console.log(error)
     res.status(500).send('Internal Service Error')
