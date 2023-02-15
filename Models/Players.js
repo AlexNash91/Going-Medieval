@@ -74,6 +74,10 @@ Players.init(
             type: DataTypes.INTEGER,
             allowNull: true,
         },
+        penClaim: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+        },
         penSol: {
             type: DataTypes.BOOLEAN,
             allowNull: false,

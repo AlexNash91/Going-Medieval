@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Mapset, Players} = require('../models');
+const { Mapset, Players, Tick} = require('../models');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 // GET request for map on homepage
@@ -60,7 +60,6 @@ router.post('/login', async (req, res) => {
   }
 });
 
-
 router.get('/api/map', async (req, res) => {
     try {
         const gameData = await Mapset.findAll()
@@ -70,18 +69,25 @@ router.get('/api/map', async (req, res) => {
     }
 })
 
-router.patch('/api/map', async (req, res) => {
+router.get('/api/timer', async (req, res) => {
   try {
-    const updatedMapset = await Mapset.update(
-      { own: req.body.own },
-      { where: { id: req.body.id } }
+      const retTimer = await Tick.findAll()
+      res.json(retTimer)
+  } catch (err) {
+      console.log(err)
+  }
+})
+
+router.patch('/claim', async (req, res) => {
+  try {
+    const updatedPlayers = await Players.update(
+      { penClaim: req.body.penClaim },
+      { where: { username: req.body.username } }
     );
-    res.json(updatedMapset);
+    res.json(updatedPlayers);
   } catch (err) {
     console.log(err);
-    res.status(500).send({
-      error: "Error updating mapset in the database."
-    });
+    res.status(500).send('Internal Server Error');
   }
 });
 
