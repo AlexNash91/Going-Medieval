@@ -100,6 +100,7 @@ const MapSetData = [
     spr: "mountain",
     defSpr: "mountain",
     res: "iron",
+    own: "crisscross",
 
   },
   {
@@ -108,6 +109,7 @@ const MapSetData = [
     spr: "hills",
     defSpr: "field",
     res: "stone",
+    own: "crisscross",
   },
   {
     x: 775,
@@ -122,6 +124,7 @@ const MapSetData = [
     spr: "field",
     defSpr: "field",
     res: "food",
+    own: "crisscross",
   },
   {
     x: 1075,
@@ -129,6 +132,7 @@ const MapSetData = [
     spr: "forest",
     defSpr: "field",
     res: "wood",
+    own: "crisscross",
   },
   {
     x: 550,
@@ -192,6 +196,7 @@ const MapSetData = [
     spr: "forest",
     defSpr: "field",
     res: "wood",
+    own: "crisscross",
   },
   {
     x: 550,
@@ -341,6 +346,7 @@ const MapSetData = [
     spr: "water",
     defSpr: "water",
     res: "food",
+    own: "dagnabbit",
   },
   {
     x: 1000,
@@ -348,6 +354,7 @@ const MapSetData = [
     spr: "forest",
     defSpr: "field",
     res: "wood",
+    own: "dagnabbit",
   },
   {
     x: 1150,
@@ -355,6 +362,7 @@ const MapSetData = [
     spr: "mountain",
     defSpr: "mountain",
     res: "iron",
+    own: "dagnabbit",
   },
   {
     x: 625,
@@ -362,6 +370,7 @@ const MapSetData = [
     spr: "hills",
     defSpr: "field",
     res: "stone",
+    own: "dagnabbit",
   },
   {
     x: 775,
