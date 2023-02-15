@@ -64,7 +64,6 @@ gameScene.create = function () {
     atkBtn.on("pointerdown", function () { 
         console.log('Button clicked!');
         // Asks how many units you want to send
-        // start attack time function
         // attackInit()
 
     })
@@ -87,6 +86,7 @@ gameScene.create = function () {
     impSol.on("pointerdown", function () {   
         console.log('Button clicked!'); 
         // PATCH request for mapset
+
         // increment data for DAM, DEF, and HP
     })
 
@@ -98,6 +98,16 @@ gameScene.create = function () {
     impArc.on("pointerdown", function () {   
         console.log('Button clicked!'); 
         // PATCH request for mapset
+        // fetch('/api/map', {
+        //     method: 'PATCH',
+        //     headers: {
+        //       'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify({ })
+        //   })
+        //     .then(res => res.json())
+        //     .then(data => console.log(data))
+        //     .catch(error => console.error(error));
         // increment data for DAM, DEF, and HP
     })
 
@@ -250,18 +260,41 @@ gameScene.update = function () {
 let game = new Phaser.Game(config);
 
 attack(); {
-    // FETCH request compares player stats with enemy stats
+    // FETCH request gets ATK from Mapset
+    // Player ATK must be higher than opponents HP + DEF
     // determines a winner
-    // PATCH request updates player stats as well as new tile assignment
+
+    // let ATK = your ATK
+    // let HP = opponents HP
+    // let DEF = opponents DEF
+
+    // if (ATK > HP + DEF ) {
+    //     console.log("You win!")
+    // }
+
+    // PATCH request updates tile assignment
+//     fetch('/api/map', {
+//         method: 'PATCH',
+//         headers: {
+//           'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify({ id:, own:  })
+//       })
+//         .then(res => res.json())
+//         .then(data => console.log(data))
+//         .catch(error => console.error(error));
 }
 
 function attackInit() {
     // calculate amount of turns to get to selected tile
     // d=√((x2 – x1)² + (y2 – y1)²)
     // decrement turns left with each tick
+    const turns = "amount of turns left"
     // conditional that checks if turns left === 0
-    // when 0, run attack function
-    attack()
+    if (turns === 0) {
+        attack()
+    }
+    // when 0, run attack function  
 }
 
-
+// timer1.timer
