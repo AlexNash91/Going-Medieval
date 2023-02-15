@@ -149,7 +149,7 @@ gameScene.create = function () {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ username: localUsername, training: "soldier"})
+                body: JSON.stringify({ username: localUsername, training: "archer"})
             })
                 .then(res => res.json())
                 .then(data => console.log(data))
@@ -170,7 +170,7 @@ gameScene.create = function () {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ username: localUsername, training: "soldier"})
+                body: JSON.stringify({ username: localUsername, training: "knight"})
             })
                 .then(res => res.json())
                 .then(data => console.log(data))
