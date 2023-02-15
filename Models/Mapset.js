@@ -22,6 +22,7 @@ Mapset.init(
         spr: {
             type: DataTypes.STRING,
             allowNull: false,
+            defaultValue: "field",
         },
         cas: {
             type: DataTypes.STRING,
@@ -30,10 +31,12 @@ Mapset.init(
         defSpr: {
             type: DataTypes.STRING,
             allowNull: false,
+            defaultValue: "field",
         },
         res: {
             type: DataTypes.STRING,
             allowNull: false,
+            defaultValue: "food",
         },
         own: {
             type: DataTypes.STRING,
