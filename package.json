@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "engines": {
-   "node": "18.13.0"
+    "node": "18.13.0"
   },
   "main": "server.js",
   "scripts": {
@@ -23,6 +23,7 @@
     "express-handlebars": "^5.2.0",
     "express-session": "^1.17.3",
     "handlebars": "^4.7.6",
+    "lodash": "^4.17.21",
     "mysql": "^2.18.1",
     "mysql2": "^3.1.2",
     "phaser": "^3.55.2",
