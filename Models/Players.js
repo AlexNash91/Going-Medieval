@@ -81,7 +81,6 @@ Players.init(
         training: {
             type: DataTypes.STRING,
             allowNull: true,
-            defaultValue: 0
         },
         ATK: {
             type: DataTypes.INTEGER,
