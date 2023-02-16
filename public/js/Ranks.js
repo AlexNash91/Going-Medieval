@@ -3,14 +3,25 @@ const ranks = function () {
         .then(resp => resp.json())
         .then(data => {
             const placement = []
+            const names = []
+            const king = []
             for (i = 0; i < data.length; i++) {
-                console.log(typeof (data[i].ranking))
-                console.log(data[i].ranking)
+                // console.log(typeof (data[i].ranking))
+                // console.log(data[i].ranking)
                 placement.push(data[i].ranking)
-                console.log(placement)
+                names.push(data[i].username)
+                king.push(data[i].kingdom)
+                // console.log(placement)
             }
             placement.sort((a, b) => b - a)
             console.log(placement)
+            console.log(names)
+            console.log(king)
+
+            // console.log(data)
+            // orderBy(data, "ranking", "asc")
+            // console.log(data)
+            
 
             for (var i = 0; i < data.length; i++) {
 
@@ -27,9 +38,9 @@ const ranks = function () {
                 const kingdom = document.createElement('td')
 
                 // set content within those new elements
-                rank.textContent = `${data[i].ranking}`
-                name.textContent = `${data[i].username}`
-                kingdom.textContent = `${data[i].kingdom}`
+                rank.textContent = `${placement[i]}`
+                name.textContent = `${names[i]}`
+                kingdom.textContent = `${king[i]}`
 
                 // append to fragments
                 fragment.appendChild(rank)
