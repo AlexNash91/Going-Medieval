@@ -87,6 +87,7 @@ router.patch('/players', async (req, res) => {
       {training: req.body.training},
       {where: {username: req.body.username}}
     )
+    res.json(updatedPlayers);
   }catch (err) {
     console.log(error)
     res.status(500).send('Internal Service Error')

@@ -49,98 +49,98 @@ app.use(express.static(path.join(__dirname, 'public')));
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log('Now listening'));
   setInterval(async () => {
-    // resolveCombat();
+    resolveCombat();
     // claimTile();
     genPlayerUnits();
     genPlayerResource();
     genPlayerRank();
-    //genplayerstats();
+    genplayerstats();
     // attack();
     console.log("Reload and Restart");
   }, tickRate);
 });
 
-// async function claimTile () {
-//   console.log("Begin Claim!");
-//   try {
-//     // Find all players with a non-null value in the penClaim column
-//     const players = await Players.findAll({
-//       where: {
-//         penClaim: {
-//           [Op.not]: null,
-//         },
-//       },
-//     });
+async function claimTile () {
+  console.log("Begin Claim!");
+  try {
+    // Find all players with a non-null value in the penClaim column
+    const players = await Players.findAll({
+      where: {
+        penClaim: {
+          [Op.not]: null,
+        },
+      },
+    });
 
-//     //loops through each player and update the corresponding mapset row
-//     for (const player of players) {
-//       const username = player.username;
-//       const penClaim = player.penClaim;
+    //loops through each player and update the corresponding mapset row
+    for (const player of players) {
+      const username = player.username;
+      const penClaim = player.penClaim;
 
-//       //finds the corresponding mapset row
-//       const mapset = await Mapset.findByPk(penClaim);
-//       if (!mapset) {
-//         throw new Error(`Mapset with id ${penClaim} not found`);
-//       }
+      //finds the corresponding mapset row
+      const mapset = await Mapset.findByPk(penClaim);
+      if (!mapset) {
+        throw new Error(`Mapset with id ${penClaim} not found`);
+      }
 
-//       //updates the own column of the mapset row
-//       await mapset.update({
-//         own: username,
-//       });
-//     }
+      //updates the own column of the mapset row
+      await mapset.update({
+        own: username,
+      });
+    }
 
-//     //sets all penClaim cells to null
-//     await Players.update({ penClaim: null }, {
-//       where: { penClaim: { [Op.not]: null } }
-//     });
+    //sets all penClaim cells to null
+    await Players.update({ penClaim: null }, {
+      where: { penClaim: { [Op.not]: null } }
+    });
 
-//     console.log("End Claim!");
-//   } catch (err) {
-//     console.log(err);
-//     throw err;
-//   }
-// };
+    console.log("End Claim!");
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+};
 
-// async function resolveCombat () {
-//   console.log("Begin Attack!");
-//   try {
-//     // Find all players with a non-null value in the targeting
-//     const players = await Players.findAll({
-//       where: {
-//         targeting: {
-//           [Op.not]: null,
-//         },
-//       },
-//     });
+async function resolveCombat () {
+  console.log("Begin Attack!");
+  try {
+    // Find all players with a non-null value in the targeting
+    const players = await Players.findAll({
+      where: {
+        targeting: {
+          [Op.not]: null,
+        },
+      },
+    });
 
-//     //loops through each player and update the corresponding mapset row
-//     for (const player of players) {
-//       const username = player.username;
-//       const penClaim = player.penClaim;
+    //loops through each player and update the corresponding mapset row
+    for (const player of players) {
+      const username = player.username;
+      const penClaim = player.penClaim;
 
-//       //finds the corresponding mapset row
-//       const mapset = await Mapset.findByPk(penClaim);
-//       if (!mapset) {
-//         throw new Error(`Mapset with id ${penClaim} not found`);
-//       }
+      //finds the corresponding mapset row
+      const mapset = await Mapset.findByPk(penClaim);
+      if (!mapset) {
+        throw new Error(`Mapset with id ${penClaim} not found`);
+      }
 
-//       //updates the own column of the mapset row
-//       await mapset.update({
-//         own: username,
-//       });
-//     }
+      //updates the own column of the mapset row
+      await mapset.update({
+        own: username,
+      });
+    }
 
-//     //sets all penClaim cells to null
-//     await Players.update({ penClaim: null }, {
-//       where: { penClaim: { [Op.not]: null } }
-//     });
+    //sets all penClaim cells to null
+    await Players.update({ penClaim: null }, {
+      where: { penClaim: { [Op.not]: null } }
+    });
 
-//     console.log("End Claim!");
-//   } catch (err) {
-//     console.log(err);
-//     throw err;
-//   }
-// };
+    console.log("End Claim!");
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+};
 
 async function genPlayerUnits() {
   console.log("Begin generating units!")
