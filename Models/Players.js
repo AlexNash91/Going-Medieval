@@ -79,7 +79,7 @@ Players.init(
             allowNull: true,
         },
         training: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             allowNull: true,
         },
         ATK: {
