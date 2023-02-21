@@ -50,12 +50,10 @@ sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log('Now listening'));
   setInterval(async () => {
     resolveCombat();
-    // claimTile();
+    claimTile();
     genPlayerUnits();
     genPlayerResource();
     genPlayerRank();
-    genplayerstats();
-    // attack();
     console.log("Reload and Restart");
   }, tickRate);
 });
