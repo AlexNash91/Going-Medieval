@@ -44,9 +44,9 @@ router.post('/login', async (req, res) => {
       return res.status(401).json({ error: 'Incorrect username.' });
     }
 
-    const pw = await Players.findOne({ where: {password}});
-    if (!pw) {
-     return res.status(401).json({error: 'Incorrect password'}) 
+    const pwMatches = await user.comparePassword(password);
+    if (!pwMatches) {
+      return res.status(401).json({error: 'Incorrect username or password.'}) 
     }
     console.log(user, "User")
     userData = user.dataValues;
