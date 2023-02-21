@@ -8,7 +8,7 @@ module.exports = {
 
   async down (queryInterface, Sequelize) {
     await queryInterface.addColumn('Players', 'training', {
-      type: Sequelize.STRING,
+      type: Sequelize.INTEGER,
       allowNull: true,
     });
   }
