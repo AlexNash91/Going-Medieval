@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Mapset, Players, Tick} = require('../Models');
+const { Mapset, Players, Tick} = require('../models');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 // GET request for map on homepage
