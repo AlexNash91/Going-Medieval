@@ -2,6 +2,7 @@ const router = require('express').Router();
 const { Mapset, Players, Tick} = require('../models');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
+const saltRounds = 10;
 // GET request for map on homepage
 
 router.use(bodyParser.json());

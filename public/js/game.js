@@ -22,13 +22,13 @@ let config = {
 // load assets
 gameScene.preload = function () {
     //load images
-    this.load.image('field', './Assets/Tiles/0001.png');
-    this.load.image('forest', './Assets/Tiles/0009.png');
-    this.load.image('hills', './Assets/Tiles/0020.png');
-    this.load.image('mountain', './Assets/Tiles/0167.png');
-    this.load.image('water', './Assets/Tiles/0986.png');
-    this.load.image('castle', './Assets/Tiles/1014.png');
-    this.load.image('scroll', './Assets/Tiles/scroll.png')
+    this.load.image('field', './assets/Tiles/0001.png');
+    this.load.image('forest', './assets/Tiles/0009.png');
+    this.load.image('hills', './assets/Tiles/0020.png');
+    this.load.image('mountain', './assets/Tiles/0167.png');
+    this.load.image('water', './assets/Tiles/0986.png');
+    this.load.image('castle', './assets/Tiles/1014.png');
+    this.load.image('scroll', './assets/Tiles/scroll.png')
 };
 
 //called once after preload ends  
