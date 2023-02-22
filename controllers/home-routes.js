@@ -32,21 +32,22 @@ router.get('/login', (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
-  console.log("I am in POST login")
   const { username, password } = req.body;
+  console.log(req.body)
   if (!username || !password) {
     return res.status(400).json({ error: 'Username and password are required.' });
   }
+
 
   try {
     const user = await Players.findOne({ where: {username} });
     if (!user) {
       return res.status(401).json({ error: 'Incorrect username.' });
     }
-
-    const pwMatches = await user.comparePassword(password);
+    const hashedPassword = user.hashedPassword;
+    const pwMatches = await bcrypt.compare(password, hashedPassword);
     if (!pwMatches) {
-      return res.status(401).json({error: 'Incorrect username or password.'}) 
+      return res.status(401).json({error: 'Incorrect username or password.'})
     }
     console.log(user, "User")
     userData = user.dataValues;
@@ -56,11 +57,13 @@ router.post('/login', async (req, res) => {
       req.session.logged_in = true;
     return res.status(200).json({ message: 'User logged in successfully.', wood: user.wood, stone: user.stone, iron: user.iron, food: user.food });
   })
-  
+ 
   } catch (error) {
     return res.status(500).json({ error: 'Failed to login user.' });
   }
 });
+
+
 
 router.get('/api/map', async (req, res) => {
     try {
@@ -198,8 +201,10 @@ router.post('/register', async (req, res) => {
     return res.status(400).json({ error: 'Username and password are required.' });
   }
 
+
   try {
-    const user = await new Players({username, password, kingdom});
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+    const user = await new Players({username, hashedPassword, kingdom});
     await user.save();
     req.session.save(() => {
     req.session.user_id = user.id;
@@ -210,6 +215,7 @@ router.post('/register', async (req, res) => {
     return res.status(500).json({ error: 'Failed to register user.' });
   }
 });
+
 
 router.get('/logout', (req, res) => {
   req.session.destroy((err) => {
