@@ -75,6 +75,10 @@ async function claimTile () {
       const username = player.username;
       const penClaim = player.penClaim;
 
+      if (penClaim === null) {
+        continue;
+      }
+
       //finds the corresponding mapset row
       const mapset = await Mapset.findByPk(penClaim);
       if (!mapset) {
