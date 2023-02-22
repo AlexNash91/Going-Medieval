@@ -4,12 +4,12 @@ const PlayerData = [
 
     {
         username: 'johncrally',
-        password: 'brulegrool',
+        hashedPassword: 'brulegrool',
         kingdom: 'Brules Abode',
     },
     {
         username: 'crisscross',
-        password: 'crosscriss',
+        hashedPassword: 'crosscriss',
         kingdom: 'Cross Castle',
         kingdomTile: 13,
         wood: '2',
@@ -23,7 +23,7 @@ const PlayerData = [
     },
     {
         username: 'dagnabbit',
-        password: 'butteredcorn',
+        hashedPassword: 'butteredcorn',
         kingdom: 'Montana Manor',
         kingdomTile: 47,
         wood: '3',

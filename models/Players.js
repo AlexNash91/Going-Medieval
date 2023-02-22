@@ -15,7 +15,7 @@ Players.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
-        password: {
+        hashedPassword: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
