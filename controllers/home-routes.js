@@ -164,9 +164,6 @@ router.patch('/ranks', async (req, res) => {
   try {
     const updatedPlayer = await Players.update(
       { penSol: req.body.penSol },
-      // getting a 500 error when adding this?
-      // { penArc: req.body.penSol},
-      // { penKni: req.body.prenKni},
       { where: { username: req.body.username } }
     );
     res.json(updatedPlayer);
